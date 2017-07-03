@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="true" scanPeriod="30 seconds">
+	
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M\(%line\) - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="logFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${catalina.base}/logs/wheatfield.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina.base}/logs/wheatfield.%d{yyyy-MM-dd}.zip</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M\(%line\) - %msg%n</Pattern>
+        </layout>
+    </appender>
+
+    <logger name="com.rkylin.wheatfield" level="info" />
+    
+    <logger name="org.mybatis.spring" level="INFO" />
+	<logger name="org.apache.ibatis" level="TRACE" />
+	<logger name="java.sql.PreparedStatement" level="DEBUG" />
+	<logger name="java.sql.Statement" level="DEBUG" />
+	<logger name="java.sql.Connection" level="DEBUG" />
+	<logger name="java.sql.ResultSet" level="DEBUG" />
+	
+	
+	<logger name="com.alibaba" level="INFO" />
+	<logger name="org.apache.zookeeper" level="INFO" />
+	<logger name="org.springframework" level="INFO" />
+	<logger name="org.springframework.transaction" level="DEBUG" />
+
+    <root level="DEBUG">
+    	<appender-ref ref="console" />
+        <appender-ref ref="logFile" />
+    </root>
+</configuration>

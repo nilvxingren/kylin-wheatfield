@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DictionaryMapper">
+	<resultMap id="BaseResultMap" type="Dictionary">
+	  <result column="DIC_ID" jdbcType="INTEGER" property="dicId" />
+	  <result column="TABLE_NAME" jdbcType="VARCHAR" property="tableName" />
+	  <result column="DICTIONARY_NAME" jdbcType="VARCHAR" property="dictionaryName" />
+	  <result column="DICTIONARY_VALUE" jdbcType="VARCHAR" property="dictionaryValue" />
+	  <result column="DICTIONARY_REMARK" jdbcType="VARCHAR" property="dictionaryRemark" />
+	  <result column="DICTIONARY_NAME_DESCRIBE" jdbcType="VARCHAR" property="dictionaryNameDescribe" />
+	  <result column="STATUS" jdbcType="INTEGER" property="status" />
+	  <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+	  <result column="CREATED_TIME" jdbcType="TIMESTAMP" property="createdTime" />
+	  <result column="UPDATED_TIME" jdbcType="TIMESTAMP" property="updatedTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <trim prefix="(" prefixOverrides="and" suffix=")">
+      <if test="dicId != null" >
+	      and DIC_ID = #{dicId,jdbcType=INTEGER}
+	    </if>
+      <if test="tableName != null" >
+	      and TABLE_NAME = #{tableName,jdbcType=VARCHAR}
+	    </if>
+      <if test="dictionaryName != null" >
+	      and DICTIONARY_NAME = #{dictionaryName,jdbcType=VARCHAR}
+	    </if>
+      <if test="dictionaryValue != null" >
+	      and DICTIONARY_VALUE = #{dictionaryValue,jdbcType=VARCHAR}
+	    </if>
+      <if test="dictionaryRemark != null" >
+	      and DICTIONARY_REMARK  like '%${dictionaryRemark}%'
+	    </if>
+      <if test="dictionaryNameDescribe != null" >
+	      and DICTIONARY_NAME_DESCRIBE = #{dictionaryNameDescribe,jdbcType=VARCHAR}
+	    </if>
+      <if test="status != null" >
+	      and STATUS = #{status,jdbcType=INTEGER}
+	    </if>
+      <if test="remark != null" >
+	      and REMARK = #{remark,jdbcType=VARCHAR}
+	    </if>
+      <if test="createdTime != null" >
+	      and CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="updatedTime != null" >
+	      and UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP}
+	    </if>
+	  </trim>
+    </where>
+  </sql>
+  <sql id="Example_Set_Clause">
+    <set>
+      <trim suffixOverrides=",">
+      <if test="dicId != null">
+        DIC_ID = #{dicId,jdbcType=INTEGER},
+      </if>
+      <if test="tableName != null">
+        TABLE_NAME = #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="dictionaryName != null">
+        DICTIONARY_NAME = #{dictionaryName,jdbcType=VARCHAR},
+      </if>
+      <if test="dictionaryValue != null">
+        DICTIONARY_VALUE = #{dictionaryValue,jdbcType=VARCHAR},
+      </if>
+      <if test="dictionaryRemark != null">
+        DICTIONARY_REMARK = #{dictionaryRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="dictionaryNameDescribe != null">
+        DICTIONARY_NAME_DESCRIBE = #{dictionaryNameDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      </trim>
+    </set>
+  </sql>
+  <sql id="Base_Column_List">
+    DIC_ID,
+    TABLE_NAME,
+    DICTIONARY_NAME,
+    DICTIONARY_VALUE,
+    DICTIONARY_REMARK,
+    DICTIONARY_NAME_DESCRIBE,
+    STATUS,
+    REMARK,
+    CREATED_TIME,
+    UPDATED_TIME,
+  </sql>
+  <sql id="Base_Set_Clause">
+    <set>
+      <trim suffixOverrides=",">
+        DIC_ID = #{dicId,jdbcType=INTEGER},
+        TABLE_NAME = #{tableName,jdbcType=VARCHAR},
+        DICTIONARY_NAME = #{dictionaryName,jdbcType=VARCHAR},
+        DICTIONARY_VALUE = #{dictionaryValue,jdbcType=VARCHAR},
+        DICTIONARY_REMARK = #{dictionaryRemark,jdbcType=VARCHAR},
+        DICTIONARY_NAME_DESCRIBE = #{dictionaryNameDescribe,jdbcType=VARCHAR},
+        STATUS = #{status,jdbcType=INTEGER},
+        REMARK = #{remark,jdbcType=VARCHAR},
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </trim>
+    </set>
+  </sql>
+  <sql id="Selective_Column_List">
+    <if test="dicId != null">
+      DIC_ID,
+    </if>
+    <if test="tableName != null">
+      TABLE_NAME,
+    </if>
+    <if test="dictionaryName != null">
+      DICTIONARY_NAME,
+    </if>
+    <if test="dictionaryValue != null">
+      DICTIONARY_VALUE,
+    </if>
+    <if test="dictionaryRemark != null">
+      DICTIONARY_REMARK,
+    </if>
+    <if test="dictionaryNameDescribe != null">
+      DICTIONARY_NAME_DESCRIBE,
+    </if>
+    <if test="status != null">
+      STATUS,
+    </if>
+    <if test="remark != null">
+      REMARK,
+    </if>
+    <if test="createdTime != null">
+      CREATED_TIME,
+    </if>
+    <if test="updatedTime != null">
+      UPDATED_TIME,
+    </if>
+  </sql>
+	<sql id="Base_Value_List">
+    #{dicId,jdbcType=INTEGER},
+    #{tableName,jdbcType=VARCHAR},
+    #{dictionaryName,jdbcType=VARCHAR},
+    #{dictionaryValue,jdbcType=VARCHAR},
+    #{dictionaryRemark,jdbcType=VARCHAR},
+    #{dictionaryNameDescribe,jdbcType=VARCHAR},
+    #{status,jdbcType=INTEGER},
+    #{remark,jdbcType=VARCHAR},
+    #{createdTime,jdbcType=TIMESTAMP},
+    #{updatedTime,jdbcType=TIMESTAMP},
+	</sql>
+  <sql id="Selective_Value_List">
+    <if test="dicId != null">
+      #{dicId,jdbcType=INTEGER},
+    </if>
+    <if test="tableName != null">
+      #{tableName,jdbcType=VARCHAR},
+    </if>
+    <if test="dictionaryName != null">
+      #{dictionaryName,jdbcType=VARCHAR},
+    </if>
+    <if test="dictionaryValue != null">
+      #{dictionaryValue,jdbcType=VARCHAR},
+    </if>
+    <if test="dictionaryRemark != null">
+      #{dictionaryRemark,jdbcType=VARCHAR},
+    </if>
+    <if test="dictionaryNameDescribe != null">
+      #{dictionaryNameDescribe,jdbcType=VARCHAR},
+    </if>
+    <if test="status != null">
+      #{status,jdbcType=INTEGER},
+    </if>
+    <if test="remark != null">
+      #{remark,jdbcType=VARCHAR},
+    </if>
+    <if test="createdTime != null">
+      #{createdTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="updatedTime != null">
+      #{updatedTime,jdbcType=TIMESTAMP},
+    </if>
+  </sql>
+  
+  <select id="selectByExample" parameterType="DictionaryQuery" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from DICTIONARY
+    <include refid="Example_Where_Clause" />
+    <!-- order by CREATE_DATE -->
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from DICTIONARY
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from DICTIONARY
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="DictionaryQuery">
+    delete from DICTIONARY
+    <include refid="Example_Where_Clause" />
+  </delete>
+  <insert id="insert" parameterType="Dictionary">
+    insert into DICTIONARY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Base_Column_List"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Base_Value_List"/>
+    </trim>
+  </insert>
+  <insert id="insertSelective" parameterType="Dictionary">
+    insert into DICTIONARY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Column_List"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Value_List"/>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="DictionaryQuery" resultType="java.lang.Integer">
+    select count(*) from DICTIONARY
+    <include refid="Example_Where_Clause" />
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="Dictionary">
+    update DICTIONARY
+    <include refid="Example_Set_Clause"/>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="Dictionary">
+    update DICTIONARY
+    <include refid="Base_Set_Clause"/>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

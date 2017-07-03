@@ -1,0 +1,613 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CorporatAccountInfoMapper">
+	<resultMap id="BaseResultMap" type="CorporatAccountInfo">
+		<result column="CORPORATE_ACCOUNT_ID" jdbcType="INTEGER"
+			property="corporateAccountId" />
+		<result column="ROOT_INST_CD" jdbcType="VARCHAR" property="rootInstCd" />
+		<result column="ACCOUNT_NUMBER" jdbcType="VARCHAR" property="accountNumber" />
+		<result column="ACCOUNT_REAL_NAME" jdbcType="VARCHAR" property="accountRealName" />
+		<result column="OPEN_ACCOUNT_DATE" jdbcType="TIMESTAMP"
+			property="openAccountDate" />
+		<result column="OPEN_ACCOUNT_DESCRIPTION" jdbcType="VARCHAR"
+			property="openAccountDescription" />
+		<result column="CURRENCY" jdbcType="VARCHAR" property="currency" />
+		<result column="BANK_HEAD" jdbcType="VARCHAR" property="bankHead" />
+		<result column="BANK_HEAD_NAME" jdbcType="VARCHAR" property="bankHeadName" />
+		<result column="BANK_BRANCH" jdbcType="VARCHAR" property="bankBranch" />
+		<result column="BANK_BRANCH_NAME" jdbcType="VARCHAR" property="bankBranchName" />
+		<result column="BANK_PROVINCE" jdbcType="VARCHAR" property="bankProvince" />
+		<result column="BANK_CITY" jdbcType="VARCHAR" property="bankCity" />
+		<result column="CERTIFICATE_TYPE" jdbcType="VARCHAR" property="certificateType" />
+		<result column="CERTIFICATE_NUMBER" jdbcType="VARCHAR"
+			property="certificateNumber" />
+		<result column="STATUS_ID" jdbcType="TINYINT" property="statusId" />
+		<result column="CREATED_TIME" jdbcType="TIMESTAMP" property="createdTime" />
+		<result column="UPDATED_TIME" jdbcType="TIMESTAMP" property="updatedTime" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<trim prefix="(" prefixOverrides="and" suffix=")">
+				<if test="corporateAccountId != null">
+					and CORPORATE_ACCOUNT_ID =
+					#{corporateAccountId,jdbcType=INTEGER}
+				</if>
+				<if test="rootInstCd != null">
+					and ROOT_INST_CD = #{rootInstCd,jdbcType=VARCHAR}
+				</if>
+				<if test="accountNumber != null">
+					and ACCOUNT_NUMBER = #{accountNumber,jdbcType=VARCHAR}
+				</if>
+				<if test="accountRealName != null">
+					and ACCOUNT_REAL_NAME =
+					#{accountRealName,jdbcType=VARCHAR}
+				</if>
+				<if test="openAccountDate != null">
+					and OPEN_ACCOUNT_DATE =
+					#{openAccountDate,jdbcType=TIMESTAMP}
+				</if>
+				<if test="openAccountDescription != null">
+					and OPEN_ACCOUNT_DESCRIPTION =
+					#{openAccountDescription,jdbcType=VARCHAR}
+				</if>
+				<if test="currency != null">
+					and CURRENCY = #{currency,jdbcType=VARCHAR}
+				</if>
+				<if test="bankHead != null">
+					and BANK_HEAD = #{bankHead,jdbcType=VARCHAR}
+				</if>
+				<if test="bankHeadName != null">
+					and BANK_HEAD_NAME = #{bankHeadName,jdbcType=VARCHAR}
+				</if>
+				<if test="bankBranch != null">
+					and BANK_BRANCH = #{bankBranch,jdbcType=VARCHAR}
+				</if>
+				<if test="bankBranchName != null">
+					and BANK_BRANCH_NAME =
+					#{bankBranchName,jdbcType=VARCHAR}
+				</if>
+				<if test="bankProvince != null">
+					and BANK_PROVINCE = #{bankProvince,jdbcType=VARCHAR}
+				</if>
+				<if test="bankCity != null">
+					and BANK_CITY = #{bankCity,jdbcType=VARCHAR}
+				</if>
+				<if test="certificateType != null">
+					and CERTIFICATE_TYPE =
+					#{certificateType,jdbcType=VARCHAR}
+				</if>
+				<if test="certificateNumber != null">
+					and CERTIFICATE_NUMBER =
+					#{certificateNumber,jdbcType=VARCHAR}
+				</if>
+				<if test="statusId != null">
+					and STATUS_ID = #{statusId,jdbcType=TINYINT}
+				</if>
+				<if test="createdTime != null">
+					and CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP}
+				</if>
+				<if test="updatedTime != null">
+					and UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP}
+				</if>
+			</trim>
+		</where>
+	</sql>
+	<sql id="Example_Set_Clause">
+		<set>
+			<trim suffixOverrides=",">
+				<if test="corporateAccountId != null">
+					CORPORATE_ACCOUNT_ID =
+					#{corporateAccountId,jdbcType=INTEGER},
+				</if>
+				<if test="rootInstCd != null">
+					ROOT_INST_CD = #{rootInstCd,jdbcType=VARCHAR},
+				</if>
+				<if test="accountNumber != null">
+					ACCOUNT_NUMBER = #{accountNumber,jdbcType=VARCHAR},
+				</if>
+				<if test="accountRealName != null">
+					ACCOUNT_REAL_NAME = #{accountRealName,jdbcType=VARCHAR},
+				</if>
+				<if test="openAccountDate != null">
+					OPEN_ACCOUNT_DATE =
+					#{openAccountDate,jdbcType=TIMESTAMP},
+				</if>
+				<if test="openAccountDescription != null">
+					OPEN_ACCOUNT_DESCRIPTION =
+					#{openAccountDescription,jdbcType=VARCHAR},
+				</if>
+				<if test="currency != null">
+					CURRENCY = #{currency,jdbcType=VARCHAR},
+				</if>
+				<if test="bankHead != null">
+					BANK_HEAD = #{bankHead,jdbcType=VARCHAR},
+				</if>
+				<if test="bankHeadName != null">
+					BANK_HEAD_NAME = #{bankHeadName,jdbcType=VARCHAR},
+				</if>
+				<if test="bankBranch != null">
+					BANK_BRANCH = #{bankBranch,jdbcType=VARCHAR},
+				</if>
+				<if test="bankBranchName != null">
+					BANK_BRANCH_NAME = #{bankBranchName,jdbcType=VARCHAR},
+				</if>
+				<if test="bankProvince != null">
+					BANK_PROVINCE = #{bankProvince,jdbcType=VARCHAR},
+				</if>
+				<if test="bankCity != null">
+					BANK_CITY = #{bankCity,jdbcType=VARCHAR},
+				</if>
+				<if test="certificateType != null">
+					CERTIFICATE_TYPE = #{certificateType,jdbcType=VARCHAR},
+				</if>
+				<if test="certificateNumber != null">
+					CERTIFICATE_NUMBER =
+					#{certificateNumber,jdbcType=VARCHAR},
+				</if>
+				<if test="statusId != null">
+					STATUS_ID = #{statusId,jdbcType=TINYINT},
+				</if>
+				<if test="createdTime != null">
+					CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+				</if>
+				<if test="updatedTime != null">
+					UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+				</if>
+			</trim>
+		</set>
+	</sql>
+	<sql id="Base_Column_List">
+		CORPORATE_ACCOUNT_ID,
+		ROOT_INST_CD,
+		ACCOUNT_NUMBER,
+		ACCOUNT_REAL_NAME,
+		OPEN_ACCOUNT_DATE,
+		OPEN_ACCOUNT_DESCRIPTION,
+		CURRENCY,
+		BANK_HEAD,
+		BANK_HEAD_NAME,
+		BANK_BRANCH,
+		BANK_BRANCH_NAME,
+		BANK_PROVINCE,
+		BANK_CITY,
+		CERTIFICATE_TYPE,
+		CERTIFICATE_NUMBER,
+		STATUS_ID,
+		CREATED_TIME,
+		UPDATED_TIME,
+	</sql>
+	<sql id="Base_Set_Clause">
+		<set>
+			<trim suffixOverrides=",">
+				CORPORATE_ACCOUNT_ID =
+				#{corporateAccountId,jdbcType=INTEGER},
+				ROOT_INST_CD =
+				#{rootInstCd,jdbcType=VARCHAR},
+				ACCOUNT_NUMBER =
+				#{accountNumber,jdbcType=VARCHAR},
+				ACCOUNT_REAL_NAME =
+				#{accountRealName,jdbcType=VARCHAR},
+				OPEN_ACCOUNT_DATE =
+				#{openAccountDate,jdbcType=TIMESTAMP},
+				OPEN_ACCOUNT_DESCRIPTION =
+				#{openAccountDescription,jdbcType=VARCHAR},
+				CURRENCY =
+				#{currency,jdbcType=VARCHAR},
+				BANK_HEAD =
+				#{bankHead,jdbcType=VARCHAR},
+				BANK_HEAD_NAME =
+				#{bankHeadName,jdbcType=VARCHAR},
+				BANK_BRANCH =
+				#{bankBranch,jdbcType=VARCHAR},
+				BANK_BRANCH_NAME =
+				#{bankBranchName,jdbcType=VARCHAR},
+				BANK_PROVINCE =
+				#{bankProvince,jdbcType=VARCHAR},
+				BANK_CITY =
+				#{bankCity,jdbcType=VARCHAR},
+				CERTIFICATE_TYPE =
+				#{certificateType,jdbcType=VARCHAR},
+				CERTIFICATE_NUMBER =
+				#{certificateNumber,jdbcType=VARCHAR},
+				STATUS_ID =
+				#{statusId,jdbcType=TINYINT},
+				CREATED_TIME =
+				#{createdTime,jdbcType=TIMESTAMP},
+				UPDATED_TIME =
+				#{updatedTime,jdbcType=TIMESTAMP},
+			</trim>
+		</set>
+	</sql>
+	<sql id="Selective_Column_List">
+		<if test="corporateAccountId != null">
+			CORPORATE_ACCOUNT_ID,
+		</if>
+		<if test="rootInstCd != null">
+			ROOT_INST_CD,
+		</if>
+		<if test="accountNumber != null">
+			ACCOUNT_NUMBER,
+		</if>
+		<if test="accountRealName != null">
+			ACCOUNT_REAL_NAME,
+		</if>
+		<if test="openAccountDate != null">
+			OPEN_ACCOUNT_DATE,
+		</if>
+		<if test="openAccountDescription != null">
+			OPEN_ACCOUNT_DESCRIPTION,
+		</if>
+		<if test="currency != null">
+			CURRENCY,
+		</if>
+		<if test="bankHead != null">
+			BANK_HEAD,
+		</if>
+		<if test="bankHeadName != null">
+			BANK_HEAD_NAME,
+		</if>
+		<if test="bankBranch != null">
+			BANK_BRANCH,
+		</if>
+		<if test="bankBranchName != null">
+			BANK_BRANCH_NAME,
+		</if>
+		<if test="bankProvince != null">
+			BANK_PROVINCE,
+		</if>
+		<if test="bankCity != null">
+			BANK_CITY,
+		</if>
+		<if test="certificateType != null">
+			CERTIFICATE_TYPE,
+		</if>
+		<if test="certificateNumber != null">
+			CERTIFICATE_NUMBER,
+		</if>
+		<if test="statusId != null">
+			STATUS_ID,
+		</if>
+		<if test="createdTime != null">
+			CREATED_TIME,
+		</if>
+		<if test="updatedTime != null">
+			UPDATED_TIME,
+		</if>
+	</sql>
+	<sql id="Base_Value_List">
+		#{corporateAccountId,jdbcType=INTEGER},
+		#{rootInstCd,jdbcType=VARCHAR},
+		#{accountNumber,jdbcType=VARCHAR},
+		#{accountRealName,jdbcType=VARCHAR},
+		#{openAccountDate,jdbcType=TIMESTAMP},
+		#{openAccountDescription,jdbcType=VARCHAR},
+		#{currency,jdbcType=VARCHAR},
+		#{bankHead,jdbcType=VARCHAR},
+		#{bankHeadName,jdbcType=VARCHAR},
+		#{bankBranch,jdbcType=VARCHAR},
+		#{bankBranchName,jdbcType=VARCHAR},
+		#{bankProvince,jdbcType=VARCHAR},
+		#{bankCity,jdbcType=VARCHAR},
+		#{certificateType,jdbcType=VARCHAR},
+		#{certificateNumber,jdbcType=VARCHAR},
+		#{statusId,jdbcType=TINYINT},
+		#{createdTime,jdbcType=TIMESTAMP},
+		#{updatedTime,jdbcType=TIMESTAMP},
+	</sql>
+	<sql id="Selective_Value_List">
+		<if test="corporateAccountId != null">
+			#{corporateAccountId,jdbcType=INTEGER},
+		</if>
+		<if test="rootInstCd != null">
+			#{rootInstCd,jdbcType=VARCHAR},
+		</if>
+		<if test="accountNumber != null">
+			#{accountNumber,jdbcType=VARCHAR},
+		</if>
+		<if test="accountRealName != null">
+			#{accountRealName,jdbcType=VARCHAR},
+		</if>
+		<if test="openAccountDate != null">
+			#{openAccountDate,jdbcType=TIMESTAMP},
+		</if>
+		<if test="openAccountDescription != null">
+			#{openAccountDescription,jdbcType=VARCHAR},
+		</if>
+		<if test="currency != null">
+			#{currency,jdbcType=VARCHAR},
+		</if>
+		<if test="bankHead != null">
+			#{bankHead,jdbcType=VARCHAR},
+		</if>
+		<if test="bankHeadName != null">
+			#{bankHeadName,jdbcType=VARCHAR},
+		</if>
+		<if test="bankBranch != null">
+			#{bankBranch,jdbcType=VARCHAR},
+		</if>
+		<if test="bankBranchName != null">
+			#{bankBranchName,jdbcType=VARCHAR},
+		</if>
+		<if test="bankProvince != null">
+			#{bankProvince,jdbcType=VARCHAR},
+		</if>
+		<if test="bankCity != null">
+			#{bankCity,jdbcType=VARCHAR},
+		</if>
+		<if test="certificateType != null">
+			#{certificateType,jdbcType=VARCHAR},
+		</if>
+		<if test="certificateNumber != null">
+			#{certificateNumber,jdbcType=VARCHAR},
+		</if>
+		<if test="statusId != null">
+			#{statusId,jdbcType=TINYINT},
+		</if>
+		<if test="createdTime != null">
+			#{createdTime,jdbcType=TIMESTAMP},
+		</if>
+		<if test="updatedTime != null">
+			#{updatedTime,jdbcType=TIMESTAMP},
+		</if>
+	</sql>
+
+	<select id="selectByExample" parameterType="CorporatAccountInfoQuery"
+		resultMap="BaseResultMap">
+		select
+		<trim suffixOverrides=",">
+			<include refid="Base_Column_List" />
+		</trim>
+		from CORPORAT_ACCOUNT_INFO
+		<include refid="Example_Where_Clause" />
+		<!-- order by CREATE_DATE -->
+	</select>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Long"
+		resultMap="BaseResultMap">
+		select
+		<trim suffixOverrides=",">
+			<include refid="Base_Column_List" />
+		</trim>
+		from CORPORAT_ACCOUNT_INFO
+		where CORPORATE_ACCOUNT_ID = #{id,jdbcType=BIGINT}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		CORPORAT_ACCOUNT_INFO
+		where CORPORATE_ACCOUNT_ID = #{id,jdbcType=BIGINT}
+	</delete>
+	<delete id="deleteByExample" parameterType="CorporatAccountInfoQuery">
+		delete from CORPORAT_ACCOUNT_INFO
+		<include refid="Example_Where_Clause" />
+	</delete>
+	<insert id="insert" parameterType="CorporatAccountInfo">
+		insert into CORPORAT_ACCOUNT_INFO
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<include refid="Base_Column_List" />
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<include refid="Base_Value_List" />
+		</trim>
+	</insert>
+	<insert id="insertSelective" parameterType="CorporatAccountInfo">
+		insert into CORPORAT_ACCOUNT_INFO
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<include refid="Selective_Column_List" />
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<include refid="Selective_Value_List" />
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="CorporatAccountInfoQuery"
+		resultType="java.lang.Integer">
+		select count(*) from CORPORAT_ACCOUNT_INFO
+		<include refid="Example_Where_Clause" />
+	</select>
+	<update id="updateByPrimaryKeySelective" parameterType="CorporatAccountInfo">
+		update CORPORAT_ACCOUNT_INFO
+		<include refid="Example_Set_Clause" />
+		where CORPORATE_ACCOUNT_ID = #{corporateAccountId,jdbcType=BIGINT}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="CorporatAccountInfo">
+		update CORPORAT_ACCOUNT_INFO
+		<include refid="Base_Set_Clause" />
+		where ID = #{id,jdbcType=BIGINT}
+	</update>
+	<update id="batchUpdate"  parameterType="java.util.List">
+		update CORPORAT_ACCOUNT_INFO
+		<trim prefix="set" suffixOverrides=",">
+			<trim prefix="STATUS_ID =case" suffix="end,">
+				<foreach collection="list" item="i" index="index">
+					<if test="i.statusId!=null">
+						when (ROOT_INST_CD=#{i.rootInstCd} and
+						ACCOUNT_NUMBER=#{i.accountNumber}) then
+						#{i.statusId}
+					</if>
+				</foreach>
+			</trim>
+		</trim>
+		where
+		<foreach collection="list" separator="or" item="i" index="index">
+			(ROOT_INST_CD=#{i.rootInstCd} and
+			ACCOUNT_NUMBER=#{i.accountNumber})
+		</foreach>
+	</update>
+	
+	<!-- liuhuan 20150908 -->
+	<sql id="Scope_Where_Clause">
+		<where>
+			<trim prefix="(" prefixOverrides="and" suffix=")">
+				<if test="corporateAccountId != null">
+					and CORPORATE_ACCOUNT_ID =
+					#{corporateAccountId,jdbcType=INTEGER}
+				</if>
+				<if test="rootInstCd != null">
+					and ROOT_INST_CD = #{rootInstCd,jdbcType=VARCHAR}
+				</if>
+				<if test="accountNumber != null">
+					and ACCOUNT_NUMBER = #{accountNumber,jdbcType=VARCHAR}
+				</if>
+				<if test="accountRealName != null">
+					and ACCOUNT_REAL_NAME =
+					#{accountRealName,jdbcType=VARCHAR}
+				</if>
+				<if test="openAccountDate != null">
+					and OPEN_ACCOUNT_DATE =
+					#{openAccountDate,jdbcType=TIMESTAMP}
+				</if>
+				<if test="openAccountDescription != null">
+					and OPEN_ACCOUNT_DESCRIPTION =
+					#{openAccountDescription,jdbcType=VARCHAR}
+				</if>
+				<if test="currency != null">
+					and CURRENCY = #{currency,jdbcType=VARCHAR}
+				</if>
+				<if test="bankHead != null">
+					and BANK_HEAD = #{bankHead,jdbcType=VARCHAR}
+				</if>
+				<if test="bankHeadName != null">
+					and BANK_HEAD_NAME = #{bankHeadName,jdbcType=VARCHAR}
+				</if>
+				<if test="bankBranch != null">
+					and BANK_BRANCH = #{bankBranch,jdbcType=VARCHAR}
+				</if>
+				<if test="bankBranchName != null">
+					and BANK_BRANCH_NAME =
+					#{bankBranchName,jdbcType=VARCHAR}
+				</if>
+				<if test="bankProvince != null">
+					and BANK_PROVINCE = #{bankProvince,jdbcType=VARCHAR}
+				</if>
+				<if test="bankCity != null">
+					and BANK_CITY = #{bankCity,jdbcType=VARCHAR}
+				</if>
+				<if test="certificateType != null">
+					and CERTIFICATE_TYPE =
+					#{certificateType,jdbcType=VARCHAR}
+				</if>
+				<if test="certificateNumber != null">
+					and CERTIFICATE_NUMBER =
+					#{certificateNumber,jdbcType=VARCHAR}
+				</if>
+				<if test="statusId != null">
+					and STATUS_ID = #{statusId,jdbcType=TINYINT}
+				</if>
+				<if test="createdTimeFrom != null">
+					and CREATED_TIME &gt;= #{createdTimeFrom,jdbcType=TIMESTAMP}
+				</if>
+				<if test="createdTimeTo != null">
+					and CREATED_TIME &lt;= #{createdTimeTo,jdbcType=TIMESTAMP}
+				</if>
+				<if test="updatedTimeFrom != null">
+					and UPDATED_TIME &gt;= #{updatedTimeFrom,jdbcType=TIMESTAMP}
+				</if>
+				<if test="updatedTimeTo != null">
+					and UPDATED_TIME &lt;= #{updatedTimeTo,jdbcType=TIMESTAMP}
+				</if>
+			</trim>
+		</where>
+	</sql>
+	
+	<!-- liuhuan 20150908 -->
+	<sql id="Update_Set_Clause">
+		<set>
+			<trim suffixOverrides=",">
+				<if test="accountNumber != null">
+					ACCOUNT_NUMBER = #{accountNumber,jdbcType=VARCHAR},
+				</if>
+				<if test="accountRealName != null">
+					ACCOUNT_REAL_NAME = #{accountRealName,jdbcType=VARCHAR},
+				</if>
+				<if test="openAccountDate != null">
+					OPEN_ACCOUNT_DATE =
+					#{openAccountDate,jdbcType=TIMESTAMP},
+				</if>
+				<if test="openAccountDescription != null">
+					OPEN_ACCOUNT_DESCRIPTION =
+					#{openAccountDescription,jdbcType=VARCHAR},
+				</if>
+				<if test="currency != null">
+					CURRENCY = #{currency,jdbcType=VARCHAR},
+				</if>
+				<if test="bankHead != null">
+					BANK_HEAD = #{bankHead,jdbcType=VARCHAR},
+				</if>
+				<if test="bankHeadName != null">
+					BANK_HEAD_NAME = #{bankHeadName,jdbcType=VARCHAR},
+				</if>
+				<if test="bankBranch != null">
+					BANK_BRANCH = #{bankBranch,jdbcType=VARCHAR},
+				</if>
+				<if test="bankBranchName != null">
+					BANK_BRANCH_NAME = #{bankBranchName,jdbcType=VARCHAR},
+				</if>
+				<if test="bankProvince != null">
+					BANK_PROVINCE = #{bankProvince,jdbcType=VARCHAR},
+				</if>
+				<if test="bankCity != null">
+					BANK_CITY = #{bankCity,jdbcType=VARCHAR},
+				</if>
+				<if test="certificateType != null">
+					CERTIFICATE_TYPE = #{certificateType,jdbcType=VARCHAR},
+				</if>
+				<if test="certificateNumber != null">
+					CERTIFICATE_NUMBER =
+					#{certificateNumber,jdbcType=VARCHAR},
+				</if>
+				<if test="statusId != null">
+					STATUS_ID = #{statusId,jdbcType=TINYINT},
+				</if>
+				<if test="updatedTime != null">
+					UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+				</if>
+			</trim>
+		</set>
+	</sql>
+	
+	<!-- liuhuan 20150908 -->
+	<update id="updateById" parameterType="CorporatAccountInfo">
+		update CORPORAT_ACCOUNT_INFO
+		<include refid="Update_Set_Clause" />
+		where CORPORATE_ACCOUNT_ID = #{corporateAccountId,jdbcType=BIGINT}
+	</update>
+	
+	<!-- liuhuan 20150908 -->
+	<select id="selectByScope" parameterType="CorporatAccountInfoScopeQuery"
+		resultMap="BaseResultMap">
+		select
+		<trim suffixOverrides=",">
+			<include refid="Base_Column_List" />
+		</trim>
+		from CORPORAT_ACCOUNT_INFO
+		<include refid="Scope_Where_Clause" />
+		<!-- order by CREATE_DATE -->
+	</select>
+	
+	<!-- liuhuan 20150906 -->
+    <insert id="insertByList" parameterType="java.util.List">
+		insert into CORPORAT_ACCOUNT_INFO
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			ROOT_INST_CD,
+		ACCOUNT_NUMBER,
+		ACCOUNT_REAL_NAME,
+		OPEN_ACCOUNT_DATE,
+		OPEN_ACCOUNT_DESCRIPTION,
+		CURRENCY,
+		BANK_HEAD,
+		BANK_HEAD_NAME,
+		BANK_BRANCH,
+		BANK_BRANCH_NAME,
+		BANK_PROVINCE,
+		BANK_CITY,
+		CERTIFICATE_TYPE,
+		CERTIFICATE_NUMBER,
+		STATUS_ID
+		</trim>
+		values
+   		<foreach collection="list" item="item" index="index" separator="," > 
+	    	(#{item.rootInstCd},#{item.accountNumber},#{item.accountRealName},#{item.openAccountDate},
+			#{item.openAccountDescription},#{item.currency},#{item.bankHead},#{item.bankHeadName},
+			#{item.bankBranch},#{item.bankBranchName},#{item.bankProvince},#{item.bankCity},
+			#{item.certificateType},#{item.certificateNumber},#{item.statusId})
+		</foreach>
+	</insert>
+</mapper>

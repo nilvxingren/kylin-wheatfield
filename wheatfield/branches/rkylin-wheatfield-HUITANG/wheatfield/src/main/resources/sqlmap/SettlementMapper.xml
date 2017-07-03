@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SettlementMapper">
+  <select id="selectTransOrderInfoByDate" parameterType="java.util.Map" resultType="TransOrderInfo">
+   select
+    REQUEST_ID as requestId,
+    REQUEST_NO as requestNo,
+    REQUEST_TIME as requestTime,
+    TRADE_FLOW_NO as tradeFlowNo,
+    ORDER_PACKAGE_NO as orderPackageNo,
+    ORDER_NO as orderNo,
+    ORDER_DATE as orderDate,
+    ORDER_AMOUNT as orderAmount,
+    ORDER_COUNT as orderCount,
+    TRANS_TYPE as transType,
+    FUNC_CODE as funcCode,
+    INTER_MERCHANT_CODE as interMerchantCode,
+    MERCHANT_CODE as merchantCode,
+    USER_ID as userId,
+    AMOUNT as amount,
+    FEE_AMOUNT as feeAmount,
+    USER_FEE as userFee,
+    PROFIT as profit,
+    BUSI_TYPE_ID as busiTypeId,
+    PAY_CHANNEL_ID as payChannelId,
+    BANK_CODE as bankCode,
+    STATUS as status,
+    ERROR_CODE as errorCode,
+    ERROR_MSG as errorMsg,
+    REMARK as remark,
+    ACCOUNT_DATE as accountdate,
+    CREATED_TIME as createdTime,
+    UPDATED_TIME as updatedTime
+   from TRANS_ORDER_INFO
+   where 1=1
+   <if test="ACCOUNT_DATE != null">
+     and ACCOUNT_DATE = str_to_date(#{ACCOUNT_DATE},'%Y%m%d %H:%i:%s')
+     and FUNC_CODE NOT IN (${FUNC_CODE})
+     and MERCHANT_CODE = #{ROOT}
+     and STATUS &lt;&gt; 6
+     and FUNC_CODE &lt;&gt; '10012'
+     and (REMARK &lt;&gt; 'qjs_tuikuan' OR REMARK IS NULL)
+   </if>
+   <if test="START_DATE != null">
+     and ti.ORDER_DATE &gt;= str_to_date(#{START_DATE},'%Y%m%d %H:%i:%s')
+   </if>
+   <if test="END_DATE != null">
+     and ORDER_DATE &lt;= str_to_date(#{END_DATE},'%Y%m%d %H:%i:%s')
+   </if>
+   <if test="STATUS != null">
+     and STATUS &lt;&gt; #{STATUS}
+   </if>
+   order by ORDER_DATE
+  </select>
+  <select id="selectDedtInfoByDate" parameterType="java.util.Map" resultType="java.util.HashMap">
+   select
+    ci.PROVIDER_ID as proid,
+   	ci.ROOT_INST_CD as merid,
+    ci.USER_ID as userid,
+    ti.INTER_MERCHANT_CODE as imercd,
+    ti.ORDER_NO as orderno,
+    ti.AMOUNT as amount,
+    date_format(ti.ORDER_DATE,'%Y%m%d%H%i%s') as orderdate
+   from CREDIT_INFO ci
+   INNER JOIN TRANS_ORDER_INFO ti ON ci.USER_ID = ti.USER_ID
+   INNER JOIN ACCOUNT_AGREEMENT aa ON ci.CREDIT_AGREEMENT_ID = aa.AGMT_ID
+   where 1=1
+   <if test="ACCOUNT_DATE != null">
+     and ACCOUNT_DATE = str_to_date(#{ACCOUNT_DATE},'%Y%m%d %H:%i:%s')
+   </if>
+   <if test="START_DATE != null">
+     and ti.ORDER_DATE &gt;= str_to_date(#{START_DATE},'%Y%m%d %H:%i:%s')
+   </if>
+   <if test="END_DATE != null">
+     and ti.ORDER_DATE &lt;= str_to_date(#{END_DATE},'%Y%m%d %H:%i:%s')
+   </if>
+   <if test="STATUS != null">
+     and ti.STATUS = #{STATUS}
+   </if>
+   <if test="FUNC_CODE != null">
+     and ti.FUNC_CODE = ${FUNC_CODE}
+   </if>
+  </select>
+  
+  <select id="selectDedtDetailByDate" parameterType="java.util.Map" resultType="java.util.HashMap">
+   select
+    ci.USER_ID as userid,aa.AGMT_CODE as agreid,ti.AMOUNT as amount,ti.ORDER_NO as orderno
+   from CREDIT_INFO ci
+   INNER JOIN TRANS_ORDER_INFO ti ON ci.USER_ID = ti.USER_ID
+   INNER JOIN ACCOUNT_AGREEMENT aa ON ci.CREDIT_AGREEMENT_ID = aa.AGMT_ID
+   where 1=1
+   <if test="ACCOUNT_DATE != null">
+     and ACCOUNT_DATE = str_to_date(#{ACCOUNT_DATE},'%Y%m%d %H:%i:%s')
+   </if>
+   <if test="START_DATE != null">
+     and ti.ORDER_DATE &gt;= str_to_date(#{START_DATE},'%Y%m%d %H:%i:%s')
+   </if>
+   <if test="END_DATE != null">
+     and ti.ORDER_DATE &lt;= str_to_date(#{END_DATE},'%Y%m%d %H:%i:%s')
+   </if>
+   <if test="STATUS != null">
+     and ti.STATUS = #{STATUS}
+   </if>
+   <if test="FUNC_CODE != null">
+     and ti.FUNC_CODE = ${FUNC_CODE}
+   </if>
+   order by ci.USER_ID
+  </select>
+  
+  <select id="selectPaymentByDate" parameterType="java.util.Map" resultType="java.util.HashMap">
+   select
+    ci.PROVIDER_ID as proid,
+   	ci.ROOT_INST_CD as merid,
+    ci.USER_ID as userid,
+    ti.CAPITAL+ti.INTEREST as ypay,
+    ti.STATUS_ID as status,
+    date_format(ti.REPAYMENT_REPAID_DATE,'%Y%m%d') as repaiddate
+   from CREDIT_INFO ci
+   INNER JOIN CREDIT_REPAYMENT ti ON ci.USER_ID = ti.USER_ID
+   INNER JOIN ACCOUNT_AGREEMENT aa ON ci.CREDIT_AGREEMENT_ID = aa.AGMT_ID
+   where 1=1
+   <if test="STATUS != null">
+     and ti.STATUS_ID  &lt;&gt; ${STATUS}
+   </if>
+   order by ci.USER_ID
+  </select>
+  
+  <select id="selectgenerationres" parameterType="java.util.Map" resultType="java.util.HashMap">
+   select
+    gp.ROOT_INST_CD as merchantId ,
+    gp.USER_ID as userid ,
+    gp.AMOUNT as amount ,
+    gp.ORDER_NO as orderno ,
+    gp.ORDER_TYPE as ordertype ，
+    gp.REQUEST_NO as batchid ，
+    date_format(gp.ACCOUNT_DATE,'%Y%m%d') as accountdate
+   from GENERATION_PAYMENT gp
+   where 1=1
+	and gp.SEND_TYPE = ${SEND_TYPE}
+	and gp.STATUS_ID = ${STATUS_ID}
+  </select>
+  
+  <select id="selectgenerationcnt" parameterType="java.util.Map" resultType="java.util.HashMap">
+   select
+    count(gp.SEND_TYPE) as cnt
+   from GENERATION_PAYMENT gp
+   INNER JOIN SETTLE_SPLITTING_ENTRY sse ON (sse.ROOT_INST_CD = gp.ROOT_INST_CD
+                                             and sse.USER_ID = gp.USER_ID
+                                             and sse.ACCOUNT_DATE = gp.ACCOUNT_DATE
+                                             and sse.STATUS_ID = 1
+                                             and sse.BATCH_ID = gp.REQUEST_NO
+                                             and sse.SETTLE_TYPE &lt;&gt; 1)
+   where 1=1
+	and gp.SEND_TYPE = ${SEND_TYPE}
+	and gp.STATUS_ID = ${STATUS_ID}
+  </select>
+
+  <select id="selectTransOrderInfoCh" parameterType="java.util.Map" resultType="TransOrderInfo">
+   select
+    ti.REQUEST_ID as requestId,
+    ti.REQUEST_NO as requestNo,
+    ti.REQUEST_TIME as requestTime,
+    ti.TRADE_FLOW_NO as tradeFlowNo,
+    ti.ORDER_PACKAGE_NO as orderPackageNo,
+    ti.ORDER_NO as orderNo,
+    ti.ORDER_DATE as orderDate,
+    ti.ORDER_AMOUNT as orderAmount,
+    ti.ORDER_COUNT as orderCount,
+    ti.TRANS_TYPE as transType,
+    ti.FUNC_CODE as funcCode,
+    ti.INTER_MERCHANT_CODE as interMerchantCode,
+    ti.MERCHANT_CODE as merchantCode,
+    ti.USER_ID as userId,
+    ti.AMOUNT as amount,
+    ti.FEE_AMOUNT as feeAmount,
+    ti.USER_FEE as userFee,
+    ti.PROFIT as profit,
+    ti.BUSI_TYPE_ID as busiTypeId,
+    ti.PAY_CHANNEL_ID as payChannelId,
+    ti.BANK_CODE as bankCode,
+    ti.STATUS as status,
+    ti.ERROR_CODE as errorCode,
+    ti.ERROR_MSG as errorMsg,
+    ti.REMARK as remark,
+    ti.ACCOUNT_DATE as accountdate,
+    ti.CREATED_TIME as createdTime,
+    ti.UPDATED_TIME as updatedTime
+   from TRANS_ORDER_INFO ti
+   INNER JOIN SETTLE_BALANCE_ENTRY sbe ON (sbe.ORDER_NO = ti.REQUEST_NO and sbe.RETRI_REF_NO = ti.FUNC_CODE)
+   where 1=1
+    and sbe.STATUS_ID = 1
+    and sbe.SETTLE_TIME = str_to_date(#{ACCOUNT_DATE},'%Y%m%d %H:%i:%s')
+    and ti.MERCHANT_CODE = #{ROOT}
+   order by ti.REQUEST_TIME
+  </select>
+
+  <select id="selectTransOrderInfoD" parameterType="java.util.Map" resultType="TransOrderInfo">
+   select aa.requestId,aa.requestNo,aa.requestTime,aa.tradeFlowNo,aa.orderPackageNo,aa.orderNo,
+          aa.orderDate,aa.orderAmount,aa.orderCount,aa.transType,aa.funcCode,aa.interMerchantCode,
+          aa.merchantCode,aa.userId,aa.amount,aa.feeAmount,aa.userFee,aa.profit,aa.busiTypeId,
+          aa.payChannelId,aa.bankCode,aa.status,aa.errorCode,aa.errorMsg,aa.remark,
+          aa.accountdate,aa.createdTime,aa.updatedTime from (
+   select
+    ti.REQUEST_ID as requestId,
+    ti.REQUEST_NO as requestNo,
+    ti.REQUEST_TIME as requestTime,
+    ti.TRADE_FLOW_NO as tradeFlowNo,
+    ti.ORDER_PACKAGE_NO as orderPackageNo,
+    ti.ORDER_NO as orderNo,
+    ti.ORDER_DATE as orderDate,
+    ti.ORDER_AMOUNT as orderAmount,
+    ti.ORDER_COUNT as orderCount,
+    ti.TRANS_TYPE as transType,
+    ti.FUNC_CODE as funcCode,
+    ti.INTER_MERCHANT_CODE as interMerchantCode,
+    ti.MERCHANT_CODE as merchantCode,
+    ti.USER_ID as userId,
+    ti.AMOUNT as amount,
+    ti.FEE_AMOUNT as feeAmount,
+    ti.USER_FEE as userFee,
+    ti.PROFIT as profit,
+    ti.BUSI_TYPE_ID as busiTypeId,
+    ti.PAY_CHANNEL_ID as payChannelId,
+    ti.BANK_CODE as bankCode,
+    ti.STATUS as status,
+    ti.ERROR_CODE as errorCode,
+    ti.ERROR_MSG as errorMsg,
+    ti.REMARK as remark,
+    ti.ACCOUNT_DATE as accountdate,
+    ti.CREATED_TIME as createdTime,
+    ti.UPDATED_TIME as updatedTime,
+    sbe.ORDER_NO as flg
+   from TRANS_ORDER_INFO ti
+   LEFT JOIN SETTLE_BALANCE_ENTRY sbe ON ((sbe.ORDER_NO = ti.REQUEST_NO or sbe.ORDER_NO = ti.ORDER_NO) and sbe.STATUS_ID = 1 and sbe.ROOT_INST_CD in (${ROOT}) and ti.FUNC_CODE = sbe.RETRI_REF_NO)
+   where 1=1
+    and ti.FUNC_CODE in (${FUNC_CODE})
+    and ti.MERCHANT_CODE in (${ROOT})
+    and ti.REQUEST_TIME &lt;= str_to_date(#{TRADE_DATE},'%Y%m%d %H:%i:%s')
+    and (
+	    ti.PAY_CHANNEL_ID = #{PAY_CHANNEL_ID}
+	    <if test="PAY_CHANNEL_ID == '01'">
+	    or ti.PAY_CHANNEL_ID is NULL 
+	    </if>
+    )
+    and (
+	    ti.BUSI_TYPE_ID = #{BUSI_TYPE_ID}
+	    or ti.BUSI_TYPE_ID is NULL 
+    )) aa
+   where aa.flg is null
+   order by aa.requestTime
+  </select>
+  <update id="updatetransstatus" parameterType="java.util.Map">
+    update TRANS_ORDER_INFO
+      set STATUS = ${STATUS}
+    where ORDER_NO = #{ORDER_NO}
+    AND MERCHANT_CODE = #{MERCHANT_CODE}
+  </update>
+  <select id="selectWithhold" parameterType="java.util.Map" resultType="java.util.HashMap">
+	select
+		date_format(a.account_date,'%Y-%m-%d') as colum1,
+		date_format(a.created_time,'%Y%m%d%H%i%s') as colum2,
+		date_format(a.updated_time,'%Y%m%d%H%i%s') as colum3,
+		a.order_no as colum4,
+		ifnull(d.parameter_code,'') as colum5,
+		ifnull(c.parameter_code,'') as colum6,
+		a.user_id as colum7,
+		round(a.amount/100,2) as colum8,
+		b.order_id as colum9,
+		a.trade_flow_no as colum10,
+		a.status as colum11,
+		'' as colum12,
+		'' as colum13,
+		'' as colum14
+	from `account`.TRANS_ORDER_INFO a
+		INNER JOIN `order`.ORDER_INFO b
+			on (a.trade_flow_no= b.user_order_id and b.PROVIDER_ID=#{providerId} and b.status_id ='1')
+		left join `account`.PARAMETER_INFO c on (a.MERCHANT_CODE=c.parameter_value
+			and c.status = '1')
+		left join `account`.PARAMETER_INFO d on (b.provider_id=d.parameter_value
+			and d.status = '1')
+	where
+		a.account_date = #{accountDate}
+		and a.MERCHANT_CODE = #{merchantCode}
+		and a.func_code = #{funcCode}
+		and a.status in (1,4,5) 
+	order by a.order_no,a.trade_flow_no
+  </select>
+  
+  <select id="selectbatchno" parameterType="SettleBatchManage" resultType="SettleBatchManage">
+
+   (select
+    BATCH_ID as batchId,
+    BATCH_TYPE as batchType,
+    BATCH_SUB_NO as batchSubNo,
+    ROOT_INST_CD as rootInstCd,
+    BATCH_CONS as batchCons,
+    BATCH_NUM as batchNum,
+    BATCH_NUM_LEN as batchNumLen,
+    REMARK as remark,
+    ACCOUNT_DATE as accountDate,
+    OBLIGATE1 as obligate1,
+    OBLIGATE2 as obligate2,
+    CREATED_TIME as createdTime,
+    UPDATED_TIME as updatedTime
+   from SETTLE_BATCH_MANAGE
+   where BATCH_TYPE = #{batchType}
+   <if test="rootInstCd != null">
+     and ROOT_INST_CD = #{rootInstCd}
+   </if>
+     and ACCOUNT_DATE is null)
+     union
+    (select
+    BATCH_ID as batchId,
+    BATCH_TYPE as batchType,
+    BATCH_SUB_NO as batchSubNo,
+    ROOT_INST_CD as rootInstCd,
+    BATCH_CONS as batchCons,
+    BATCH_NUM as batchNum,
+    BATCH_NUM_LEN as batchNumLen,
+    REMARK as remark,
+    ACCOUNT_DATE as accountDate,
+    OBLIGATE1 as obligate1,
+    OBLIGATE2 as obligate2,
+    CREATED_TIME as createdTime,
+    UPDATED_TIME as updatedTime
+   from SETTLE_BATCH_MANAGE
+   where BATCH_TYPE = #{batchType}
+   <if test="rootInstCd != null">
+     and ROOT_INST_CD = #{rootInstCd}
+   </if>
+   <if test="accountDate != null">
+     and ACCOUNT_DATE = #{accountDate}
+   </if>
+	ORDER BY BATCH_SUB_NO DESC)
+  </select>
+  
+   <select id="selectDeduct" parameterType="java.util.Map" resultType="java.util.HashMap">
+	select
+		date_format(a.account_date,'%Y-%m-%d') as colum1,
+		date_format(a.created_time,'%Y%m%d%H%i%s') as colum2,
+		date_format(a.updated_time,'%Y%m%d%H%i%s') as colum3,
+		a.order_no as colum4,
+		ifnull(d.parameter_code,'') as colum5,
+		ifnull(c.parameter_code,'') as colum6,
+		a.user_id as colum7,
+		round(a.amount/100,2) as colum8,
+		b.order_id as colum9,
+		a.trade_flow_no as colum10,
+		a.status as colum11,
+		'' as colum12,
+		'' as colum13,
+		'' as colum14
+	from `account`.TRANS_ORDER_INFO a
+		INNER JOIN `order`.ORDER_INFO b
+			on (a.trade_flow_no= b.user_order_id and b.PROVIDER_ID=#{providerId} and b.status_id ='1')
+		left join `account`.PARAMETER_INFO c on (a.MERCHANT_CODE=c.parameter_value
+			and c.status = '1')
+		left join `account`.PARAMETER_INFO d on (b.provider_id=d.parameter_value
+			and d.status = '1')
+	where
+		a.account_date = #{accountDate}
+		and a.MERCHANT_CODE = #{merchantCode}
+		and a.func_code = #{funcCode}
+		and a.status = 1 
+	order by a.order_no,a.trade_flow_no
+  </select>
+</mapper>

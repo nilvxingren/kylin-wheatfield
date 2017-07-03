@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MyBatisMap">
+
+    <!-- created by liuhuan 20151110 -->
+	<resultMap id="resultMapList" type="SHBalanceInfo">
+		<result column="AMOUNT" jdbcType="DECIMAL" property="amount" />
+		<result column="BALANCE_USABLE" jdbcType="DECIMAL" property="balanceUsable" />
+		<result column="BALANCE_SETTLE" jdbcType="DECIMAL" property="balanceSettle" />
+		<result column="BALANCE_FROZON" jdbcType="DECIMAL" property="balanceFrozon" />
+		<result column="BALANCE_OVER_LIMIT" jdbcType="DECIMAL" property="balanceOverLimit" />
+		<result column="BALANCE_CREDIT" jdbcType="DECIMAL" property="balanceCredit" />
+		<result column="on_pulse_time" jdbcType="VARCHAR" property="on_pulse_time" />
+		<result column="ACCOUNT_RELATE_ID" jdbcType="VARCHAR" property="userId" />
+		<result column="GROUP_MANAGE" jdbcType="VARCHAR" property="productId" />
+		<result column="FIN_ACCOUNT_ID" jdbcType="VARCHAR" property="finAccountId" />
+	</resultMap>
+	<!--获取用户账户余额 created by liuhuan 20151110-->
+	<select id="getBalanceList" resultMap="resultMapList">         
+	    SELECT FA.`ROOT_INST_CD`
+        ,FA.`ACCOUNT_RELATE_ID`
+        ,FA.`GROUP_MANAGE`
+        ,FA.`FIN_ACCOUNT_ID`
+        ,IFNULL(FE.`AMOUNT`,FA.`AMOUNT`) AS AMOUNT
+        ,IFNULL(FE.`BALANCE_USABLE`,FA.`BALANCE_USABLE`) AS BALANCE_USABLE
+        ,IFNULL(FE.`BALANCE_SETTLE`,FA.`BALANCE_SETTLE`) AS BALANCE_SETTLE
+        ,IFNULL(FE.`BALANCE_FROZON`,FA.`BALANCE_FROZON`) AS BALANCE_FROZON
+        ,IFNULL(FE.`BALANCE_OVER_LIMIT`,FA.`BALANCE_OVER_LIMIT`) AS BALANCE_OVER_LIMIT
+        ,IFNULL(FE.`BALANCE_CREDIT`,FA.`BALANCE_CREDIT`) AS BALANCE_CREDIT
+        FROM `FINANACE_ACCOUNT` FA
+        LEFT JOIN (SELECT  E.`FIN_ACCOUNT_ID`
+                    ,E.`AMOUNT`
+                    ,E.`BALANCE_USABLE`
+                    ,E.`BALANCE_SETTLE`
+                    ,E.`BALANCE_FROZON`
+                    ,E.`BALANCE_OVER_LIMIT`
+                    ,E.`BALANCE_CREDIT`
+               FROM `FINANACE_ENTRY` E
+              INNER JOIN (SELECT F.`FIN_ACCOUNT_ID`,MAX(F.`PULSE_DEGREE`) AS `PULSE_DEGREE` 
+                            FROM `FINANACE_ENTRY` F
+                           GROUP BY F.`FIN_ACCOUNT_ID`) AS FAE ON (FAE.`FIN_ACCOUNT_ID` = E.`FIN_ACCOUNT_ID` AND FAE.`PULSE_DEGREE` = E.`PULSE_DEGREE`) 
+            ) FE ON (FE.`FIN_ACCOUNT_ID` = FA.`FIN_ACCOUNT_ID`)
+        WHERE FA.`ROOT_INST_CD` = #{ROOT_INST_CD,mode=IN,jdbcType=VARCHAR}
+        AND FA.`ACCOUNT_RELATE_ID` = #{ACCOUNT_RELATE_ID,mode=IN,jdbcType=VARCHAR}
+	</select>
+
+<resultMap type="java.util.HashMap" id="resultMap">
+	<result column="on_pulse_degree" jdbcType="INTEGER" property="on_pulse_degree" />
+	<result column="on_amount" jdbcType="DECIMAL" property="on_amount" />
+	<result column="on_balance_usable" jdbcType="DECIMAL" property="on_balance_usable" />
+	<result column="on_balance_settle" jdbcType="DECIMAL" property="on_balance_settle" />
+	<result column="on_balance_frozon" jdbcType="DECIMAL" property="on_balance_frozon" />
+	<result column="on_balance_over_limit" jdbcType="DECIMAL" property="on_balance_over_limit" />
+	<result column="on_balance_credit" jdbcType="DECIMAL" property="on_balance_credit" />
+	<result column="on_pulse_time" jdbcType="VARCHAR" property="on_pulse_time" />
+	<result column="on_err_code" jdbcType="INTEGER" property="on_err_code" />
+	<result column="ov_err_text" jdbcType="VARCHAR" property="ov_err_text" />	
+	<result column="ov_segment" jdbcType="VARCHAR" property="ov_segment" />	
+</resultMap>
+
+<!--代付表成功的数据移动到历史表Map-->
+<resultMap type="java.util.HashMap" id="resultMapAdjust">	
+	<result column="on_err_code" jdbcType="INTEGER" property="on_err_code" />
+	<result column="ov_err_text" jdbcType="VARCHAR" property="ov_err_text" />
+
+</resultMap>
+
+<!--获取用户账户余额-->
+<select id="getBalance" resultMap="resultMap"  statementType="CALLABLE">         
+    {CALL PRO_FINANACE_ENTRY_CURRENT(#{iv_fin_account_id,mode=IN,jdbcType=VARCHAR},
+    #{iv_accrual_type,mode=IN,jdbcType=VARCHAR},#{on_pulse_degree,mode=OUT,jdbcType=INTEGER},
+    #{on_amount,mode=OUT,jdbcType=DECIMAL},#{on_balance_usable,mode=OUT,jdbcType=DECIMAL},
+    #{on_balance_settle,mode=OUT,jdbcType=DECIMAL},#{on_balance_frozon,mode=OUT,jdbcType=DECIMAL},
+    #{on_balance_over_limit,mode=OUT,jdbcType=DECIMAL},#{on_balance_credit,mode=OUT,jdbcType=DECIMAL},
+    #{on_pulse_time,mode=OUT,jdbcType=VARCHAR},#{on_err_code,mode=OUT,jdbcType=INTEGER},#{ov_err_text,mode=OUT,jdbcType=VARCHAR})}
+</select>
+<!--  查询还款计划 resultMap  -->
+<!--  计算日，计息日  -->
+<resultMap type="java.util.HashMap" id="resultMapDate">
+	<result column="out_calculate_date" jdbcType="VARCHAR" property="out_calculate_date" />
+	<result column="out_interest_date" jdbcType="VARCHAR" property="out_interest_date" />
+	<result column="on_err_code" jdbcType="INTEGER" property="on_err_code" />
+	<result column="ov_err_text" jdbcType="VARCHAR" property="ov_err_text" />
+</resultMap>
+<!--  费率模版 -->
+<resultMap type="RepaymentMode" id="resultMapRate">
+	<result column="RATE_ID" jdbcType="VARCHAR" property="rateId" />
+	<result column="RATE_TYPE" jdbcType="VARCHAR" property="rateType" />
+	<result column="BILL_DAY" jdbcType="VARCHAR" property="billDay" />
+	<result column="REPAYMENT_DAY" jdbcType="VARCHAR" property="repaymentDay" />
+	<result column="RATE_PROPERTY" jdbcType="VARCHAR" property="rateProperty" />	
+	<result column="RATE_INTEREST_FORM" jdbcType="VARCHAR" property="rateInterestForm" />
+	<result column="RATE_INTEREST_TYPE" jdbcType="VARCHAR" property="rateInterestType"/>
+	<result column="RATE" jdbcType="VARCHAR" property="rate" />
+</resultMap>
+<resultMap type="InterestRepayment" id="resultMapInterest" >
+	  <result column="PERIOD_CURRENT" jdbcType="VARCHAR" property="periodCurrent" />
+	  <result column="SHOULD_REPAYMENT_DATE" property="shouldRepaymentDate" />
+	  <result column="SHOULD_CAPITAL" jdbcType="VARCHAR" property="shouldCapital" />
+	  <result column="SHOULD_INTEREST" jdbcType="VARCHAR" property="shouldInterest" />
+	  <result column="SHOULD_AMOUNT" jdbcType="VARCHAR" property="shouldAmount" />
+</resultMap>
+
+<!-- 查询还款计划ResultMap -->
+<resultMap type="CreditRateTemplateRes" id="creditRateMap">
+	<result column="lv_bill_day" property="billDay" />
+	<result column="lv_repayment_day" property="repaymentDay" />
+	<result column="lv_rate_property" property="rateProperty" />
+	<result column="lv_rate_interest_form" property="rateInterestForm" />
+	<result column="lv_rate_interest_type" property="rateInterestType" />
+	<result column="lv_rate_timex" property="rateTimeX" />
+	<result column="lv_rate_timey" property="rateTimeY" />
+	<result column="lv_ratex" property="rateX" />
+	<result column="lv_ratey" property="rateY" />
+	<result column="lv_rate_unitx" property="rateUnit" />
+</resultMap>
+
+<!-- 查询还款计划 -->
+<select id="queryRepayPlan"  statementType="CALLABLE" resultMap="creditRateMap,resultMapInterest">         
+    {
+      CALL PRO_INTEREST_LOAN_QUERY (
+         #{iv_user_id,mode=IN,jdbcType=VARCHAR},
+         #{iv_user_order_id,mode=IN,jdbcType=VARCHAR},
+         #{iv_root_inst_cd,mode=IN,jdbcType=VARCHAR},
+         #{iv_order_id,mode=IN,jdbcType=VARCHAR},
+       	 #{out_calculate_date,mode=OUT,jdbcType=VARCHAR,resultMap=resultMapDate},
+         #{out_interest_date,mode=OUT,jdbcType=VARCHAR,resultMap=resultMapDate}
+         )
+     }
+</select>
+<!-- 查询是否可以提前还款 -->
+<select id="interestPrepaymentQuery"  statementType="CALLABLE" resultType="Map">         
+    {
+      CALL PRO_INTEREST_PREPAYMENT_QUERY (
+         #{iv_user_id,mode=IN,jdbcType=VARCHAR},
+         #{iv_user_order_id,mode=IN,jdbcType=VARCHAR},
+         #{iv_root_inst_cd,mode=IN,jdbcType=VARCHAR},
+       	 #{out_principal,mode=OUT,jdbcType=VARCHAR},
+         #{out_fees,mode=OUT,jdbcType=VARCHAR}
+         )
+     }
+</select>
+
+<!--维护代付表历史数据-->
+<select id="setgeneration" resultMap="resultMap"  statementType="CALLABLE">         
+    {CALL PRO_GENERATION_PAYMENT_HIS(#{on_err_code,mode=OUT,jdbcType=INTEGER},#{ov_err_text,mode=OUT,jdbcType=VARCHAR})}
+</select>
+
+<!--维护贷款还款表历史数据-->
+<select id="setinterest" resultMap="resultMap"  statementType="CALLABLE">         
+    {
+      CALL PRO_INTEREST_REPAYMENT_HIS(
+    	#{on_err_code,mode=OUT,jdbcType=INTEGER},
+    	#{ov_err_text,mode=OUT,jdbcType=VARCHAR},
+    	#{ov_segment,mode=OUT,jdbcType=VARCHAR}	
+    	)
+    }
+</select>
+
+<!--维护还款表历史数据-->
+<select id="setrepayment" resultMap="resultMap"  statementType="CALLABLE">         
+    {CALL PRO_CREDIT_REPAYMENT_HIS(#{on_err_code,mode=OUT,jdbcType=INTEGER},#{ov_err_text,mode=OUT,jdbcType=VARCHAR})}
+</select>
+
+<!--计息(丰年)-->
+<select id="prorepayment" resultMap="resultMap"  statementType="CALLABLE">         
+    {CALL PRO_CREDIT_REPAYMENT(#{on_err_code,mode=OUT,jdbcType=INTEGER},#{ov_err_text,mode=OUT,jdbcType=VARCHAR})}
+</select>
+
+<!--计息（课栈）-->
+<select id="prorepayment_kz" resultMap="resultMap"  statementType="CALLABLE">         
+    {CALL PRO_INTEREST_REPAYMENT(#{on_err_code,mode=OUT,jdbcType=INTEGER},#{ov_err_text,mode=OUT,jdbcType=VARCHAR})}
+</select>
+
+<!--维护代收付表成功的数据移动到历史表-->
+<select id="setpayment_adjust" resultMap="resultMapAdjust"  statementType="CALLABLE">         
+     {
+	     CALL PRO_PAYMENT_ACCOUNT_ADJUST(
+	     	#{id_begin_time,mode=IN,jdbcType=TIMESTAMP},
+	    	#{id_end_time,mode=IN,jdbcType=TIMESTAMP},
+	    	#{on_err_code,mode=OUT,jdbcType=INTEGER},
+	    	#{ov_err_text,mode=OUT,jdbcType=VARCHAR}
+	    )
+    }
+</select>
+<!--维护代收付表失败的数据移动到历史表-->
+<select id="setpayment_status" resultMap="resultMapAdjust"  statementType="CALLABLE">         
+     {
+	     CALL PRO_PAYMENT_STATUS(	     	
+	    	#{on_err_code,mode=OUT,jdbcType=INTEGER}
+	    )
+    }
+</select>
+
+</mapper>

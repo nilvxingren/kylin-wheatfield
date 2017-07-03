@@ -1,0 +1,823 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FinanaceEntryMapper">
+	<resultMap id="BaseResultMap" type="FinanaceEntry">
+	  <result column="FINANACE_ENTRY_ID" jdbcType="VARCHAR" property="finanaceEntryId" />
+	  <result column="ACCOUNT_DATE" jdbcType="TIMESTAMP" property="accountDate" />
+	  <result column="FIN_ACCOUNT_ID" jdbcType="VARCHAR" property="finAccountId" />
+	  <result column="ACCRUAL_TYPE" jdbcType="TINYINT" property="accrualType" />
+	  <result column="AMOUNT" jdbcType="DECIMAL" property="amount" />
+	  <result column="REFER_ENTRY_ID" jdbcType="VARCHAR" property="referEntryId" />
+	  <result column="PULSE_TIME" jdbcType="VARCHAR" property="pulseTime" />
+	  <result column="PULSE_DEGREE" jdbcType="INTEGER" property="pulseDegree" />
+	  <result column="DIRECTION" jdbcType="TINYINT" property="direction" />
+	  <result column="BALANCE_USABLE" jdbcType="DECIMAL" property="balanceUsable" />
+	  <result column="BALANCE_SETTLE" jdbcType="DECIMAL" property="balanceSettle" />
+	  <result column="BALANCE_FROZON" jdbcType="DECIMAL" property="balanceFrozon" />
+	  <result column="BALANCE_OVER_LIMIT" jdbcType="DECIMAL" property="balanceOverLimit" />
+	  <result column="BALANCE_CREDIT" jdbcType="DECIMAL" property="balanceCredit" />
+	  <result column="REVERSE_FLAG" jdbcType="TINYINT" property="reverseFlag" />
+	  <result column="PARTY_ID_FROM" jdbcType="VARCHAR" property="partyIdFrom" />
+	  <result column="REFER_FROM" jdbcType="VARCHAR" property="referFrom" />
+	  <result column="REFER_ID" jdbcType="VARCHAR" property="referId" />
+	  <result column="PAYMENT_AMOUNT" jdbcType="DECIMAL" property="paymentAmount" />
+	  <result column="TRANS_DATE" jdbcType="TIMESTAMP" property="transDate" />
+	  <result column="THIRD_PARTY_ID" jdbcType="VARCHAR" property="thirdPartyId" />
+	  <result column="MY_NOTES" jdbcType="VARCHAR" property="myNotes" />
+	  <result column="YOUR_NOTES" jdbcType="VARCHAR" property="yourNotes" />
+	  <result column="HIS_NOTE" jdbcType="VARCHAR" property="hisNote" />
+	  <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+	  <result column="RECORD_MAP" jdbcType="VARCHAR" property="recordMap" />
+	  <result column="CREATED_TIME" jdbcType="TIMESTAMP" property="createdTime" />
+	  <result column="UPDATED_TIME" jdbcType="TIMESTAMP" property="updatedTime" />
+  </resultMap>
+  
+  	<resultMap id="BaseResultMapSmail" type="FinanaceEntry">	 
+	  <result column="FIN_ACCOUNT_ID" jdbcType="VARCHAR" property="finAccountId" />	 
+	  <result column="PAYMENT_AMOUNT" jdbcType="DECIMAL" property="paymentAmount" />	 
+  </resultMap>
+  
+  <sql id="Example_Where_Clause">
+    <where>
+      <trim prefix="(" prefixOverrides="and" suffix=")">
+      <if test="finanaceEntryId != null" >
+	      and FINANACE_ENTRY_ID = #{finanaceEntryId,jdbcType=VARCHAR}
+	    </if>
+      <if test="accountDate != null" >
+	      and ACCOUNT_DATE = #{accountDate,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="finAccountId != null" >
+	      and FIN_ACCOUNT_ID = #{finAccountId,jdbcType=VARCHAR}
+	    </if>
+      <if test="accrualType != null" >
+	      and ACCRUAL_TYPE = #{accrualType,jdbcType=TINYINT}
+	    </if>
+      <if test="amount != null" >
+	      and AMOUNT = #{amount,jdbcType=DECIMAL}
+	    </if>
+      <if test="referEntryId != null" >
+	      and REFER_ENTRY_ID = #{referEntryId,jdbcType=VARCHAR}
+	    </if>
+      <if test="pulseTime != null" >
+	      and PULSE_TIME = #{pulseTime,jdbcType=VARCHAR}
+	    </if>
+      <if test="pulseDegree != null" >
+	      and PULSE_DEGREE = #{pulseDegree,jdbcType=INTEGER}
+	    </if>
+      <if test="direction != null" >
+	      and DIRECTION = #{direction,jdbcType=TINYINT}
+	    </if>
+      <if test="balanceUsable != null" >
+	      and BALANCE_USABLE = #{balanceUsable,jdbcType=DECIMAL}
+	    </if>
+      <if test="balanceSettle != null" >
+	      and BALANCE_SETTLE = #{balanceSettle,jdbcType=DECIMAL}
+	    </if>
+      <if test="balanceFrozon != null" >
+	      and BALANCE_FROZON = #{balanceFrozon,jdbcType=DECIMAL}
+	    </if>
+      <if test="balanceOverLimit != null" >
+	      and BALANCE_OVER_LIMIT = #{balanceOverLimit,jdbcType=DECIMAL}
+	    </if>
+      <if test="balanceCredit != null" >
+	      and BALANCE_CREDIT = #{balanceCredit,jdbcType=DECIMAL}
+	    </if>
+     
+      <if test="reverseFlag != null" >
+	      and REVERSE_FLAG = #{reverseFlag,jdbcType=TINYINT}
+	    </if>
+      <if test="partyIdFrom != null" >
+	      and PARTY_ID_FROM = #{partyIdFrom,jdbcType=VARCHAR}
+	    </if>
+      <if test="referFrom != null" >
+	      and REFER_FROM = #{referFrom,jdbcType=VARCHAR}
+	    </if>
+      <if test="referId != null" >
+	      and REFER_ID = #{referId,jdbcType=VARCHAR}
+	    </if>
+      <if test="paymentAmount != null" >
+	      and PAYMENT_AMOUNT = #{paymentAmount,jdbcType=DECIMAL}
+	    </if>
+      <if test="transDate != null" >
+	      and TRANS_DATE = #{transDate,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="thirdPartyId != null" >
+	      and THIRD_PARTY_ID = #{thirdPartyId,jdbcType=VARCHAR}
+	    </if>
+      <if test="myNotes != null" >
+	      and MY_NOTES = #{myNotes,jdbcType=VARCHAR}
+	    </if>
+      <if test="yourNotes != null" >
+	      and YOUR_NOTES = #{yourNotes,jdbcType=VARCHAR}
+	    </if>
+      <if test="hisNote != null" >
+	      and HIS_NOTE = #{hisNote,jdbcType=VARCHAR}
+	    </if>
+      <if test="remark != null" >
+	      and REMARK = #{remark,jdbcType=VARCHAR}
+	    </if>
+      <if test="recordMap != null" >
+	      and RECORD_MAP = #{recordMap,jdbcType=VARCHAR}
+	    </if>
+      <if test="createdTime != null" >
+	      and CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="updatedTime != null" >
+	      and UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP}
+	    </if>
+	  </trim>
+    </where>
+  </sql>
+  <sql id="Example_Set_Clause">
+    <set>
+      <trim suffixOverrides=",">
+      <if test="finanaceEntryId != null">
+        FINANACE_ENTRY_ID = #{finanaceEntryId,jdbcType=VARCHAR},
+      </if>
+      <if test="accountDate != null">
+        ACCOUNT_DATE = #{accountDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finAccountId != null">
+        FIN_ACCOUNT_ID = #{finAccountId,jdbcType=VARCHAR},
+      </if>
+      <if test="accrualType != null">
+        ACCRUAL_TYPE = #{accrualType,jdbcType=TINYINT},
+      </if>
+      <if test="amount != null">
+        AMOUNT = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="referEntryId != null">
+        REFER_ENTRY_ID = #{referEntryId,jdbcType=VARCHAR},
+      </if>
+      <if test="pulseTime != null">
+        PULSE_TIME = #{pulseTime,jdbcType=VARCHAR},
+      </if>
+      <if test="pulseDegree != null">
+        PULSE_DEGREE = #{pulseDegree,jdbcType=INTEGER},
+      </if>
+      <if test="direction != null">
+        DIRECTION = #{direction,jdbcType=TINYINT},
+      </if>
+      <if test="balanceUsable != null">
+        BALANCE_USABLE = #{balanceUsable,jdbcType=DECIMAL},
+      </if>
+      <if test="balanceSettle != null">
+        BALANCE_SETTLE = #{balanceSettle,jdbcType=DECIMAL},
+      </if>
+      <if test="balanceFrozon != null">
+        BALANCE_FROZON = #{balanceFrozon,jdbcType=DECIMAL},
+      </if>
+      <if test="balanceOverLimit != null">
+        BALANCE_OVER_LIMIT = #{balanceOverLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="balanceCredit != null">
+        BALANCE_CREDIT = #{balanceCredit,jdbcType=DECIMAL},
+      </if>
+      <if test="reverseFlag != null">
+        REVERSE_FLAG = #{reverseFlag,jdbcType=TINYINT},
+      </if>
+      <if test="partyIdFrom != null">
+        PARTY_ID_FROM = #{partyIdFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="referFrom != null">
+        REFER_FROM = #{referFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="referId != null">
+        REFER_ID = #{referId,jdbcType=VARCHAR},
+      </if>
+      <if test="paymentAmount != null">
+        PAYMENT_AMOUNT = #{paymentAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="transDate != null">
+        TRANS_DATE = #{transDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="thirdPartyId != null">
+        THIRD_PARTY_ID = #{thirdPartyId,jdbcType=VARCHAR},
+      </if>
+      <if test="myNotes != null">
+        MY_NOTES = #{myNotes,jdbcType=VARCHAR},
+      </if>
+      <if test="yourNotes != null">
+        YOUR_NOTES = #{yourNotes,jdbcType=VARCHAR},
+      </if>
+      <if test="hisNote != null">
+        HIS_NOTE = #{hisNote,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="recordMap != null">
+        RECORD_MAP = #{recordMap,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      </trim>
+    </set>
+  </sql>
+  <sql id="Base_Column_List">
+    FINANACE_ENTRY_ID,
+    ACCOUNT_DATE,
+    FIN_ACCOUNT_ID,
+    ACCRUAL_TYPE,
+    AMOUNT,
+    REFER_ENTRY_ID,
+    PULSE_TIME,
+    PULSE_DEGREE,
+    DIRECTION,
+    BALANCE_USABLE,
+    BALANCE_SETTLE,
+    BALANCE_FROZON,
+    BALANCE_OVER_LIMIT,
+    BALANCE_CREDIT,
+    REVERSE_FLAG,
+    PARTY_ID_FROM,
+    REFER_FROM,
+    REFER_ID,
+    PAYMENT_AMOUNT,
+    TRANS_DATE,
+    THIRD_PARTY_ID,
+    MY_NOTES,
+    YOUR_NOTES,
+    HIS_NOTE,
+    REMARK,
+    RECORD_MAP,
+    CREATED_TIME,
+    UPDATED_TIME,
+  </sql>
+  <sql id="Base_Set_Clause">
+    <set>
+      <trim suffixOverrides=",">
+        FINANACE_ENTRY_ID = #{finanaceEntryId,jdbcType=VARCHAR},
+        ACCOUNT_DATE = #{accountDate,jdbcType=TIMESTAMP},
+        FIN_ACCOUNT_ID = #{finAccountId,jdbcType=VARCHAR},
+        ACCRUAL_TYPE = #{accrualType,jdbcType=TINYINT},
+        AMOUNT = #{amount,jdbcType=DECIMAL},
+        REFER_ENTRY_ID = #{referEntryId,jdbcType=VARCHAR},
+        PULSE_TIME = #{pulseTime,jdbcType=VARCHAR},
+        PULSE_DEGREE = #{pulseDegree,jdbcType=INTEGER},
+        DIRECTION = #{direction,jdbcType=TINYINT},
+        BALANCE_USABLE = #{balanceUsable,jdbcType=DECIMAL},
+        BALANCE_SETTLE = #{balanceSettle,jdbcType=DECIMAL},
+        BALANCE_FROZON = #{balanceFrozon,jdbcType=DECIMAL},
+        BALANCE_OVER_LIMIT = #{balanceOverLimit,jdbcType=DECIMAL},
+        BALANCE_CREDIT = #{balanceCredit,jdbcType=DECIMAL},
+        REVERSE_FLAG = #{reverseFlag,jdbcType=TINYINT},
+        PARTY_ID_FROM = #{partyIdFrom,jdbcType=VARCHAR},
+        REFER_FROM = #{referFrom,jdbcType=VARCHAR},
+        REFER_ID = #{referId,jdbcType=VARCHAR},
+        PAYMENT_AMOUNT = #{paymentAmount,jdbcType=DECIMAL},
+        TRANS_DATE = #{transDate,jdbcType=TIMESTAMP},
+        THIRD_PARTY_ID = #{thirdPartyId,jdbcType=VARCHAR},
+        MY_NOTES = #{myNotes,jdbcType=VARCHAR},
+        YOUR_NOTES = #{yourNotes,jdbcType=VARCHAR},
+        HIS_NOTE = #{hisNote,jdbcType=VARCHAR},
+        REMARK = #{remark,jdbcType=VARCHAR},
+        RECORD_MAP = #{recordMap,jdbcType=VARCHAR},
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </trim>
+    </set>
+  </sql>
+  <sql id="Selective_Column_List">
+    <if test="finanaceEntryId != null">
+      FINANACE_ENTRY_ID,
+    </if>
+    <if test="accountDate != null">
+      ACCOUNT_DATE,
+    </if>
+    <if test="finAccountId != null">
+      FIN_ACCOUNT_ID,
+    </if>
+    <if test="accrualType != null">
+      ACCRUAL_TYPE,
+    </if>
+    <if test="amount != null">
+      AMOUNT,
+    </if>
+    <if test="referEntryId != null">
+      REFER_ENTRY_ID,
+    </if>
+    <if test="pulseTime != null">
+      PULSE_TIME,
+    </if>
+    <if test="pulseDegree != null">
+      PULSE_DEGREE,
+    </if>
+    <if test="direction != null">
+      DIRECTION,
+    </if>
+    <if test="balanceUsable != null">
+      BALANCE_USABLE,
+    </if>
+    <if test="balanceSettle != null">
+      BALANCE_SETTLE,
+    </if>
+    <if test="balanceFrozon != null">
+      BALANCE_FROZON,
+    </if>
+    <if test="balanceOverLimit != null">
+      BALANCE_OVER_LIMIT,
+    </if>
+    <if test="balanceCredit != null">
+      BALANCE_CREDIT,
+    </if>
+    <if test="reverseFlag != null">
+      REVERSE_FLAG,
+    </if>
+    <if test="partyIdFrom != null">
+      PARTY_ID_FROM,
+    </if>
+    <if test="referFrom != null">
+      REFER_FROM,
+    </if>
+    <if test="referId != null">
+      REFER_ID,
+    </if>
+    <if test="paymentAmount != null">
+      PAYMENT_AMOUNT,
+    </if>
+    <if test="transDate != null">
+      TRANS_DATE,
+    </if>
+    <if test="thirdPartyId != null">
+      THIRD_PARTY_ID,
+    </if>
+    <if test="myNotes != null">
+      MY_NOTES,
+    </if>
+    <if test="yourNotes != null">
+      YOUR_NOTES,
+    </if>
+    <if test="hisNote != null">
+      HIS_NOTE,
+    </if>
+    <if test="remark != null">
+      REMARK,
+    </if>
+    <if test="recordMap != null">
+      RECORD_MAP,
+    </if>
+    <if test="createdTime != null">
+      CREATED_TIME,
+    </if>
+    <if test="updatedTime != null">
+      UPDATED_TIME,
+    </if>
+  </sql>
+	<sql id="Base_Value_List">
+    #{finanaceEntryId,jdbcType=VARCHAR},
+    #{accountDate,jdbcType=TIMESTAMP},
+    #{finAccountId,jdbcType=VARCHAR},
+    #{accrualType,jdbcType=TINYINT},
+    #{amount,jdbcType=DECIMAL},
+    #{referEntryId,jdbcType=VARCHAR},
+    #{pulseTime,jdbcType=VARCHAR},
+    #{pulseDegree,jdbcType=INTEGER},
+    #{direction,jdbcType=TINYINT},
+    #{balanceUsable,jdbcType=DECIMAL},
+    #{balanceSettle,jdbcType=DECIMAL},
+    #{balanceFrozon,jdbcType=DECIMAL},
+    #{balanceOverLimit,jdbcType=DECIMAL},
+    #{balanceCredit,jdbcType=DECIMAL},
+    #{reverseFlag,jdbcType=TINYINT},
+    #{partyIdFrom,jdbcType=VARCHAR},
+    #{referFrom,jdbcType=VARCHAR},
+    #{referId,jdbcType=VARCHAR},
+    #{paymentAmount,jdbcType=DECIMAL},
+    #{transDate,jdbcType=TIMESTAMP},
+    #{thirdPartyId,jdbcType=VARCHAR},
+    #{myNotes,jdbcType=VARCHAR},
+    #{yourNotes,jdbcType=VARCHAR},
+    #{hisNote,jdbcType=VARCHAR},
+    #{remark,jdbcType=VARCHAR},
+    #{recordMap,jdbcType=VARCHAR},
+    #{createdTime,jdbcType=TIMESTAMP},
+    #{updatedTime,jdbcType=TIMESTAMP},
+	</sql>
+  <sql id="Selective_Value_List">
+    <if test="finanaceEntryId != null">
+      #{finanaceEntryId,jdbcType=VARCHAR},
+    </if>
+    <if test="accountDate != null">
+      #{accountDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="finAccountId != null">
+      #{finAccountId,jdbcType=VARCHAR},
+    </if>
+    <if test="accrualType != null">
+      #{accrualType,jdbcType=TINYINT},
+    </if>
+    <if test="amount != null">
+      #{amount,jdbcType=DECIMAL},
+    </if>
+    <if test="referEntryId != null">
+      #{referEntryId,jdbcType=VARCHAR},
+    </if>
+    <if test="pulseTime != null">
+      #{pulseTime,jdbcType=VARCHAR},
+    </if>
+    <if test="pulseDegree != null">
+      #{pulseDegree,jdbcType=INTEGER},
+    </if>
+    <if test="direction != null">
+      #{direction,jdbcType=TINYINT},
+    </if>
+    <if test="balanceUsable != null">
+      #{balanceUsable,jdbcType=DECIMAL},
+    </if>
+    <if test="balanceSettle != null">
+      #{balanceSettle,jdbcType=DECIMAL},
+    </if>
+    <if test="balanceFrozon != null">
+      #{balanceFrozon,jdbcType=DECIMAL},
+    </if>
+    <if test="balanceOverLimit != null">
+      #{balanceOverLimit,jdbcType=DECIMAL},
+    </if>
+    <if test="balanceCredit != null">
+      #{balanceCredit,jdbcType=DECIMAL},
+    </if>
+    <if test="reverseFlag != null">
+      #{reverseFlag,jdbcType=TINYINT},
+    </if>
+    <if test="partyIdFrom != null">
+      #{partyIdFrom,jdbcType=VARCHAR},
+    </if>
+    <if test="referFrom != null">
+      #{referFrom,jdbcType=VARCHAR},
+    </if>
+    <if test="referId != null">
+      #{referId,jdbcType=VARCHAR},
+    </if>
+    <if test="paymentAmount != null">
+      #{paymentAmount,jdbcType=DECIMAL},
+    </if>
+    <if test="transDate != null">
+      #{transDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="thirdPartyId != null">
+      #{thirdPartyId,jdbcType=VARCHAR},
+    </if>
+    <if test="myNotes != null">
+      #{myNotes,jdbcType=VARCHAR},
+    </if>
+    <if test="yourNotes != null">
+      #{yourNotes,jdbcType=VARCHAR},
+    </if>
+    <if test="hisNote != null">
+      #{hisNote,jdbcType=VARCHAR},
+    </if>
+    <if test="remark != null">
+      #{remark,jdbcType=VARCHAR},
+    </if>
+    <if test="recordMap != null">
+      #{recordMap,jdbcType=VARCHAR},
+    </if>
+    <if test="createdTime != null">
+      #{createdTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="updatedTime != null">
+      #{updatedTime,jdbcType=TIMESTAMP},
+    </if>
+  </sql>
+  
+  <sql id="Selective_Value_Item_List">
+    <if test="item.finanaceEntryId != null">
+      #{item.finanaceEntryId},
+    </if>
+    <if test="item.accountDate != null">
+      #{item.accountDate},
+    </if>
+    <if test="item.finAccountId != null">
+      #{item.finAccountId},
+    </if>
+    <if test="item.accrualType != null">
+      #{item.accrualType},
+    </if>
+    <if test="item.amount != null">
+      #{item.amount},
+    </if>
+    <if test="item.referEntryId != null">
+      #{item.referEntryId},
+    </if>
+    <if test="item.pulseTime != null">
+      #{item.pulseTime},
+    </if>
+    <if test="item.pulseDegree != null">
+      #{item.pulseDegree},
+    </if>
+    <if test="item.direction != null">
+      #{item.direction},
+    </if>
+    <if test="item.balanceUsable != null">
+      #{item.balanceUsable},
+    </if>
+    <if test="item.balanceSettle != null">
+      #{item.balanceSettle},
+    </if>
+    <if test="item.balanceFrozon != null">
+      #{item.balanceFrozon},
+    </if>
+    <if test="item.balanceOverLimit != null">
+      #{item.balanceOverLimit},
+    </if>
+    <if test="item.balanceCredit != null">
+      #{item.balanceCredit},
+    </if>
+    <if test="item.reverseFlag != null">
+      #{item.reverseFlag},
+    </if>
+    <if test="item.partyIdFrom != null">
+      #{item.partyIdFrom},
+    </if>
+    <if test="item.referFrom != null">
+      #{item.referFrom},
+    </if>
+    <if test="item.referId != null">
+      #{item.referId},
+    </if>
+    <if test="item.paymentAmount != null">
+      #{item.paymentAmount},
+    </if>
+    <if test="item.transDate != null">
+      #{item.transDate},
+    </if>
+    <if test="item.thirdPartyId != null">
+      #{item.thirdPartyId},
+    </if>
+    <if test="item.myNotes != null">
+      #{item.myNotes},
+    </if>
+    <if test="item.yourNotes != null">
+      #{item.yourNotes},
+    </if>
+    <if test="item.hisNote != null">
+      #{item.hisNote},
+    </if>
+    <if test="item.remark != null">
+      #{item.remark},
+    </if>
+    <if test="item.recordMap != null">
+      #{item.recordMap},
+    </if>
+    <if test="item.createdTime != null">
+      #{item.createdTime},
+    </if>
+    <if test="item.updatedTime != null">
+      #{item.updatedTime},
+    </if>
+  </sql>
+  
+  <select id="selectByExample" parameterType="FinanaceEntryQuery" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from FINANACE_ENTRY
+    <include refid="Example_Where_Clause" />
+    order by FIN_ACCOUNT_ID,PULSE_TIME desc
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from FINANACE_ENTRY
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  
+    <select id="selectByFinAccountId" parameterType="FinanaceEntryQuery" resultMap="BaseResultMapSmail">
+    select FIN_ACCOUNT_ID,SUM(PAYMENT_AMOUNT) as PAYMENT_AMOUNT 
+    from FINANACE_ENTRY
+    <include refid="Example_Where_Clause" />
+      group by FIN_ACCOUNT_ID
+  </select>
+  
+  <!-- 根据机构号，产品号，用户id及起止时间查询流水信息 -->
+  <select id="queryFinDtoList" resultType="com.rkylin.wheatfield.pojo.FinanaceEntryDto">
+  	<if test="createdtimefrom != null">
+  	 (
+  	</if>
+		SELECT
+		    f.ACCOUNT_DATE       accountdate,
+		    f.FIN_ACCOUNT_ID     finaccountid,
+		    f.AMOUNT             amount,
+		    f.DIRECTION          direction,
+		    f.BALANCE_USABLE     balanceusable,
+		    f.BALANCE_SETTLE     balancesettle,
+		    f.BALANCE_FROZON     balancefrozon,
+		    f.BALANCE_OVER_LIMIT balanceoverlimit,
+		    f.BALANCE_CREDIT     balancecredit,
+		    f.REVERSE_FLAG       reverseflag,
+		    f.REFER_ID           referid,
+		    f.PAYMENT_AMOUNT     paymentamount,
+		    f.TRANS_DATE         transdate,
+		    f.REMARK             remark,
+		    t.FUNC_CODE          funcode,
+		    t.BUSI_TYPE_ID       busitypeid,
+		    f.CREATED_TIME       createdtime,
+		    f.UPDATED_TIME       updatedtime,
+		    fa.ROOT_INST_CD      rootinstcd,
+		    fa.ACCOUNT_RELATE_ID  userid,
+		    fa.GROUP_MANAGE      productid
+		FROM
+		    FINANACE_ENTRY f
+		LEFT JOIN
+		    TRANS_ORDER_INFO t
+		ON
+		    f.REFER_ID = t.REQUEST_ID
+		LEFT JOIN
+		    FINANACE_ACCOUNT fa
+		ON
+		    f.fin_account_id = fa.fin_account_id
+		WHERE
+		    fa.ROOT_INST_CD = #{rootinstcd}
+		AND fa.GROUP_MANAGE = #{productid}
+		AND fa.ACCOUNT_RELATE_ID = #{userid}
+		<if test="createdtimefrom != null">
+			AND f.CREATED_TIME &gt; #{createdtimefrom}
+		</if>
+		<if test="createdtimeto != null">
+			AND f.CREATED_TIME &lt; #{createdtimeto}
+		</if>
+		ORDER BY
+		    f.CREATED_TIME DESC
+	<if test="createdtimefrom != null">
+  	 )
+  	 UNION
+  	 (
+  	 	SELECT
+		    f.ACCOUNT_DATE       accountdate,
+		    f.FIN_ACCOUNT_ID     finaccountid,
+		    f.AMOUNT             amount,
+		    f.DIRECTION          direction,
+		    f.BALANCE_USABLE     balanceusable,
+		    f.BALANCE_SETTLE     balancesettle,
+		    f.BALANCE_FROZON     balancefrozon,
+		    f.BALANCE_OVER_LIMIT balanceoverlimit,
+		    f.BALANCE_CREDIT     balancecredit,
+		    f.REVERSE_FLAG       reverseflag,
+		    f.REFER_ID           referid,
+		    f.PAYMENT_AMOUNT     paymentamount,
+		    f.TRANS_DATE         transdate,
+		    f.REMARK             remark,
+		    t.FUNC_CODE          funcode,
+		    t.BUSI_TYPE_ID       busitypeid,
+		    f.CREATED_TIME       createdtime,
+		    f.UPDATED_TIME       updatedtime,
+		    fa.ROOT_INST_CD      rootinstcd,
+		    fa.ACCOUNT_RELATE_ID  userid,
+		    fa.GROUP_MANAGE      productid
+		FROM
+		    FINANACE_ENTRY_HISTORY f
+		LEFT JOIN
+		    TRANS_ORDER_INFO t
+		ON
+		    f.REFER_ID = t.REQUEST_ID
+		LEFT JOIN
+		    FINANACE_ACCOUNT fa
+		ON
+		    f.fin_account_id = fa.fin_account_id
+		WHERE
+		    fa.ROOT_INST_CD = #{rootinstcd}
+		AND fa.GROUP_MANAGE = #{productid}
+		AND fa.ACCOUNT_RELATE_ID = #{userid}
+		AND f.CREATED_TIME &gt; #{createdtimefrom}
+		<if test="createdtimeto != null">
+			AND f.CREATED_TIME &lt; #{createdtimeto}
+		</if>
+		ORDER BY
+		    f.CREATED_TIME DESC
+  	 )
+  	</if>
+  </select>
+  
+  <!-- 根据Referid查询流水信息 -->
+  <select id="selectListByReferid" parameterType="java.lang.String" resultType="com.rkylin.wheatfield.pojo.FinanaceEntryDto">
+    SELECT
+	    f.ACCOUNT_DATE       accountdate,
+	    f.FIN_ACCOUNT_ID     finaccountid,
+	    f.AMOUNT             amount,
+	    f.DIRECTION          direction,
+	    f.BALANCE_USABLE     balanceusable,
+	    f.BALANCE_SETTLE     balancesettle,
+	    f.BALANCE_FROZON     balancefrozon,
+	    f.BALANCE_OVER_LIMIT balanceoverlimit,
+	    f.BALANCE_CREDIT     balancecredit,
+	    f.REVERSE_FLAG       reverseflag,
+	    f.REFER_ID           referid,
+	    f.PAYMENT_AMOUNT     paymentamount,
+	    f.TRANS_DATE         transdate,
+	    f.REMARK             remark,
+	    t.FUNC_CODE          funcode,
+	    t.BUSI_TYPE_ID       busitypeid,
+	    f.CREATED_TIME       createdtime,
+	    f.UPDATED_TIME       updatedtime,
+	    fa.ROOT_INST_CD      rootinstcd,
+	    fa.ACCOUNT_RELATE_ID  userid,
+	    fa.GROUP_MANAGE      productid
+	FROM
+	    FINANACE_ENTRY f
+	LEFT JOIN
+	    TRANS_ORDER_INFO t
+	ON
+	    f.REFER_ID = t.REQUEST_ID
+	LEFT JOIN
+	    FINANACE_ACCOUNT fa
+	ON
+	    f.fin_account_id = fa.fin_account_id
+	WHERE
+	    f.REFER_ID = #{referid}
+	ORDER BY f.CREATED_TIME DESC
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from FINANACE_ENTRY
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="FinanaceEntryQuery">
+    delete from FINANACE_ENTRY
+    <include refid="Example_Where_Clause" />
+  </delete>
+  <insert id="insert" parameterType="FinanaceEntry">
+    insert into FINANACE_ENTRY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Base_Column_List"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Base_Value_List"/>
+    </trim>
+  </insert>
+  <insert id="insertSelective" parameterType="FinanaceEntry">
+    insert into FINANACE_ENTRY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Column_List"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Value_List"/>
+    </trim>
+  </insert>
+  
+  <insert id="insertSelectiveBatch" parameterType="java.util.List">
+	insert into FINANACE_ENTRY
+	<!--<trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Column_List"/>
+    </trim>-->
+     (FINANACE_ENTRY_ID,
+    ACCOUNT_DATE,
+    FIN_ACCOUNT_ID,
+    ACCRUAL_TYPE,
+    AMOUNT,
+    REFER_ENTRY_ID,
+    PULSE_TIME,
+    PULSE_DEGREE,
+    DIRECTION,
+    BALANCE_USABLE,
+    BALANCE_SETTLE,
+    BALANCE_FROZON,
+    BALANCE_OVER_LIMIT,
+    BALANCE_CREDIT,
+    REVERSE_FLAG,
+    PARTY_ID_FROM,
+    REFER_FROM,
+    REFER_ID,
+    PAYMENT_AMOUNT,
+    TRANS_DATE,
+    THIRD_PARTY_ID,
+    MY_NOTES,
+    YOUR_NOTES,
+    HIS_NOTE,
+    REMARK,
+    RECORD_MAP)
+    values
+	<foreach collection="list" item="item" index="index" separator="," >
+	 <!--<trim prefix=" (" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Value_Item_List"/>
+     </trim>-->
+     (#{item.finanaceEntryId},#{item.accountDate},#{item.finAccountId},#{item.accrualType},#{item.amount},#{item.referEntryId},
+     #{item.pulseTime},#{item.pulseDegree},#{item.direction},#{item.balanceUsable},#{item.balanceSettle},#{item.balanceFrozon},
+     #{item.balanceOverLimit},#{item.balanceCredit},#{item.reverseFlag},
+     #{item.partyIdFrom},#{item.referFrom},#{item.referId},#{item.paymentAmount},#{item.transDate},#{item.thirdPartyId},#{item.myNotes},
+     #{item.yourNotes},#{item.hisNote},#{item.remark},#{item.recordMap})     
+	</foreach>
+</insert>
+  
+  <select id="countByExample" parameterType="FinanaceEntryQuery" resultType="java.lang.Integer">
+    select count(*) from FINANACE_ENTRY
+    <include refid="Example_Where_Clause" />
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="FinanaceEntry">
+    update FINANACE_ENTRY
+    <include refid="Example_Set_Clause"/>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="FinanaceEntry">
+    update FINANACE_ENTRY
+    <include refid="Base_Set_Clause"/>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
