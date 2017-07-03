@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SettleBatchResultMapper">
+	<resultMap id="BaseResultMap" type="SettleBatchResult">
+	  <result column="RESULT_ID" jdbcType="INTEGER" property="resultId" />
+	  <result column="ROOT_INST_CD" jdbcType="VARCHAR" property="rootInstCd" />
+	  <result column="BATCH_TYPE" jdbcType="VARCHAR" property="batchType" />
+	  <result column="BATCH_NO" jdbcType="VARCHAR" property="batchNo" />
+	  <result column="FILE_NAME" jdbcType="VARCHAR" property="fileName" />
+	  <result column="BATCH_RESULT" jdbcType="VARCHAR" property="batchResult" />
+	  <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+	  <result column="ACCOUNT_DATE" jdbcType="TIMESTAMP" property="accountDate" />
+	  <result column="OBLIGATE1" jdbcType="VARCHAR" property="obligate1" />
+	  <result column="OBLIGATE2" jdbcType="VARCHAR" property="obligate2" />
+	  <result column="CREATED_TIME" jdbcType="TIMESTAMP" property="createdTime" />
+	  <result column="UPDATED_TIME" jdbcType="TIMESTAMP" property="updatedTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <trim prefix="(" prefixOverrides="and" suffix=")">
+      <if test="resultId != null" >
+	      and RESULT_ID = #{resultId,jdbcType=INTEGER}
+	    </if>
+      <if test="rootInstCd != null" >
+	      and ROOT_INST_CD = #{rootInstCd,jdbcType=VARCHAR}
+	    </if>
+      <if test="batchType != null" >
+	      and BATCH_TYPE = #{batchType,jdbcType=VARCHAR}
+	    </if>
+      <if test="batchNo != null" >
+	      and BATCH_NO = #{batchNo,jdbcType=VARCHAR}
+	    </if>
+      <if test="fileName != null" >
+	      and FILE_NAME = #{fileName,jdbcType=VARCHAR}
+	    </if>
+      <if test="batchResult != null" >
+	      and BATCH_RESULT = #{batchResult,jdbcType=VARCHAR}
+	    </if>
+      <if test="remark != null" >
+	      and REMARK = #{remark,jdbcType=VARCHAR}
+	    </if>
+      <if test="accountDate != null" >
+	      and ACCOUNT_DATE = #{accountDate,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="obligate1 != null" >
+	      and OBLIGATE1 = #{obligate1,jdbcType=VARCHAR}
+	    </if>
+      <if test="obligate2 != null" >
+	      and OBLIGATE2 = #{obligate2,jdbcType=VARCHAR}
+	    </if>
+      <if test="createdTime != null" >
+	      and CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="updatedTime != null" >
+	      and UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP}
+	    </if>
+	  </trim>
+    </where>
+  </sql>
+  <sql id="Example_Set_Clause">
+    <set>
+      <trim suffixOverrides=",">
+      <if test="resultId != null">
+        RESULT_ID = #{resultId,jdbcType=INTEGER},
+      </if>
+      <if test="rootInstCd != null">
+        ROOT_INST_CD = #{rootInstCd,jdbcType=VARCHAR},
+      </if>
+      <if test="batchType != null">
+        BATCH_TYPE = #{batchType,jdbcType=VARCHAR},
+      </if>
+      <if test="batchNo != null">
+        BATCH_NO = #{batchNo,jdbcType=VARCHAR},
+      </if>
+      <if test="fileName != null">
+        FILE_NAME = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="batchResult != null">
+        BATCH_RESULT = #{batchResult,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="accountDate != null">
+        ACCOUNT_DATE = #{accountDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="obligate1 != null">
+        OBLIGATE1 = #{obligate1,jdbcType=VARCHAR},
+      </if>
+      <if test="obligate2 != null">
+        OBLIGATE2 = #{obligate2,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      </trim>
+    </set>
+  </sql>
+  <sql id="Base_Column_List">
+    RESULT_ID,
+    ROOT_INST_CD,
+    BATCH_TYPE,
+    BATCH_NO,
+    FILE_NAME,
+    BATCH_RESULT,
+    REMARK,
+    ACCOUNT_DATE,
+    OBLIGATE1,
+    OBLIGATE2,
+    CREATED_TIME,
+    UPDATED_TIME,
+  </sql>
+  <sql id="Base_Set_Clause">
+    <set>
+      <trim suffixOverrides=",">
+        RESULT_ID = #{resultId,jdbcType=INTEGER},
+        ROOT_INST_CD = #{rootInstCd,jdbcType=VARCHAR},
+        BATCH_TYPE = #{batchType,jdbcType=VARCHAR},
+        BATCH_NO = #{batchNo,jdbcType=VARCHAR},
+        FILE_NAME = #{fileName,jdbcType=VARCHAR},
+        BATCH_RESULT = #{batchResult,jdbcType=VARCHAR},
+        REMARK = #{remark,jdbcType=VARCHAR},
+        ACCOUNT_DATE = #{accountDate,jdbcType=TIMESTAMP},
+        OBLIGATE1 = #{obligate1,jdbcType=VARCHAR},
+        OBLIGATE2 = #{obligate2,jdbcType=VARCHAR},
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </trim>
+    </set>
+  </sql>
+  <sql id="Selective_Column_List">
+    <if test="resultId != null">
+      RESULT_ID,
+    </if>
+    <if test="rootInstCd != null">
+      ROOT_INST_CD,
+    </if>
+    <if test="batchType != null">
+      BATCH_TYPE,
+    </if>
+    <if test="batchNo != null">
+      BATCH_NO,
+    </if>
+    <if test="fileName != null">
+      FILE_NAME,
+    </if>
+    <if test="batchResult != null">
+      BATCH_RESULT,
+    </if>
+    <if test="remark != null">
+      REMARK,
+    </if>
+    <if test="accountDate != null">
+      ACCOUNT_DATE,
+    </if>
+    <if test="obligate1 != null">
+      OBLIGATE1,
+    </if>
+    <if test="obligate2 != null">
+      OBLIGATE2,
+    </if>
+    <if test="createdTime != null">
+      CREATED_TIME,
+    </if>
+    <if test="updatedTime != null">
+      UPDATED_TIME,
+    </if>
+  </sql>
+	<sql id="Base_Value_List">
+    #{resultId,jdbcType=INTEGER},
+    #{rootInstCd,jdbcType=VARCHAR},
+    #{batchType,jdbcType=VARCHAR},
+    #{batchNo,jdbcType=VARCHAR},
+    #{fileName,jdbcType=VARCHAR},
+    #{batchResult,jdbcType=VARCHAR},
+    #{remark,jdbcType=VARCHAR},
+    #{accountDate,jdbcType=TIMESTAMP},
+    #{obligate1,jdbcType=VARCHAR},
+    #{obligate2,jdbcType=VARCHAR},
+    #{createdTime,jdbcType=TIMESTAMP},
+    #{updatedTime,jdbcType=TIMESTAMP},
+	</sql>
+  <sql id="Selective_Value_List">
+    <if test="resultId != null">
+      #{resultId,jdbcType=INTEGER},
+    </if>
+    <if test="rootInstCd != null">
+      #{rootInstCd,jdbcType=VARCHAR},
+    </if>
+    <if test="batchType != null">
+      #{batchType,jdbcType=VARCHAR},
+    </if>
+    <if test="batchNo != null">
+      #{batchNo,jdbcType=VARCHAR},
+    </if>
+    <if test="fileName != null">
+      #{fileName,jdbcType=VARCHAR},
+    </if>
+    <if test="batchResult != null">
+      #{batchResult,jdbcType=VARCHAR},
+    </if>
+    <if test="remark != null">
+      #{remark,jdbcType=VARCHAR},
+    </if>
+    <if test="accountDate != null">
+      #{accountDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="obligate1 != null">
+      #{obligate1,jdbcType=VARCHAR},
+    </if>
+    <if test="obligate2 != null">
+      #{obligate2,jdbcType=VARCHAR},
+    </if>
+    <if test="createdTime != null">
+      #{createdTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="updatedTime != null">
+      #{updatedTime,jdbcType=TIMESTAMP},
+    </if>
+  </sql>
+  
+  <select id="selectByExample" parameterType="SettleBatchResultQuery" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from SETTLE_BATCH_RESULT
+    <include refid="Example_Where_Clause" />
+    <!-- order by CREATE_DATE -->
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from SETTLE_BATCH_RESULT
+    where RESULT_ID = #{resultId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from SETTLE_BATCH_RESULT
+    where RESULT_ID = #{resultId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="SettleBatchResultQuery">
+    delete from SETTLE_BATCH_RESULT
+    <include refid="Example_Where_Clause" />
+  </delete>
+  <insert id="insert" parameterType="SettleBatchResult">
+    insert into SETTLE_BATCH_RESULT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Base_Column_List"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Base_Value_List"/>
+    </trim>
+  </insert>
+  <insert id="insertSelective" parameterType="SettleBatchResult">
+    insert into SETTLE_BATCH_RESULT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Column_List"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Value_List"/>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="SettleBatchResultQuery" resultType="java.lang.Integer">
+    select count(*) from SETTLE_BATCH_RESULT
+    <include refid="Example_Where_Clause" />
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="SettleBatchResult">
+    update SETTLE_BATCH_RESULT
+    <include refid="Example_Set_Clause"/>
+    where RESULT_ID = #{resultId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="SettleBatchResult">
+    update SETTLE_BATCH_RESULT
+    <include refid="Base_Set_Clause"/>
+    where RESULT_ID = #{resultId,jdbcType=BIGINT}
+  </update>
+</mapper>

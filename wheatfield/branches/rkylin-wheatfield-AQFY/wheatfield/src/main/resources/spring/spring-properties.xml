@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="userProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="location">
+			<value>classpath:user.properties</value>
+		</property>
+	</bean>
+	<bean id="orderProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="location">
+			<value>classpath:order.properties</value>
+		</property>
+	</bean>
+	
+	<bean id="errorCodeProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="location">
+			<value>classpath:errorCode.properties</value>
+		</property>
+	</bean>
+	
+	<bean id="accountErrorCodeProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="location">
+			<value>classpath:accountErrorCode.properties</value>
+		</property>
+	</bean>
+	
+	<bean id="logBufferProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="location">
+			<value>classpath:logBuffer.properties</value>
+		</property>
+	</bean>
+
+</beans>

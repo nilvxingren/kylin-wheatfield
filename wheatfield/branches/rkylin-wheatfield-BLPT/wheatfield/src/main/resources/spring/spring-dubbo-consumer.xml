@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd  
+        http://code.alibabatech.com/schema/dubbo  
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.2.xsd
+        ">
+        <context:property-placeholder location="classpath:dubbo.properties" ignore-unresolvable="true"/>
+    <!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 -->
+<!--     <dubbo:application name="consumer-of-account-app" />       使用multicast广播注册中心暴露发现服务地址 -->
+     <dubbo:registry  protocol="zookeeper" address="${registry-address}" />         <!-- 生成远程服务代理，可以和本地bean一样使用demoService -->
+     <dubbo:reference group="st" id="settlementToOrderService" interface="com.rkylin.order.mixservice.SettlementToOrderService" check="false" />
+ 	 <dubbo:reference group="st" id="collectionWithholdService" interface="com.rkylin.order.mixservice.CollectionWithholdService" check="false" />
+	 <dubbo:reference group="rkylincrps" version="1.0.0" id="crpsApiService" interface="com.rkylin.crps.service.CrpsApiService" check="false" />
+	<dubbo:reference group="st" id="orderAccountInfoService" interface="com.rkylin.order.service.OrderAccountInfoService" check="false" />
+    <dubbo:reference group="st" id="interestToOrderService" interface="com.rkylin.order.mixservice.InterestToOrderService" check="false" />
+    <dubbo:reference group="st" id="orderItemService" interface="com.rkylin.order.service.OrderItemService" check="false" />
+    <dubbo:reference group="PY_Credit" id="creditService" interface="com.rkylin.gateway.service.CreditService" version="1.0.0" check="false" />
+    <dubbo:reference group="gaterouter" id="authenticationService" interface="com.rkylin.gaterouter.service.AuthenticationService" version="1.0.0" check="false" />
+    <dubbo:reference group="gaterouter" id="pabAccountService" interface="com.rkylin.gaterouter.service.PabAccountService" version="1.0.0" check="false" />
+    <dubbo:reference group="gaterouter" id="bankPaymentService" interface="com.rkylin.gaterouter.service.BankPaymentService" version="1.0.0" check="false" />
+	<dubbo:reference group="gaterouter" id="cmbcAccountService" interface="com.rkylin.gaterouter.service.CmbcAccountService" version="1.0.0" check="false" />    
+</beans>

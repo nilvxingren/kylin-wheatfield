@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CreditRepaymentMonthMapper">
+	<resultMap id="BaseResultMap" type="CreditRepaymentMonth">
+	  <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+	  <result column="CREDIT_DATE" jdbcType="INTEGER" property="creditDate" />
+	  <result column="CAPITAL_MONTH" jdbcType="DECIMAL" property="capitalMonth" />
+	  <result column="INTEREST_FIX" jdbcType="DECIMAL" property="interestFix" />
+	  <result column="CAPITAL_ALL" jdbcType="DECIMAL" property="capitalAll" />
+	  <result column="INTEREST_ALL" jdbcType="DECIMAL" property="interestAll" />
+	  <result column="CREATED_TIME" jdbcType="TIMESTAMP" property="createdTime" />
+	  <result column="UPDATED_TIME" jdbcType="TIMESTAMP" property="updatedTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <trim prefix="(" prefixOverrides="and" suffix=")">
+      <if test="userId != null" >
+	      and USER_ID = #{userId,jdbcType=VARCHAR}
+	    </if>
+      <if test="creditDate != null" >
+	      and CREDIT_DATE = #{creditDate,jdbcType=INTEGER}
+	    </if>
+      <if test="capitalMonth != null" >
+	      and CAPITAL_MONTH = #{capitalMonth,jdbcType=DECIMAL}
+	    </if>
+      <if test="interestFix != null" >
+	      and INTEREST_FIX = #{interestFix,jdbcType=DECIMAL}
+	    </if>
+      <if test="capitalAll != null" >
+	      and CAPITAL_ALL = #{capitalAll,jdbcType=DECIMAL}
+	    </if>
+      <if test="interestAll != null" >
+	      and INTEREST_ALL = #{interestAll,jdbcType=DECIMAL}
+	    </if>
+      <if test="createdTime != null" >
+	      and CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="updatedTime != null" >
+	      and UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP}
+	    </if>
+	  </trim>
+    </where>
+  </sql>
+  <sql id="Example_Set_Clause">
+    <set>
+      <trim suffixOverrides=",">
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="creditDate != null">
+        CREDIT_DATE = #{creditDate,jdbcType=INTEGER},
+      </if>
+      <if test="capitalMonth != null">
+        CAPITAL_MONTH = #{capitalMonth,jdbcType=DECIMAL},
+      </if>
+      <if test="interestFix != null">
+        INTEREST_FIX = #{interestFix,jdbcType=DECIMAL},
+      </if>
+      <if test="capitalAll != null">
+        CAPITAL_ALL = #{capitalAll,jdbcType=DECIMAL},
+      </if>
+      <if test="interestAll != null">
+        INTEREST_ALL = #{interestAll,jdbcType=DECIMAL},
+      </if>
+      <if test="createdTime != null">
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      </trim>
+    </set>
+  </sql>
+  <sql id="Base_Column_List">
+    USER_ID,
+    CREDIT_DATE,
+    CAPITAL_MONTH,
+    INTEREST_FIX,
+    CAPITAL_ALL,
+    INTEREST_ALL,
+    CREATED_TIME,
+    UPDATED_TIME,
+  </sql>
+  <sql id="Base_Set_Clause">
+    <set>
+      <trim suffixOverrides=",">
+        USER_ID = #{userId,jdbcType=VARCHAR},
+        CREDIT_DATE = #{creditDate,jdbcType=INTEGER},
+        CAPITAL_MONTH = #{capitalMonth,jdbcType=DECIMAL},
+        INTEREST_FIX = #{interestFix,jdbcType=DECIMAL},
+        CAPITAL_ALL = #{capitalAll,jdbcType=DECIMAL},
+        INTEREST_ALL = #{interestAll,jdbcType=DECIMAL},
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </trim>
+    </set>
+  </sql>
+  <sql id="Selective_Column_List">
+    <if test="userId != null">
+      USER_ID,
+    </if>
+    <if test="creditDate != null">
+      CREDIT_DATE,
+    </if>
+    <if test="capitalMonth != null">
+      CAPITAL_MONTH,
+    </if>
+    <if test="interestFix != null">
+      INTEREST_FIX,
+    </if>
+    <if test="capitalAll != null">
+      CAPITAL_ALL,
+    </if>
+    <if test="interestAll != null">
+      INTEREST_ALL,
+    </if>
+    <if test="createdTime != null">
+      CREATED_TIME,
+    </if>
+    <if test="updatedTime != null">
+      UPDATED_TIME,
+    </if>
+  </sql>
+	<sql id="Base_Value_List">
+    #{userId,jdbcType=VARCHAR},
+    #{creditDate,jdbcType=INTEGER},
+    #{capitalMonth,jdbcType=DECIMAL},
+    #{interestFix,jdbcType=DECIMAL},
+    #{capitalAll,jdbcType=DECIMAL},
+    #{interestAll,jdbcType=DECIMAL},
+    #{createdTime,jdbcType=TIMESTAMP},
+    #{updatedTime,jdbcType=TIMESTAMP},
+	</sql>
+  <sql id="Selective_Value_List">
+    <if test="userId != null">
+      #{userId,jdbcType=VARCHAR},
+    </if>
+    <if test="creditDate != null">
+      #{creditDate,jdbcType=INTEGER},
+    </if>
+    <if test="capitalMonth != null">
+      #{capitalMonth,jdbcType=DECIMAL},
+    </if>
+    <if test="interestFix != null">
+      #{interestFix,jdbcType=DECIMAL},
+    </if>
+    <if test="capitalAll != null">
+      #{capitalAll,jdbcType=DECIMAL},
+    </if>
+    <if test="interestAll != null">
+      #{interestAll,jdbcType=DECIMAL},
+    </if>
+    <if test="createdTime != null">
+      #{createdTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="updatedTime != null">
+      #{updatedTime,jdbcType=TIMESTAMP},
+    </if>
+  </sql>
+  
+  <select id="selectByExample" parameterType="CreditRepaymentMonthQuery" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from CREDIT_REPAYMENT_MONTH
+    <include refid="Example_Where_Clause" />
+    <!-- order by CREATE_DATE -->
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from CREDIT_REPAYMENT_MONTH
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from CREDIT_REPAYMENT_MONTH
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="CreditRepaymentMonthQuery">
+    delete from CREDIT_REPAYMENT_MONTH
+    <include refid="Example_Where_Clause" />
+  </delete>
+  <insert id="insert" parameterType="CreditRepaymentMonth">
+    insert into CREDIT_REPAYMENT_MONTH
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Base_Column_List"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Base_Value_List"/>
+    </trim>
+  </insert>
+  <insert id="insertSelective" parameterType="CreditRepaymentMonth">
+    insert into CREDIT_REPAYMENT_MONTH
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Column_List"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Value_List"/>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="CreditRepaymentMonthQuery" resultType="java.lang.Integer">
+    select count(*) from CREDIT_REPAYMENT_MONTH
+    <include refid="Example_Where_Clause" />
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="CreditRepaymentMonth">
+    update CREDIT_REPAYMENT_MONTH
+    <include refid="Example_Set_Clause"/>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="CreditRepaymentMonth">
+    update CREDIT_REPAYMENT_MONTH
+    <include refid="Base_Set_Clause"/>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

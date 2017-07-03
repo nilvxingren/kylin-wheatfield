@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="OpenBankCodeMapper">
+	<resultMap id="BaseResultMap" type="OpenBankCode">
+	  <result column="CITY_CODE" jdbcType="VARCHAR" property="cityCode" />
+	  <result column="CITY_NAME" jdbcType="VARCHAR" property="cityName" />
+	  <result column="PROVINCE_NAME" jdbcType="VARCHAR" property="provinceName" />
+	  <result column="PAY_BANK_CODE" jdbcType="VARCHAR" property="payBankCode" />
+	  <result column="OPEN_BANK_CODE" jdbcType="VARCHAR" property="openBankCode" />
+	  <result column="BANK_CODE" jdbcType="VARCHAR" property="bankCode" />
+	  <result column="BANK_NAME" jdbcType="VARCHAR" property="bankName" />
+	  <result column="CREATED_TIME" jdbcType="TIMESTAMP" property="createdTime" />
+	  <result column="UPDATED_TIME" jdbcType="TIMESTAMP" property="updatedTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <trim prefix="(" prefixOverrides="and" suffix=")">
+      <if test="cityCode != null" >
+	      and CITY_CODE = #{cityCode,jdbcType=VARCHAR}
+	    </if>
+      <if test="cityName != null" >
+	      and CITY_NAME = #{cityName,jdbcType=VARCHAR}
+	    </if>
+      <if test="provinceName != null" >
+	      and PROVINCE_NAME = #{provinceName,jdbcType=VARCHAR}
+	    </if>
+      <if test="payBankCode != null" >
+	      and PAY_BANK_CODE = #{payBankCode,jdbcType=VARCHAR}
+	    </if>
+      <if test="openBankCode != null" >
+	      and OPEN_BANK_CODE = #{openBankCode,jdbcType=VARCHAR}
+	    </if>
+      <if test="bankCode != null" >
+	      and BANK_CODE = #{bankCode,jdbcType=VARCHAR}
+	    </if>
+      <if test="bankName != null" >
+	      and BANK_NAME = #{bankName,jdbcType=VARCHAR}
+	    </if>
+      <if test="createdTime != null" >
+	      and CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="updatedTime != null" >
+	      and UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP}
+	    </if>
+	  </trim>
+    </where>
+  </sql>
+  <sql id="Example_Set_Clause">
+    <set>
+      <trim suffixOverrides=",">
+      <if test="cityCode != null">
+        CITY_CODE = #{cityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null">
+        CITY_NAME = #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceName != null">
+        PROVINCE_NAME = #{provinceName,jdbcType=VARCHAR},
+      </if>
+      <if test="payBankCode != null">
+        PAY_BANK_CODE = #{payBankCode,jdbcType=VARCHAR},
+      </if>
+      <if test="openBankCode != null">
+        OPEN_BANK_CODE = #{openBankCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCode != null">
+        BANK_CODE = #{bankCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null">
+        BANK_NAME = #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      </trim>
+    </set>
+  </sql>
+  <sql id="Base_Column_List">
+    CITY_CODE,
+    CITY_NAME,
+    PROVINCE_NAME,
+    PAY_BANK_CODE,
+    OPEN_BANK_CODE,
+    BANK_CODE,
+    BANK_NAME,
+    CREATED_TIME,
+    UPDATED_TIME,
+  </sql>
+  <sql id="Base_Set_Clause">
+    <set>
+      <trim suffixOverrides=",">
+        CITY_CODE = #{cityCode,jdbcType=VARCHAR},
+        CITY_NAME = #{cityName,jdbcType=VARCHAR},
+        PROVINCE_NAME = #{provinceName,jdbcType=VARCHAR},
+        PAY_BANK_CODE = #{payBankCode,jdbcType=VARCHAR},
+        OPEN_BANK_CODE = #{openBankCode,jdbcType=VARCHAR},
+        BANK_CODE = #{bankCode,jdbcType=VARCHAR},
+        BANK_NAME = #{bankName,jdbcType=VARCHAR},
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </trim>
+    </set>
+  </sql>
+  <sql id="Selective_Column_List">
+    <if test="cityCode != null">
+      CITY_CODE,
+    </if>
+    <if test="cityName != null">
+      CITY_NAME,
+    </if>
+    <if test="provinceName != null">
+      PROVINCE_NAME,
+    </if>
+    <if test="payBankCode != null">
+      PAY_BANK_CODE,
+    </if>
+    <if test="openBankCode != null">
+      OPEN_BANK_CODE,
+    </if>
+    <if test="bankCode != null">
+      BANK_CODE,
+    </if>
+    <if test="bankName != null">
+      BANK_NAME,
+    </if>
+    <if test="createdTime != null">
+      CREATED_TIME,
+    </if>
+    <if test="updatedTime != null">
+      UPDATED_TIME,
+    </if>
+  </sql>
+	<sql id="Base_Value_List">
+    #{cityCode,jdbcType=VARCHAR},
+    #{cityName,jdbcType=VARCHAR},
+    #{provinceName,jdbcType=VARCHAR},
+    #{payBankCode,jdbcType=VARCHAR},
+    #{openBankCode,jdbcType=VARCHAR},
+    #{bankCode,jdbcType=VARCHAR},
+    #{bankName,jdbcType=VARCHAR},
+    #{createdTime,jdbcType=TIMESTAMP},
+    #{updatedTime,jdbcType=TIMESTAMP},
+	</sql>
+  <sql id="Selective_Value_List">
+    <if test="cityCode != null">
+      #{cityCode,jdbcType=VARCHAR},
+    </if>
+    <if test="cityName != null">
+      #{cityName,jdbcType=VARCHAR},
+    </if>
+    <if test="provinceName != null">
+      #{provinceName,jdbcType=VARCHAR},
+    </if>
+    <if test="payBankCode != null">
+      #{payBankCode,jdbcType=VARCHAR},
+    </if>
+    <if test="openBankCode != null">
+      #{openBankCode,jdbcType=VARCHAR},
+    </if>
+    <if test="bankCode != null">
+      #{bankCode,jdbcType=VARCHAR},
+    </if>
+    <if test="bankName != null">
+      #{bankName,jdbcType=VARCHAR},
+    </if>
+    <if test="createdTime != null">
+      #{createdTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="updatedTime != null">
+      #{updatedTime,jdbcType=TIMESTAMP},
+    </if>
+  </sql>
+  <sql id="code_Where_Clause">
+    <where>
+      <trim prefix="(" prefixOverrides="and" suffix=")">
+      <if test="cityCode != null" >
+	      and CITY_CODE = #{cityCode,jdbcType=VARCHAR}
+	    </if>
+      <if test="openBankCode != null" >
+	      and OPEN_BANK_CODE like #{openBankCode,jdbcType=VARCHAR}
+	    </if>
+	  </trim>
+    </where>
+  </sql>
+  <select id="selectByExample" parameterType="OpenBankCodeQuery" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from OPEN_BANK_CODE
+    <include refid="Example_Where_Clause" />
+    <!-- order by CREATE_DATE -->
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from OPEN_BANK_CODE
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from OPEN_BANK_CODE
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="OpenBankCodeQuery">
+    delete from OPEN_BANK_CODE
+    <include refid="Example_Where_Clause" />
+  </delete>
+  <insert id="insert" parameterType="OpenBankCode">
+    insert into OPEN_BANK_CODE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Base_Column_List"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Base_Value_List"/>
+    </trim>
+  </insert>
+  <insert id="insertSelective" parameterType="OpenBankCode">
+    insert into OPEN_BANK_CODE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Column_List"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Value_List"/>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="OpenBankCodeQuery" resultType="java.lang.Integer">
+    select count(*) from OPEN_BANK_CODE
+    <include refid="Example_Where_Clause" />
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="OpenBankCode">
+    update OPEN_BANK_CODE
+    <include refid="Example_Set_Clause"/>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="OpenBankCode">
+    update OPEN_BANK_CODE
+    <include refid="Base_Set_Clause"/>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByCode" parameterType="OpenBankCodeQuery" resultMap="BaseResultMap">
+    SELECT BANK_CODE,BANK_NAME,PAY_BANK_CODE FROM OPEN_BANK_CODE 
+    <include refid="code_Where_Clause" />
+    <!-- order by CREATE_DATE -->
+  </select>
+</mapper>

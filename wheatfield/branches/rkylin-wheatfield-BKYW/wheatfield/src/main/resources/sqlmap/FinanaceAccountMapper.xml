@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FinanaceAccountMapper">
+	<resultMap id="BaseResultMap" type="FinanaceAccount">
+	  <result column="ROOT_INST_CD" jdbcType="VARCHAR" property="rootInstCd" />
+	  <result column="FIN_ACCOUNT_ID" jdbcType="VARCHAR" property="finAccountId" />
+	  <result column="FIN_ACCOUNT_TYPE_ID" jdbcType="VARCHAR" property="finAccountTypeId" />
+	  <result column="FIN_ACCOUNT_NAME" jdbcType="VARCHAR" property="finAccountName" />
+	  <result column="ACCOUNT_CODE" jdbcType="VARCHAR" property="accountCode" />
+	  <result column="ACCOUNT_RELATE_ID" jdbcType="VARCHAR" property="accountRelateId" />
+	  <result column="GROUP_MANAGE" jdbcType="VARCHAR" property="groupManage" />
+	  <result column="GROUP_SETTLE" jdbcType="VARCHAR" property="groupSettle" />
+	  <result column="CURRENCY" jdbcType="VARCHAR" property="currency" />
+	  <result column="AMOUNT" jdbcType="DECIMAL" property="amount" />
+	  <result column="BALANCE_USABLE" jdbcType="DECIMAL" property="balanceUsable" />
+	  <result column="BALANCE_SETTLE" jdbcType="DECIMAL" property="balanceSettle" />
+	  <result column="BALANCE_FROZON" jdbcType="DECIMAL" property="balanceFrozon" />
+	  <result column="BALANCE_OVER_LIMIT" jdbcType="DECIMAL" property="balanceOverLimit" />
+	  <result column="BALANCE_CREDIT" jdbcType="DECIMAL" property="balanceCredit" />
+<!-- 	  <result column="BALANCE_BONUS" jdbcType="DECIMAL" property="balanceBonus" /> -->
+<!-- 	  <result column="BALANCE_POINTS" jdbcType="DECIMAL" property="balancePoints" /> -->
+ 	  <result column="REFER_USER_ID" jdbcType="VARCHAR" property="referUserId" />
+	  <result column="START_TIME" jdbcType="TIMESTAMP" property="startTime" />
+	  <result column="END_TIME" jdbcType="TIMESTAMP" property="endTime" />
+	  <result column="BUSS_CONTROL" jdbcType="VARCHAR" property="bussControl" />
+	  <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+	  <result column="STATUS_ID" jdbcType="VARCHAR" property="statusId" />
+	  <result column="RECORD_MAP" jdbcType="VARCHAR" property="recordMap" />
+	  <result column="CREATED_TIME" jdbcType="TIMESTAMP" property="createdTime" />
+	  <result column="UPDATED_TIME" jdbcType="TIMESTAMP" property="updatedTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <trim prefix="(" prefixOverrides="and" suffix=")">
+      <if test="rootInstCd != null" >
+	      and ROOT_INST_CD = #{rootInstCd,jdbcType=VARCHAR}
+	    </if>
+      <if test="finAccountId != null" >
+	      and FIN_ACCOUNT_ID = #{finAccountId,jdbcType=VARCHAR}
+	    </if>
+      <if test="finAccountTypeId != null" >
+	      and FIN_ACCOUNT_TYPE_ID = #{finAccountTypeId,jdbcType=VARCHAR}
+	    </if>
+      <if test="finAccountName != null" >
+	      and FIN_ACCOUNT_NAME = #{finAccountName,jdbcType=VARCHAR}
+	    </if>
+      <if test="accountCode != null" >
+	      and ACCOUNT_CODE = #{accountCode,jdbcType=VARCHAR}
+	    </if>
+      <if test="accountRelateId != null" >
+	      and ACCOUNT_RELATE_ID = #{accountRelateId,jdbcType=VARCHAR}
+	    </if>
+      <if test="groupManage != null" >
+	      and GROUP_MANAGE = #{groupManage,jdbcType=VARCHAR}
+	    </if>
+      <if test="groupSettle != null" >
+	      and GROUP_SETTLE = #{groupSettle,jdbcType=VARCHAR}
+	    </if>
+      <if test="currency != null" >
+	      and CURRENCY = #{currency,jdbcType=VARCHAR}
+	    </if>
+      <if test="amount != null" >
+	      and AMOUNT = #{amount,jdbcType=DECIMAL}
+	    </if>
+      <if test="balanceUsable != null" >
+	      and BALANCE_USABLE = #{balanceUsable,jdbcType=DECIMAL}
+	    </if>
+      <if test="balanceSettle != null" >
+	      and BALANCE_SETTLE = #{balanceSettle,jdbcType=DECIMAL}
+	    </if>
+      <if test="balanceFrozon != null" >
+	      and BALANCE_FROZON = #{balanceFrozon,jdbcType=DECIMAL}
+	    </if>
+      <if test="balanceOverLimit != null" >
+	      and BALANCE_OVER_LIMIT = #{balanceOverLimit,jdbcType=DECIMAL}
+	    </if>
+      <if test="balanceCredit != null" >
+	      and BALANCE_CREDIT = #{balanceCredit,jdbcType=DECIMAL}
+	    </if>
+<!--       <if test="balanceBonus != null" > -->
+<!-- 	      and BALANCE_BONUS = #{balanceBonus,jdbcType=DECIMAL} -->
+<!-- 	    </if> -->
+<!--       <if test="balancePoints != null" > -->
+<!-- 	      and BALANCE_POINTS = #{balancePoints,jdbcType=DECIMAL} -->
+<!-- 	    </if> -->
+       <if test="referUserId != null" > 
+ 	      and REFER_USER_ID = #{referUserId,jdbcType=VARCHAR}
+	    </if> 
+      <if test="startTime != null" >
+	      and START_TIME = #{startTime,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="endTime != null" >
+	      and END_TIME = #{endTime,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="bussControl != null" >
+	      and BUSS_CONTROL = #{bussControl,jdbcType=VARCHAR}
+	    </if>
+      <if test="remark != null" >
+	      and REMARK = #{remark,jdbcType=VARCHAR}
+	    </if>
+      <if test="statusId != null" >
+	      and STATUS_ID = #{statusId,jdbcType=VARCHAR}
+	    </if>
+      <if test="recordMap != null" >
+	      and RECORD_MAP = #{recordMap,jdbcType=VARCHAR}
+	    </if>
+      <if test="createdTime != null" >
+	      and CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="updatedTime != null" >
+	      and UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP}
+	    </if>
+	  </trim>
+    </where>
+  </sql>
+  <sql id="Example_Set_Clause">
+    <set>
+      <trim suffixOverrides=",">
+      <if test="rootInstCd != null">
+        ROOT_INST_CD = #{rootInstCd,jdbcType=VARCHAR},
+      </if>
+      <if test="finAccountId != null">
+        FIN_ACCOUNT_ID = #{finAccountId,jdbcType=VARCHAR},
+      </if>
+      <if test="finAccountTypeId != null">
+        FIN_ACCOUNT_TYPE_ID = #{finAccountTypeId,jdbcType=VARCHAR},
+      </if>
+      <if test="finAccountName != null">
+        FIN_ACCOUNT_NAME = #{finAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="accountCode != null">
+        ACCOUNT_CODE = #{accountCode,jdbcType=VARCHAR},
+      </if>
+      <if test="accountRelateId != null">
+        ACCOUNT_RELATE_ID = #{accountRelateId,jdbcType=VARCHAR},
+      </if>
+      <if test="groupManage != null">
+        GROUP_MANAGE = #{groupManage,jdbcType=VARCHAR},
+      </if>
+      <if test="groupSettle != null">
+        GROUP_SETTLE = #{groupSettle,jdbcType=VARCHAR},
+      </if>
+      <if test="currency != null">
+        CURRENCY = #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        AMOUNT = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="balanceUsable != null">
+        BALANCE_USABLE = #{balanceUsable,jdbcType=DECIMAL},
+      </if>
+      <if test="balanceSettle != null">
+        BALANCE_SETTLE = #{balanceSettle,jdbcType=DECIMAL},
+      </if>
+      <if test="balanceFrozon != null">
+        BALANCE_FROZON = #{balanceFrozon,jdbcType=DECIMAL},
+      </if>
+      <if test="balanceOverLimit != null">
+        BALANCE_OVER_LIMIT = #{balanceOverLimit,jdbcType=DECIMAL},
+      </if>
+      <if test="balanceCredit != null">
+        BALANCE_CREDIT = #{balanceCredit,jdbcType=DECIMAL},
+      </if>
+<!--       <if test="balanceBonus != null"> -->
+<!--         BALANCE_BONUS = #{balanceBonus,jdbcType=DECIMAL}, -->
+<!--       </if> -->
+<!--       <if test="balancePoints != null"> -->
+<!--         BALANCE_POINTS = #{balancePoints,jdbcType=DECIMAL}, -->
+<!--       </if> -->
+		<if test="referUserId != null" > 
+	      REFER_USER_ID = #{referUserId,jdbcType=VARCHAR},
+	    </if> 
+      <if test="startTime != null">
+        START_TIME = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        END_TIME = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="bussControl != null">
+        BUSS_CONTROL = #{bussControl,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="statusId != null">
+        STATUS_ID = #{statusId,jdbcType=VARCHAR},
+      </if>
+      <if test="recordMap != null">
+        RECORD_MAP = #{recordMap,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      </trim>
+    </set>
+  </sql>
+  <sql id="Base_Column_List">
+    ROOT_INST_CD,
+    FIN_ACCOUNT_ID,
+    FIN_ACCOUNT_TYPE_ID,
+    FIN_ACCOUNT_NAME,
+    ACCOUNT_CODE,
+    ACCOUNT_RELATE_ID,
+    GROUP_MANAGE,
+    GROUP_SETTLE,
+    CURRENCY,
+    AMOUNT,
+    BALANCE_USABLE,
+    BALANCE_SETTLE,
+    BALANCE_FROZON,
+    BALANCE_OVER_LIMIT,
+    BALANCE_CREDIT,
+<!--     BALANCE_BONUS, -->
+<!--     BALANCE_POINTS, -->
+	REFER_USER_ID,
+    START_TIME,
+    END_TIME,
+    BUSS_CONTROL,
+    REMARK,
+    STATUS_ID,
+    RECORD_MAP,
+    CREATED_TIME,
+    UPDATED_TIME,
+  </sql>
+  <sql id="Base_Set_Clause">
+    <set>
+      <trim suffixOverrides=",">
+        ROOT_INST_CD = #{rootInstCd,jdbcType=VARCHAR},
+        FIN_ACCOUNT_ID = #{finAccountId,jdbcType=VARCHAR},
+        FIN_ACCOUNT_TYPE_ID = #{finAccountTypeId,jdbcType=VARCHAR},
+        FIN_ACCOUNT_NAME = #{finAccountName,jdbcType=VARCHAR},
+        ACCOUNT_CODE = #{accountCode,jdbcType=VARCHAR},
+        ACCOUNT_RELATE_ID = #{accountRelateId,jdbcType=VARCHAR},
+        GROUP_MANAGE = #{groupManage,jdbcType=VARCHAR},
+        GROUP_SETTLE = #{groupSettle,jdbcType=VARCHAR},
+        CURRENCY = #{currency,jdbcType=VARCHAR},
+        AMOUNT = #{amount,jdbcType=DECIMAL},
+        BALANCE_USABLE = #{balanceUsable,jdbcType=DECIMAL},
+        BALANCE_SETTLE = #{balanceSettle,jdbcType=DECIMAL},
+        BALANCE_FROZON = #{balanceFrozon,jdbcType=DECIMAL},
+        BALANCE_OVER_LIMIT = #{balanceOverLimit,jdbcType=DECIMAL},
+        BALANCE_CREDIT = #{balanceCredit,jdbcType=DECIMAL},
+<!--         BALANCE_BONUS = #{balanceBonus,jdbcType=DECIMAL}, -->
+<!--         BALANCE_POINTS = #{balancePoints,jdbcType=DECIMAL}, -->
+<!--         BALANCE_RESERVE1 = #{balanceReserve1,jdbcType=DECIMAL}, -->
+		REFER_USER_ID= #{referUserId,jdbcType=VARCHAR},
+        START_TIME = #{startTime,jdbcType=TIMESTAMP},
+        END_TIME = #{endTime,jdbcType=TIMESTAMP},
+        BUSS_CONTROL = #{bussControl,jdbcType=VARCHAR},
+        REMARK = #{remark,jdbcType=VARCHAR},
+        STATUS_ID = #{statusId,jdbcType=VARCHAR},
+        RECORD_MAP = #{recordMap,jdbcType=VARCHAR},
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </trim>
+    </set>
+  </sql>
+  <sql id="Selective_Column_List">
+    <if test="rootInstCd != null">
+      ROOT_INST_CD,
+    </if>
+    <if test="finAccountId != null">
+      FIN_ACCOUNT_ID,
+    </if>
+    <if test="finAccountTypeId != null">
+      FIN_ACCOUNT_TYPE_ID,
+    </if>
+    <if test="finAccountName != null">
+      FIN_ACCOUNT_NAME,
+    </if>
+    <if test="accountCode != null">
+      ACCOUNT_CODE,
+    </if>
+    <if test="accountRelateId != null">
+      ACCOUNT_RELATE_ID,
+    </if>
+    <if test="groupManage != null">
+      GROUP_MANAGE,
+    </if>
+    <if test="groupSettle != null">
+      GROUP_SETTLE,
+    </if>
+    <if test="currency != null">
+      CURRENCY,
+    </if>
+    <if test="amount != null">
+      AMOUNT,
+    </if>
+    <if test="balanceUsable != null">
+      BALANCE_USABLE,
+    </if>
+    <if test="balanceSettle != null">
+      BALANCE_SETTLE,
+    </if>
+    <if test="balanceFrozon != null">
+      BALANCE_FROZON,
+    </if>
+    <if test="balanceOverLimit != null">
+      BALANCE_OVER_LIMIT,
+    </if>
+    <if test="balanceCredit != null">
+      BALANCE_CREDIT,
+    </if>
+<!--     <if test="balanceBonus != null"> -->
+<!--       BALANCE_BONUS, -->
+<!--     </if> -->
+<!--     <if test="balancePoints != null"> -->
+<!--       BALANCE_POINTS, -->
+<!--     </if> -->
+<!--     <if test="balanceReserve1 != null"> -->
+<!--       BALANCE_RESERVE1, -->
+<!--     </if> -->
+ 	<if test="referUserId != null" > 
+ 	      REFER_USER_ID,
+	   </if> 
+    <if test="startTime != null">
+      START_TIME,
+    </if>
+    <if test="endTime != null">
+      END_TIME,
+    </if>
+    <if test="bussControl != null">
+      BUSS_CONTROL,
+    </if>
+    <if test="remark != null">
+      REMARK,
+    </if>
+    <if test="statusId != null">
+      STATUS_ID,
+    </if>
+    <if test="recordMap != null">
+      RECORD_MAP,
+    </if>
+    <if test="createdTime != null">
+      CREATED_TIME,
+    </if>
+    <if test="updatedTime != null">
+      UPDATED_TIME,
+    </if>
+  </sql>
+	<sql id="Base_Value_List">
+    #{rootInstCd,jdbcType=VARCHAR},
+    #{finAccountId,jdbcType=VARCHAR},
+    #{finAccountTypeId,jdbcType=VARCHAR},
+    #{finAccountName,jdbcType=VARCHAR},
+    #{accountCode,jdbcType=VARCHAR},
+    #{accountRelateId,jdbcType=VARCHAR},
+    #{groupManage,jdbcType=VARCHAR},
+    #{groupSettle,jdbcType=VARCHAR},
+    #{currency,jdbcType=VARCHAR},
+    #{amount,jdbcType=DECIMAL},
+    #{balanceUsable,jdbcType=DECIMAL},
+    #{balanceSettle,jdbcType=DECIMAL},
+    #{balanceFrozon,jdbcType=DECIMAL},
+    #{balanceOverLimit,jdbcType=DECIMAL},
+    #{balanceCredit,jdbcType=DECIMAL},
+<!--     #{balanceBonus,jdbcType=DECIMAL}, -->
+<!--     #{balancePoints,jdbcType=DECIMAL}, -->
+<!--     #{balanceReserve1,jdbcType=DECIMAL}, -->
+	#{referUserId,jdbcType=VARCHAR}
+    #{startTime,jdbcType=TIMESTAMP},
+    #{endTime,jdbcType=TIMESTAMP},
+    #{bussControl,jdbcType=VARCHAR},
+    #{remark,jdbcType=VARCHAR},
+    #{statusId,jdbcType=VARCHAR},
+    #{recordMap,jdbcType=VARCHAR},
+    #{createdTime,jdbcType=TIMESTAMP},
+    #{updatedTime,jdbcType=TIMESTAMP},
+	</sql>
+  <sql id="Selective_Value_List">
+    <if test="rootInstCd != null">
+      #{rootInstCd,jdbcType=VARCHAR},
+    </if>
+    <if test="finAccountId != null">
+      #{finAccountId,jdbcType=VARCHAR},
+    </if>
+    <if test="finAccountTypeId != null">
+      #{finAccountTypeId,jdbcType=VARCHAR},
+    </if>
+    <if test="finAccountName != null">
+      #{finAccountName,jdbcType=VARCHAR},
+    </if>
+    <if test="accountCode != null">
+      #{accountCode,jdbcType=VARCHAR},
+    </if>
+    <if test="accountRelateId != null">
+      #{accountRelateId,jdbcType=VARCHAR},
+    </if>
+    <if test="groupManage != null">
+      #{groupManage,jdbcType=VARCHAR},
+    </if>
+    <if test="groupSettle != null">
+      #{groupSettle,jdbcType=VARCHAR},
+    </if>
+    <if test="currency != null">
+      #{currency,jdbcType=VARCHAR},
+    </if>
+    <if test="amount != null">
+      #{amount,jdbcType=DECIMAL},
+    </if>
+    <if test="balanceUsable != null">
+      #{balanceUsable,jdbcType=DECIMAL},
+    </if>
+    <if test="balanceSettle != null">
+      #{balanceSettle,jdbcType=DECIMAL},
+    </if>
+    <if test="balanceFrozon != null">
+      #{balanceFrozon,jdbcType=DECIMAL},
+    </if>
+    <if test="balanceOverLimit != null">
+      #{balanceOverLimit,jdbcType=DECIMAL},
+    </if>
+    <if test="balanceCredit != null">
+      #{balanceCredit,jdbcType=DECIMAL},
+    </if>
+<!--     <if test="balanceBonus != null"> -->
+<!--       #{balanceBonus,jdbcType=DECIMAL}, -->
+<!--     </if> -->
+<!--     <if test="balancePoints != null"> -->
+<!--       #{balancePoints,jdbcType=DECIMAL}, -->
+<!--     </if> -->
+<!--     <if test="balanceReserve1 != null"> -->
+<!--       #{balanceReserve1,jdbcType=DECIMAL}, -->
+<!--     </if> -->
+	 <if test="referUserId != null" > 
+ 	      #{referUserId,jdbcType=VARCHAR},
+	    </if> 
+    <if test="startTime != null">
+      #{startTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="endTime != null">
+      #{endTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="bussControl != null">
+      #{bussControl,jdbcType=VARCHAR},
+    </if>
+    <if test="remark != null">
+      #{remark,jdbcType=VARCHAR},
+    </if>
+    <if test="statusId != null">
+      #{statusId,jdbcType=VARCHAR},
+    </if>
+    <if test="recordMap != null">
+      #{recordMap,jdbcType=VARCHAR},
+    </if>
+    <if test="createdTime != null">
+      #{createdTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="updatedTime != null">
+      #{updatedTime,jdbcType=TIMESTAMP},
+    </if>
+  </sql>
+  
+  <select id="selectByFinAccountId" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from FINANACE_ACCOUNT
+	where
+	FIN_ACCOUNT_ID in
+	<foreach item="item" index="index" collection="array" open="("
+		separator="," close=")">
+		#{item}
+	</foreach>
+  </select>
+  
+  <select id="selectByExample" parameterType="FinanaceAccountQuery" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from FINANACE_ACCOUNT
+    <include refid="Example_Where_Clause" />
+    <!-- order by CREATE_DATE -->
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from FINANACE_ACCOUNT
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <!-- 根据机构号和用户id查询其所有产品号 -->
+  <select id="selectProductIdList" parameterType="FinanaceAccountQuery" resultType="java.lang.String">
+    SELECT
+	    GROUP_MANAGE
+	FROM
+	    FINANACE_ACCOUNT
+	<include refid="Example_Where_Clause" />
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from FINANACE_ACCOUNT
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="FinanaceAccountQuery">
+    delete from FINANACE_ACCOUNT
+    <include refid="Example_Where_Clause" />
+  </delete>
+  <insert id="insert" parameterType="FinanaceAccount" useGeneratedKeys="true" keyProperty="finAccountId">
+    insert into FINANACE_ACCOUNT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Base_Column_List"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Base_Value_List"/>
+    </trim>
+  </insert>
+  <insert id="insertSelective" parameterType="FinanaceAccount" useGeneratedKeys="true" keyProperty="finAccountId">
+    insert into FINANACE_ACCOUNT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Column_List"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Value_List"/>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="FinanaceAccountQuery" resultType="java.lang.Integer">
+    select count(*) from FINANACE_ACCOUNT
+    <include refid="Example_Where_Clause" />
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="FinanaceAccount">
+    update FINANACE_ACCOUNT
+    <include refid="Example_Set_Clause"/>
+    where FIN_ACCOUNT_ID = #{finAccountId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="FinanaceAccount">
+    update FINANACE_ACCOUNT
+    <include refid="Base_Set_Clause"/>
+    where FIN_ACCOUNT_ID = #{finAccountId,jdbcType=VARCHAR}
+  </update>
+<!--   <select id="selectByFinAccountId" resultMap="BaseResultMap"> -->
+<!--     select -->
+<!--     FIN_ACCOUNT_ID, -->
+<!--     ACCOUNT_RELATE_ID, -->
+<!--     GROUP_MANAGE, -->
+<!--     ROOT_INST_CD -->
+<!--     from FINANACE_ACCOUNT -->
+<!--     where FIN_ACCOUNT_ID in -->
+<!-- 	<foreach item="item" index="index" collection="array" open="(" -->
+<!-- 		separator="," close=")"> -->
+<!-- 		#{item} -->
+<!-- 	</foreach> -->
+<!--   </select> -->
+  
+  <select id="selectByInstCodeAndUser" resultMap="BaseResultMap">
+    select
+    FIN_ACCOUNT_ID,
+    ACCOUNT_RELATE_ID,
+    FIN_ACCOUNT_TYPE_ID,
+    GROUP_MANAGE,
+    ROOT_INST_CD
+    from FINANACE_ACCOUNT
+    where
+    STATUS_ID=1 
+	AND ACCOUNT_RELATE_ID = #{userId}
+	AND ROOT_INST_CD = #{instCode} 
+	<if test="productId != null">
+		AND GROUP_MANAGE=#{productId} 
+	</if>
+	<if test="type != null">
+		AND FIN_ACCOUNT_TYPE_ID in 
+		<foreach item="item" index="index" collection="type" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</if>
+  </select>
+  
+  <select id="batchSelectByCon" parameterType="list" resultMap="BaseResultMap">
+		<foreach item="item" index="index" collection="list">
+			SELECT
+		    FIN_ACCOUNT_ID,
+		    ACCOUNT_RELATE_ID,
+		    GROUP_MANAGE,
+		    ROOT_INST_CD,
+		    REFER_USER_ID,
+		    RECORD_MAP
+		    from FINANACE_ACCOUNT
+		    where
+			ROOT_INST_CD=#{item.instCode} 
+			<if test="item.userId != null">
+				AND ACCOUNT_RELATE_ID=#{item.userId} 
+			</if>			
+			<if test="item.productId != null">
+				AND GROUP_MANAGE=#{item.productId} 
+			</if>
+			<if test="item.last == null">UNION</if>
+		</foreach>
+  </select>
+  
+  <select id="selectAllUserByCertificateNum" parameterType="FinanaceAccountQuery" resultMap="BaseResultMap">
+    select
+	    f.ROOT_INST_CD,
+	    f.FIN_ACCOUNT_ID,
+	    f.ACCOUNT_RELATE_ID,
+	    f.GROUP_MANAGE
+	    from FINANACE_ACCOUNT f join ACCOUNT_INFO a on f.FIN_ACCOUNT_ID=a.FIN_ACCOUNT_ID
+	    and f.FIN_ACCOUNT_TYPE_ID='10001' 
+ 		and a.CERTIFICATE_NUMBER=#{recordMap} 
+  </select>  
+</mapper>

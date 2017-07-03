@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+	    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+	    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd" 
+    default-autowire="byName" default-lazy-init="true">
+    <bean id="securityService" class="com.rkylin.wheatfield.service.impl.SecurityServiceImpl">
+    	<property name="userProperties" ref="userProperties"/>
+		<property name="errorResponseService" ref="errorResponseService"/>
+    </bean>
+	<bean id="marshallingView" class="com.rkylin.wheatfield.utils.MarshallingView" >
+		<property name="marshaller" ref="xStreamMarshaller" />
+		<property name="contentType" value="application/xml;charset=UTF-8"></property>
+	</bean>
+
+	<bean id="xStreamMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller" scope="prototype">  
+		<property name="autodetectAnnotations" value="true"/>  
+	</bean>
+
+	<bean id="xStreamXMLDriver" class="com.thoughtworks.xstream.io.xml.DomDriver"> 
+		<constructor-arg index="0"> 
+			<bean class="java.lang.String"> 
+				<constructor-arg index="0" value="UTF-8"/> 
+			</bean>
+		</constructor-arg>
+		<constructor-arg index="1"> 
+			<bean class="com.thoughtworks.xstream.io.xml.XmlFriendlyReplacer"> 
+				<constructor-arg index="0" value="_-"/> 
+				<constructor-arg index="1" value="_"/> 
+			</bean>
+		</constructor-arg> 
+	</bean>
+	
+	<bean id="xStreamJSONDriver" class="com.thoughtworks.xstream.io.json.JsonHierarchicalStreamDriver" />
+	
+	<bean id="xStreamDateConverter" class="com.rkylin.wheatfield.utils.xStreamConverter.XStreamDateConverter"> 
+		<constructor-arg value="yyyy-MM-dd HH:mm:ss"/> 
+	</bean>
+	
+	<bean id="xStreamDoubleConverter" class="com.rkylin.wheatfield.utils.xStreamConverter.XStreamDoubleConverter"/> 
+	
+	<bean id="xStreamStringConverter" class="com.rkylin.wheatfield.utils.xStreamConverter.XStreamStringConverter"/>
+
+	<!-- streamMarshaller end -->
+
+	<!-- security end -->
+    <!-- file upload -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"  
+        p:defaultEncoding="UTF-8"  
+        p:maxUploadSize="5400000">  
+    </bean> 
+	<!-- errorResponseService start -->
+	<bean id="errorResponseService" class="com.rkylin.wheatfield.service.impl.ErrorResponseServiceImpl">
+		<property name="errorCodeProperties" ref="errorCodeProperties"/>
+	</bean>
+	<!-- accountManageService -->
+	<bean id="ruixue.wheatfield.account.open" class="com.rkylin.wheatfield.service.impl.AccountManageServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.bankaccount.binding" class="com.rkylin.wheatfield.service.impl.AccountManageServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.accountnum.ckeck" class="com.rkylin.wheatfield.service.impl.AccountManageServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.account.check" class="com.rkylin.wheatfield.service.impl.AccountManageServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.account.close" class="com.rkylin.wheatfield.service.impl.AccountManageServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.account.credit" class="com.rkylin.wheatfield.service.impl.AccountManageServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.creditinfo.query" class="com.rkylin.wheatfield.service.impl.AccountManageServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.account.freeze" class="com.rkylin.wheatfield.service.impl.AccountManageServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.account.rmfreeze" class="com.rkylin.wheatfield.service.impl.AccountManageServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.creditrepaymenthistory.query" class="com.rkylin.wheatfield.service.impl.AccountManageServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.account.notify" class="com.rkylin.wheatfield.service.impl.GenerationPaymentServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.accountinfo.query" class="com.rkylin.wheatfield.service.impl.AccountManageServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.accountinfoplus.query" class="com.rkylin.wheatfield.service.impl.AccountManageServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.accountinfo.delete" class="com.rkylin.wheatfield.service.impl.AccountManageServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.accountinfo.update" class="com.rkylin.wheatfield.service.impl.AccountManageServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.signcheck.get" class="com.rkylin.wheatfield.service.impl.UtilsResponseServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.signmessage.import" class="com.rkylin.wheatfield.service.impl.UtilsResponseServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.account.status.get" class="com.rkylin.wheatfield.service.impl.AccountManageServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.account.update" class="com.rkylin.wheatfield.service.impl.AccountManageServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.batchquery.accountinfo" class="com.rkylin.wheatfield.service.impl.AccountManageServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.accountbankcard.query" class="com.rkylin.wheatfield.service.impl.AccountManageQueryServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.batchquery.company" class="com.rkylin.wheatfield.service.impl.AccountManageQueryServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.creditapprovalinfo.query" class="com.rkylin.wheatfield.service.impl.AccountManageServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.demand.redemption" class="com.rkylin.wheatfield.service.impl.PaymentAccountServieImpl"></bean>
+	<!-- accountManageService end-->
+	
+	<!-- CorporatAccountInfoService start add by liuhuan-->
+	<bean id="ruixue.wheatfield.corporateaccount.import" class="com.rkylin.wheatfield.service.impl.CorporatAccountInfoServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.corporateaccount.query" class="com.rkylin.wheatfield.service.impl.CorporatAccountInfoServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.corporateaccount.update" class="com.rkylin.wheatfield.service.impl.CorporatAccountInfoServiceImpl"></bean>
+	<!-- CorporatAccountInfoService end -->
+	
+	<!-- accountPasswordService -->
+	<bean id="ruixue.wheatfield.password.save" class="com.rkylin.wheatfield.service.impl.AccountPasswordServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.password.check" class="com.rkylin.wheatfield.service.impl.AccountPasswordServiceImpl"></bean>
+	<bean id ="ruixue.wheatfield.pwdlock.update" class="com.rkylin.wheatfield.service.impl.AccountPasswordServiceImpl"></bean>
+	<bean id ="ruixue.wheatfield.password.query" class="com.rkylin.wheatfield.service.impl.AccountPasswordServiceImpl"></bean>
+	<!-- accountManageService end-->
+	
+	<bean id="ruixue.wheatfield.balance.get" class="com.rkylin.wheatfield.service.impl.PaymentAccountServieImpl"></bean>
+	<bean id="ruixue.wheatfield.user.antideduct" class="com.rkylin.wheatfield.service.impl.PaymentAccountServieImpl"></bean>
+	<bean id="ruixue.wheatfield.user.deduct" class="com.rkylin.wheatfield.service.impl.PaymentAccountServieImpl"></bean>
+	<bean id="ruixue.wheatfield.user.recharge" class="com.rkylin.wheatfield.service.impl.PaymentAccountServieImpl"></bean>
+	<bean id="ruixue.wheatfield.user.transfer" class="com.rkylin.wheatfield.service.impl.PaymentAccountServieImpl"></bean>
+	<bean id="ruixue.wheatfield.user.withdrow" class="com.rkylin.wheatfield.service.impl.PaymentAccountServieImpl"></bean>
+	<bean id="ruixue.wheatfield.user.advanceorders" class="com.rkylin.wheatfield.service.impl.PaymentAccountServieImpl"></bean>
+	<bean id="ruixue.wheatfield.user.consumptionbeforerefund" class="com.rkylin.wheatfield.service.impl.PaymentAccountServieImpl"></bean>
+	<bean id="ruixue.wheatfield.user.afterspendingrefund" class="com.rkylin.wheatfield.service.impl.PaymentAccountServieImpl"></bean>
+	<bean id="ruixue.wheatfield.user.preauthorization" class="com.rkylin.wheatfield.service.impl.PaymentAccountServieImpl"></bean>
+	<bean id="ruixue.wheatfield.user.preauthorizationcomplete" class="com.rkylin.wheatfield.service.impl.PaymentAccountServieImpl"></bean>
+	<bean id="ruixue.wheatfield.user.collection" class="com.rkylin.wheatfield.service.impl.PaymentAccountServieImpl"></bean>
+	<bean id="ruixue.wheatfield.user.withhold" class="com.rkylin.wheatfield.service.impl.PaymentAccountServieImpl"></bean>
+	<bean id="ruixue.wheatfield.user.wipeaccount" class="com.rkylin.wheatfield.service.impl.PaymentAccountServieImpl"></bean>
+	<bean id="ruixue.wheatfield.user.getadvancebalance" class="com.rkylin.wheatfield.service.impl.PaymentAccountServieImpl"></bean>
+	<bean id="ruixue.wheatfield.user.frozon" class="com.rkylin.wheatfield.service.impl.PaymentAccountServieImpl"></bean>
+	<bean id="ruixue.wheatfield.user.thaw" class="com.rkylin.wheatfield.service.impl.PaymentAccountServieImpl"></bean>
+	<bean id="ruixue.wheatfield.user.orderrefund" class="com.rkylin.wheatfield.service.impl.PaymentAccountServieImpl"></bean>
+	<bean id="ruixue.wheatfield.user.frozon.authcode" class="com.rkylin.wheatfield.service.impl.PaymentAccountServieImpl"></bean>
+	<bean id="ruixue.wheatfield.user.thaw.authcode" class="com.rkylin.wheatfield.service.impl.PaymentAccountServieImpl"></bean>
+	<bean id="ruixue.wheatfield.user.transfer.new" class="com.rkylin.wheatfield.service.impl.PaymentAccountServieImpl"></bean>
+	<bean id="ruixue.wheatfield.user.transfer.common" class="com.rkylin.wheatfield.service.impl.PaymentAccountServieImpl"></bean>
+	<bean id="ruixue.wheatfield.redenvelope.exchange" class="com.rkylin.wheatfield.service.impl.PaymentAccountServieImpl"></bean>
+	
+	<bean id="ruixue.wheatfield.paymentinternal.credit" class="com.rkylin.wheatfield.service.impl.PaymentInternalServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.paymentinternal.withdrawerturn" class="com.rkylin.wheatfield.service.impl.PaymentInternalServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.paymentinternal.refundreturn" class="com.rkylin.wheatfield.service.impl.PaymentInternalServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.paymentinternal.rightsackagereturn" class="com.rkylin.wheatfield.service.impl.PaymentInternalServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.paymentinternal.fenrun" class="com.rkylin.wheatfield.service.impl.PaymentInternalServiceImpl"></bean>
+	
+	
+	<bean id="ruixue.wheatfield.settlement.creditload" class="com.rkylin.wheatfield.service.impl.SettlementServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.settlement.collate" class="com.rkylin.wheatfield.service.impl.SettlementServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.settlement.dedtcollate" class="com.rkylin.wheatfield.service.impl.SettlementServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.settlement.repayfile" class="com.rkylin.wheatfield.service.impl.SettlementServiceImpl"></bean>
+	
+	<bean id="ruixue.wheatfield.ordernum.query" class="com.rkylin.wheatfield.service.impl.OrderServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.order.query" 	class="com.rkylin.wheatfield.service.impl.OrderServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.ordern.query" 	class="com.rkylin.wheatfield.service.impl.OrderServiceImpl"></bean>
+	
+	
+	<bean id="ruixue.wheatfield.creditbill.query" class="com.rkylin.wheatfield.service.impl.CreditRepaymentMonthServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.finanace.entry.query" class="com.rkylin.wheatfield.service.impl.TransOrderInfoServiceImpl"></bean>
+	<!-- creditrepaymenthistory -->
+	<bean id="ruixue.wheatfield.creditrepayment.query" class="com.rkylin.wheatfield.service.impl.CreditRepaymentHistoryServiceImpl"></bean>
+	<!-- creditrepaymenthistory -->
+	<!-- cityCode ruixue.wheatfield.city.query  ruixue.wheatfield.bank.query-->
+	<bean id="ruixue.wheatfield.city.query" class="com.rkylin.wheatfield.service.impl.CityCodeServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.bank.query" class="com.rkylin.wheatfield.service.impl.OpenBankCodeServiceImpl"></bean>
+	<!--NEW Service Start-->
+	<bean id="ruixue.wheatfield.bankn.query" class="com.rkylin.wheatfield.service.impl.OpenBankCodeServiceImpl"></bean>
+	<!--NEW Service End-->
+	<!-- cityCode end -->
+	<!-- enterprise open account -->
+	<bean id="ruixue.wheatfield.enterprise.entityaccountopt" class="com.rkylin.wheatfield.service.impl.OpenEntityAccountImpl"></bean>
+	<bean id="ruixue.wheatfield.enterprise.updatecompanyinfo" class="com.rkylin.wheatfield.service.impl.OpenEntityAccountImpl"></bean>
+	<bean id="ruixue.wheatfield.person.accountopr" class="com.rkylin.wheatfield.service.impl.OpenEntityAccountImpl"></bean>
+    <bean id="ruixue.wheatfield.batchquery.person" class="com.rkylin.wheatfield.service.impl.OpenEntityAccountImpl"></bean>
+    <bean id="ruixue.wheatfield.parameter.query" class="com.rkylin.wheatfield.service.impl.UtilsResponseServiceImpl"></bean>
+	<!-- enterprise open account end -->
+    <bean id="ruixue.wheatfield.ratetemplate.operate" class="com.rkylin.wheatfield.service.impl.SettlementServiceSecImpl"></bean>
+    <bean id="ruixue.wheatfield.ratetemplate.query" class="com.rkylin.wheatfield.service.impl.SettlementServiceSecImpl"></bean>
+    <bean id="ruixue.wheatfield.nofity.service.kzhloaninteresttoaccount" class="com.rkylin.wheatfield.service.impl.SettlementServiceSecImpl"></bean>
+    <bean id="ruixue.wheatfield.repaymentplan.query" class="com.rkylin.wheatfield.service.impl.SettlementServiceSecImpl"></bean>
+    <bean id="ruixue.wheatfield.credit.notify" class="com.rkylin.wheatfield.service.impl.SettlementServiceThrImpl"></bean><!-- com.rkylin.wheatfield.service.impl.SettlementServiceThrImpl -->
+
+	<!-- InterestRepayment -->
+	<bean id="ruixue.wheatfield.interestrepayment.query" class="com.rkylin.wheatfield.service.impl.InterestRepaymentServiceImpl"></bean>
+	<bean id="ruixue.wheatfield.earlyrepayment.query" class="com.rkylin.wheatfield.service.impl.InterestRepaymentServiceImpl"></bean>
+	
+	<!-- jrd-purchase start-->
+	<bean id="ruixue.wheatfield.demand.purchase" class="com.rkylin.wheatfield.service.impl.CurrentPurchaseServiceImpl" ></bean>
+	<!-- jrd-purchase end-->
+</beans>

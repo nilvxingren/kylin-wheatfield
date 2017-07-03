@@ -1,0 +1,2058 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+	    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+	    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd" >
+	<!-- 使用MethodInvokingJobDetailFactoryBean，任务类可以不实现Job接口，通过targetMethod指定调用方法-->
+	<!--丰年提现生成文件参数配置-->
+	<!-- ROP文件路线 -->
+	<!-- 	<bean id="uploadPaymentFileJob" class="com.rkylin.wheatfield.task.UploadPaymentFile"> -->
+	<!-- 代收付系统数据传输路线 -->
+	<bean id="uploadPaymentJob" class="com.rkylin.wheatfield.task.UploadPayment">
+		<property name="type" value="7"></property>
+		<property name="batch" value=""></property>
+		<property name="rootInstCd" value="M000001"></property>
+	</bean>
+	<!--丰年代收生成文件参数配置-->
+	<!-- ROP文件路线 -->
+	<!-- 	<bean id="uploadPaymentFileJob1" class="com.rkylin.wheatfield.task.UploadPaymentFile"> -->
+	<!-- 代收付系统数据传输路线 -->
+	<bean id="uploadPaymentJob1" class="com.rkylin.wheatfield.task.UploadPayment">
+		<property name="type" value="6"></property>
+		<property name="batch" value=""></property>
+		<property name="rootInstCd" value="M000001"></property>
+	</bean>
+	<!--会唐代付生成文件参数配置-->
+	<!-- ROP文件路线 -->
+<!-- 	<bean id="uploadPaymentFileJob2" class="com.rkylin.wheatfield.task.UploadPaymentFile"> -->
+	<!-- 代收付系统数据传输路线 -->
+	<bean id="uploadPaymentJob2" class="com.rkylin.wheatfield.task.UploadPayment">
+		<property name="type" value="7"></property>
+		<property name="batch" value=""></property>
+		<property name="rootInstCd" value="M000003"></property>
+	</bean>
+	<!--君融贷代付生成文件参数配置-->
+	<!-- ROP文件路线 -->
+<!-- 	<bean id="uploadPaymentFileJob3" class="com.rkylin.wheatfield.task.UploadPaymentFile"> -->
+	<!-- 代收付系统数据传输路线 -->
+	<bean id="uploadPaymentJob3" class="com.rkylin.wheatfield.task.UploadPayment">
+		<property name="type" value="7"></property>
+		<property name="batch" value=""></property>
+		<property name="rootInstCd" value="M000005"></property>
+	</bean>
+	<!--融数代付生成文件参数配置-->
+	<!-- ROP文件路线 -->
+	<!--<bean id="uploadPaymentFileJob4" class="com.rkylin.wheatfield.task.UploadPaymentFile">-->
+	<!-- 代收付系统数据传输路线 -->
+	<bean id="uploadPaymentJob4" class="com.rkylin.wheatfield.task.UploadPayment">
+		<property name="type" value="7"></property>
+		<property name="batch" value=""></property>
+		<property name="rootInstCd" value="M00000X"></property>
+	</bean>
+	
+	<!-- 指尖代言代付上传 starts-->
+	<bean id="uploadPaymentJobZJDY7" class="com.rkylin.wheatfield.task.UploadPayment">
+		<property name="type" value="7"></property>
+		<property name="batch" value=""></property>
+		<property name="rootInstCd" value="M000012"></property>
+	</bean>
+	<bean id="uploadPaymentZJDY7jobDetailJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- false表示等上一个任务执行完后再开启新的任务 -->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+		  	<ref bean="uploadPaymentJobZJDY7"/> 
+		</property>
+		<property name="targetMethod">
+			<value>submitToCollectionSys</value>
+		</property>
+	</bean>	
+	<bean id="uploadPaymentZJDY7Trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="uploadPaymentZJDY7jobDetailJob" />
+		</property>
+		<property name="cronExpression">
+			<value>0 30 11 * * ?</value>
+		</property>
+	</bean>		
+<!-- 指尖代言代付上传 ends-->	
+
+	<bean id="uploadPaymentFilejobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- false表示等上一个任务执行完后再开启新的任务 -->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<!-- ROP文件上传路线 -->
+			<!-- <ref bean="uploadPaymentFileJob"/>-->
+			<!-- 代收付系统数据传输路线 -->
+		  	<ref bean="uploadPaymentJob"/> 
+		</property>
+		<property name="targetMethod">
+			<!-- ROP文件上传路线 -->
+			<!-- <value>uploadPaymentFiles</value> -->
+			<!-- 代收付系统数据传输路线 -->
+			<value>submitToCollectionSys</value>
+		</property>
+	</bean>	
+	
+	<!-- 上传当天 -->
+	<bean id="uploadPaymentFilejobDetailT0" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- false表示等上一个任务执行完后再开启新的任务 -->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+		  	<ref bean="uploadPaymentJob"/> 
+		</property>
+		<property name="targetMethod">
+			<value>submitToCollSysT0</value>
+		</property>
+	</bean>	
+	
+	<bean id="uploadPaymentFilejobDetail1" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- false表示等上一个任务执行完后再开启新的任务 -->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<!-- ROP文件上传路线 -->
+			<!-- <ref bean="uploadPaymentFileJob1"/>-->
+			<!-- 代收付系统数据传输路线 -->
+			<ref bean="uploadPaymentJob1"/> 
+		</property>
+		<property name="targetMethod">
+			<!-- ROP文件上传路线 -->
+			<!-- <value>uploadPaymentFiles</value>-->
+			<!-- 代收付系统数据传输路线 -->
+ 			<value>submitToCollectionSys</value> 
+		</property>
+	</bean>	
+	<bean id="uploadPaymentFilejobDetail2" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- false表示等上一个任务执行完后再开启新的任务 -->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<!-- ROP文件上传路线 -->
+<!-- 			<ref bean="uploadPaymentFileJob2"/> -->
+			<!-- 代收付系统数据传输路线 -->
+			<ref bean="uploadPaymentJob2"/>
+		</property>
+		<property name="targetMethod">
+			<!-- ROP文件上传路线 -->
+<!-- 			<value>uploadPaymentFiles</value> -->
+			<!-- 代收付系统数据传输路线 -->
+			<value>submitToCollectionSys</value>
+		</property>
+	</bean>	
+	<bean id="uploadPaymentFilejobDetail3" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- false表示等上一个任务执行完后再开启新的任务 -->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<!-- ROP文件上传路线 -->
+<!-- 			<ref bean="uploadPaymentFileJob3"/> -->
+			<!-- 代收付系统数据传输路线-->
+			<ref bean="uploadPaymentJob3"/>
+		</property>
+		<property name="targetMethod">
+			<!-- ROP文件上传路线 -->
+<!-- 			<value>uploadPaymentFiles</value> -->
+			<!-- 代收付系统数据传输路线 -->
+			<value>submitToCollectionSys</value>
+		</property>
+	</bean>	
+	<bean id="uploadPaymentFilejobDetail4" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- false表示等上一个任务执行完后再开启新的任务 -->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<!-- ROP文件上传路线 -->
+			<!-- <ref bean="uploadPaymentFileJob4"/> -->
+			<!-- 代收付系统数据传输路线 -->
+			<ref bean="uploadPaymentJob4"/>
+		</property>
+		<property name="targetMethod">
+			<!-- ROP文件上传路线 -->
+			<!-- <value>uploadPaymentFiles</value> -->
+			<!-- 代收付系统数据传输路线 -->
+			<value>submitToCollectionSys</value>
+		</property>
+	</bean>	
+	<!-- 丰年代付生成文件上传T-1 -->
+	<bean id="uploadPaymentFileTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="uploadPaymentFilejobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 50 11 * * ?</value>
+		</property>
+	</bean>	
+	
+	<!-- 展酷代付上传开始 -->
+	<bean id="uploadPaymentJobZK7" class="com.rkylin.wheatfield.task.UploadPayment">
+		<property name="type" value="7"></property>
+		<property name="batch" value=""></property>
+		<property name="rootInstCd" value="M000011"></property>
+	</bean>		
+	<bean id="uploadPaymentjobZkDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- false表示等上一个任务执行完后再开启新的任务 -->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<!-- ROP文件上传路线 -->
+			<!-- <ref bean="uploadPaymentFileJob"/>-->
+			<!-- 代收付系统数据传输路线 -->
+		  	<ref bean="uploadPaymentJobZK7"/> 
+		</property>
+		<property name="targetMethod">
+			<!-- ROP文件上传路线 -->
+			<!-- <value>uploadPaymentFiles</value> -->
+			<!-- 代收付系统数据传输路线 -->
+			<value>submitToCollectionSys</value>
+		</property>
+	</bean>	
+	<bean id="uploadPaymentZkTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="uploadPaymentjobZkDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 55 11 * * ?</value>
+		</property>
+	</bean>		
+	<!-- 展酷代付上传结束 -->
+	
+	<!-- 丰年代付生成文件上传T0 -->
+	<bean id="uploadPaymentFileTriggerT0" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="uploadPaymentFilejobDetailT0" />
+		</property>
+		<property name="cronExpression">
+			<value>0 55 11 * * ?</value>
+		</property>
+	</bean>
+	<!-- 丰年代收生成文件上传 -->
+	<bean id="uploadPaymentFileTrigger1" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="uploadPaymentFilejobDetail1" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 10 * * ?</value>
+		</property>
+	</bean>
+	<!-- 会堂代付生成文件  -->
+	<bean id="uploadPaymentFileTrigger2" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="uploadPaymentFilejobDetail2" />
+		</property>
+		<property name="cronExpression">
+			<value>0 45 11 * * ?</value>
+		</property>
+	</bean>
+	<!-- 君融贷代付生成文件  -->
+	<bean id="uploadPaymentFileTrigger3" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="uploadPaymentFilejobDetail3" />
+		</property>
+		<property name="cronExpression">
+			<value>0 55 11 * * ?</value>
+		</property>
+	</bean>
+	<!-- 融数代付生成文件 -->
+	<bean id="uploadPaymentFileTrigger4" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="uploadPaymentFilejobDetail4" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 12 * * ?</value>
+		</property>
+	</bean>
+	
+	<!--指尖代言提现Task开始 -->
+	<bean id="withdrawZJDYJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="withdrawJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>withdrawZJDY</value>
+		</property>
+	</bean>
+	 
+	<!-- 调度触发器 -->
+	<bean id="withdrawZJDYTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="withdrawZJDYJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 10 7 * * ?</value>
+		</property>
+	</bean>
+	<!--指尖代言提现Task结束 -->
+	
+	<!--丰年提现Task开始 -->
+	<bean id="withdrawJob" class="com.rkylin.wheatfield.task.WithdrawTask"/>
+	<bean id="withdrawJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="withdrawJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>withdraw</value>
+		</property>
+	</bean>
+	 
+	<!-- 调度触发器 -->
+	<bean id="withdrawTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="withdrawJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 6 * * ?</value>
+		</property>
+	</bean>
+	<!--丰年提现Task结束 -->
+	
+	<!-- 展酷提现汇总  开始 -->
+	<bean id="withdrawZkJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="withdrawJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>withdrawZK</value>
+		</property>
+	</bean>
+	<bean id="withdrawZkTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="withdrawZkJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 7 * * ?</value>
+		</property>
+	</bean>
+	<!-- 展酷提现汇总   结束 -->
+	
+	<!-- 通信运维提现汇总  开始 -->
+	<bean id="withdrawTXYWJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="withdrawJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>withdrawTXYW</value>
+		</property>
+	</bean>
+	<bean id="withdrawTXYWTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="withdrawTXYWJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 5 7 * * ?</value>
+		</property>
+	</bean>
+	<!-- 通信运维提现汇总   结束 -->
+	
+	<!-- 客栈提现汇总  开始 -->
+	<bean id="withdrawKZJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="withdrawJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>withdrawKZ</value>
+		</property>
+	</bean>
+	<bean id="withdrawKZTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="withdrawKZJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 7 * * ?</value>
+		</property>
+	</bean>
+	
+	<bean id="withdrawKZT1JobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="withdrawJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>withdrawKZT1</value>
+		</property>
+	</bean>
+	<bean id="withdrawKZT1Trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="withdrawKZT1JobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 5 7 * * ?</value>
+		</property>
+	</bean>
+	<!-- 客栈提现汇总   结束 -->
+	
+
+	<!--君融贷提现Task开始 -->
+	<bean id="withdrawJRDJob" class="com.rkylin.wheatfield.task.WithdrawTask"/>
+	<bean id="withdrawJRDJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="withdrawJRDJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>withdrawJRD</value>
+		</property>
+	</bean>
+	 
+	<!-- 调度触发器 -->
+	<bean id="withdrawJRDTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="withdrawJRDJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 10 6 * * ?</value>
+		</property>
+	</bean>
+	<!--君融贷提现Task结束 -->
+	<!--棉庄提现Task开始 -->
+	<bean id="withdrawMZJob" class="com.rkylin.wheatfield.task.WithdrawTask"/>
+	<bean id="withdrawMZJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="withdrawJRDJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>withdrawMZ</value>
+		</property>
+	</bean>
+	 
+	<!-- 调度触发器 -->
+	<bean id="withdrawMZTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="withdrawMZJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 30 6 * * ?</value>
+		</property>
+	</bean>
+	
+	<!--会堂提现Task开始 -->
+	<bean id="withdrawHTJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="withdrawJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>withdrawHT</value>
+		</property>
+	</bean>
+	<bean id="withdrawHTTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="withdrawHTJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 5 7 * * ?</value>
+		</property>
+	</bean>
+	
+	<!--棉庄分润Task开始 -->
+	<bean id="profitLogicMZJob" class="com.rkylin.wheatfield.task.SettlementTask">
+		<property name="rootinstcd" value="M000007"></property>
+		<property name="invoicedate" value=""></property>
+	</bean>
+	<bean id="profitLogicMZjobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	<!--false表示等上一个任务执行完后再开启新的任务 -->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="profitLogicMZJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>porfitTask</value>
+		</property>
+	</bean>		
+	<bean id="profitLogicMZTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="profitLogicMZjobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 45 23 * * ?</value>
+		</property>
+	</bean>	
+	<!--棉庄提现Task结束 -->
+	<!--食全食美提现Task开始 -->
+	<bean id="withdrawSQSMJob" class="com.rkylin.wheatfield.task.WithdrawTask"/>
+	<bean id="withdrawSQSMJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="withdrawSQSMJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>withdrawSQSM</value>
+		</property>
+	</bean>
+	 
+	<!-- 调度触发器 -->
+	<bean id="withdrawSQSMTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="withdrawSQSMJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 35 6 * * ?</value>
+		</property>
+	</bean>
+	<!--食全食美提现Task结束 -->
+	
+	<!--代收Task开始 -->
+	<bean id="collectionJob" class="com.rkylin.wheatfield.task.CollectionTask"/>
+	<bean id="collectionJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="collectionJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>collection</value>
+		</property>
+	</bean>
+	 
+	<!-- 调度触发器 -->
+	<bean id="collectionTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="collectionJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 16 * * ?</value>
+		</property>
+	</bean>
+	<!--代收Task结束 -->
+	
+	<!--课栈代收汇总上传Task开始 -->
+	<bean id="collectionSumSubmitKZT0JobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务 -->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="collectionJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>collectionSumSubmitKZT0</value>
+		</property>
+	</bean>
+	 
+	<!-- 调度触发器 -->
+	<bean id="collectionSumSubmitKZT0Trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="collectionSumSubmitKZT0JobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 16 * * ?</value>
+		</property>
+	</bean>
+	<!--课栈代收汇总上传Task结束 -->
+
+	<!--帮帮助学代收汇总上传Task开始 -->
+	<bean id="collectionSumSubmitBBZXT0JobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务 -->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="collectionJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>collectionSumSubmitBBZXT0</value>
+		</property>
+	</bean>
+	<bean id="collectionSumSubmitBBZXT0Trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="collectionSumSubmitBBZXT0JobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 16 * * ?</value>
+		</property>
+	</bean>
+	<!--帮帮助学代收汇总上传Task结束 -->
+	
+<!-- 	<bean id="collectionKZT0JobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> -->
+<!--false表示等上一个任务执行完后再开启新的任务-->
+<!-- 		<property name="concurrent" value="false"/> -->
+<!-- 		<property name="targetObject"> -->
+<!-- 			<ref bean="collectionKZT0Job"/> -->
+<!-- 		</property> -->
+<!-- 		<property name="targetMethod"> -->
+<!-- 			<value>collectionKZT0</value> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+	 
+	<!-- 调度触发器 -->
+<!-- 	<bean id="collectionKZT0Trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean"> -->
+<!-- 		<property name="jobDetail"> -->
+<!-- 			<ref bean="collectionKZT0JobDetail" /> -->
+<!-- 		</property> -->
+<!-- 		<property name="cronExpression"> -->
+<!-- 			<value>0 0 16 * * ?</value> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
+	<!--课栈代收Task结束 -->
+	<!--丰年代收Task开始 -->
+	<bean id="collectionFNJob" class="com.rkylin.wheatfield.task.CollectionTask"/>
+	<bean id="collectionFNJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="collectionFNJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>collectionFN</value>
+		</property>
+	</bean>
+	 
+	<!-- 调度触发器 -->
+	<bean id="collectionFNTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="collectionFNJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 40 6 * * ?</value>
+		</property>
+	</bean>
+	<!--丰年代收Task结束 -->
+	<!--课栈代收Task开始 -->
+	<bean id="collectionKZJob" class="com.rkylin.wheatfield.task.CollectionTask"/>
+	<bean id="collectionKZJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="collectionKZJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>collectionKZ</value>
+		</property>
+	</bean>
+	 
+	<!-- 调度触发器 -->
+	<bean id="collectionKZTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="collectionKZJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 45 6 * * ?</value>
+		</property>
+	</bean>
+	<!--课栈代收Task结束 -->
+	<!--会堂代付Task开始 -->
+	<bean id="withholdJob" class="com.rkylin.wheatfield.task.WithholdTask"/>
+	<bean id="withholdJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="withholdJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>withholdHT</value>
+		</property>
+	</bean>
+	 
+	<!-- 调度触发器 -->
+	<bean id="withholdTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="withholdJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 50 6 * * ?</value>
+		</property>
+	</bean>
+	<!--会堂代付Task结束 -->
+	
+<!-- 指尖代言代付汇总 starts-->
+	<bean id="withholdZJDYJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="withholdJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>withholdZJDY</value>
+		</property>
+	</bean>
+	<bean id="withholdZJDYTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="withholdZJDYJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 5 7 * * ?</value>
+		</property>
+	</bean>
+<!-- 指尖代言代付汇总 ends-->		
+
+<!-- 帮帮助学代付汇总 starts-->
+	<bean id="withholdBBZXJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="withholdJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>withholdBBZX</value>
+		</property>
+	</bean>
+	<bean id="withholdBBZXTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="withholdBBZXJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 7 * * ?</value>
+		</property>
+	</bean>
+<!-- 帮帮助学代付汇总 ends-->	
+
+<!-- 帮帮助学提现汇总t1 starts-->
+	<bean id="withdrawBBZXJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="withdrawJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>withdrawBBZX</value>
+		</property>
+	</bean>
+	<bean id="withdrawBBZXTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="withdrawBBZXJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 10 7 * * ?</value>
+		</property>
+	</bean>
+<!-- 帮帮助学提现汇总t1 ends-->	
+
+<!-- 帮帮助学提现汇总t0 starts-->
+	<bean id="withdrawBBZXT0JobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="withdrawJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>withdrawBBZXT0</value>
+		</property>
+	</bean>
+	<bean id="withdrawBBZXT0Trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="withdrawBBZXT0JobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 16 * * ?</value>
+		</property>
+	</bean>
+<!-- 帮帮助学提现汇总t0 ends-->	
+
+<!-- 房仓提现汇总1 starts-->
+	<bean id="withdrawFCT1JobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="withdrawJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>withdrawFC</value>
+		</property>
+	</bean>
+	<bean id="withdrawFCT1Trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="withdrawFCT1JobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 10 7 * * ?</value>
+		</property>
+	</bean>
+<!-- 房仓提现汇总t1 ends-->	
+
+<!-- 房仓代付汇总1 starts-->
+	<bean id="withholdFCJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="withholdJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>withholdFC</value>
+		</property>
+	</bean>
+	<bean id="withholdFCTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="withholdFCJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 15 7 * * ?</value>
+		</property>
+	</bean>
+<!-- 房仓代付汇总t1 ends-->	
+	
+	<!-- 展酷代付汇总开始 -->
+	<bean id="withholdZkJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="withholdJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>withholdZk</value>
+		</property>
+	</bean>
+	<bean id="withholdZkTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="withholdZkJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 5 7 * * ?</value>
+		</property>
+	</bean>
+	<!-- 展酷代付汇总结束 -->
+	
+	<!-- 通信运维代付汇总开始 -->
+	<bean id="withholdTXYWJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="withholdJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>withholdTXYW</value>
+		</property>
+	</bean>
+	<bean id="withholdTXYWTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="withholdTXYWJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 10 7 * * ?</value>
+		</property>
+	</bean>
+	<!-- 通信运维代付汇总结束 -->
+	
+	<!--课栈代付Task开始 -->
+	<bean id="withholdKZJob" class="com.rkylin.wheatfield.task.WithholdTask"/>
+	<bean id="withholdKZJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="withholdKZJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>withholdKZ</value>
+		</property>
+	</bean>
+	 
+	<!-- 调度触发器 -->
+	<bean id="withholdKZTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="withholdKZJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 50 6 * * ?</value>
+		</property>
+	</bean>
+	<!--课栈代付Task结束 -->
+	<!--君融贷代付Task开始 -->
+	<bean id="withholdJRDJob" class="com.rkylin.wheatfield.task.WithholdTask"/>
+	<bean id="withholdJRDJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="withholdJRDJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>withholdJRD</value>
+		</property>
+	</bean>
+	 
+	<!-- 调度触发器 -->
+	<bean id="withholdJRDTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="withholdJRDJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 55 6 * * ?</value>
+		</property>
+	</bean>
+	<!--君融贷代付Task结束 -->
+	
+	<!--棉庄代付Task开始 -->
+	<bean id="withholdMZJob" class="com.rkylin.wheatfield.task.WithholdTask"/>
+	<bean id="withholdMZJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="withholdMZJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>withholdMZ</value>
+		</property>
+	</bean>
+	 
+	<!-- 调度触发器 -->
+	<bean id="withholdMZTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="withholdMZJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 55 6 * * ?</value>
+		</property>
+	</bean>
+	<!--棉庄代付Task结束 -->
+	
+	<!--食全食美代付Task开始 -->
+	<bean id="withholdSQSMJob" class="com.rkylin.wheatfield.task.WithholdTask"/>
+	<bean id="withholdSQSMJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="withholdSQSMJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>withholdSQSM</value>
+		</property>
+	</bean>
+	 
+	<!-- 调度触发器 -->
+	<bean id="withholdSQSMTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="withholdSQSMJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 55 6 * * ?</value>
+		</property>
+	</bean>
+	<!--食全食美代付Task结束 -->
+	
+	<!--君融贷对账Task开始 -->
+	<bean id="createJRDDebtAccountFileJob" class="com.rkylin.wheatfield.task.SettlementTask"/>
+	<bean id="createJRDDebtAccountFileJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="createJRDDebtAccountFileJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>collate_JRD_FC</value>
+		</property>
+	</bean>
+	 
+	<!-- 调度触发器 -->
+	<bean id="createJRDDebtAccountFileTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="createJRDDebtAccountFileJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 30 23 * * ?</value>
+		</property>
+	</bean>
+	<!--君融贷对账Task结束 -->
+	
+	<!--丰年对账Task开始 -->
+	<bean id="createDebtAccountFileJob" class="com.rkylin.wheatfield.task.SettlementTask"/>
+	<bean id="createDebtAccountFileJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="createDebtAccountFileJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>collate_FN_FC</value>
+		</property>
+	</bean>
+	 
+	<!-- 调度触发器 -->
+	<bean id="createDebtAccountFileTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="createDebtAccountFileJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 30 23 * * ?</value>
+		</property>
+	</bean>
+	<!--丰年对账Task结束 -->
+	
+	<!--通联对账Task开始 -->
+	<bean id="readTLDebtAccountFileJob" class="com.rkylin.wheatfield.task.SettlementTask"/>
+	<bean id="readTLDebtAccountFileJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="readTLDebtAccountFileJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>collate_TL_C</value>
+		</property>
+	</bean>
+	 
+	<!-- 调度触发器 -->
+	<bean id="readTLDebtAccountFileTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="readTLDebtAccountFileJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 30 13 * * ?</value>
+		</property>
+	</bean>
+	<!--通联对账Task结束 -->
+	
+	<!--HT通联对账Task开始 -->
+	<bean id="readTLHTDebtAccountFileJob" class="com.rkylin.wheatfield.task.SettlementTask"/>
+	<bean id="readTLHTDebtAccountFileJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="readTLHTDebtAccountFileJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>collate_TLHT_C</value>
+		</property>
+	</bean>
+	 
+	<!-- 调度触发器 -->
+	<bean id="readTLHTDebtAccountFileTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="readTLHTDebtAccountFileJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 30 13 * * ?</value>
+		</property>
+	</bean>
+	<!--HT通联对账Task结束 -->
+	
+	<!--HT通联对账Task开始 -->
+	<bean id="readTLJRDDebtAccountFileJob" class="com.rkylin.wheatfield.task.SettlementTask"/>
+	<bean id="readTLJRDDebtAccountFileJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="readTLJRDDebtAccountFileJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>collate_TLJRD_C</value>
+		</property>
+	</bean>
+	 
+	<!-- 调度触发器 -->
+	<bean id="readTLJRDDebtAccountFileTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="readTLJRDDebtAccountFileJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 30 13 * * ?</value>
+		</property>
+	</bean>
+	<!--HT通联对账Task结束 -->
+	
+	<!--债权包文件Task开始 -->
+	<bean id="createDebtFileJob" class="com.rkylin.wheatfield.task.SettlementTask"/>
+	<bean id="createDebtFileJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="readTLDebtAccountFileJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>createDebtFile</value>
+		</property>
+	</bean>
+	 
+	<!-- 调度触发器 -->
+	<bean id="createDebtFileTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="createDebtFileJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 7 * * ?</value>
+		</property>
+	</bean>
+	<!--债权包文件Task结束 -->
+	
+	<!--还款文件Task开始 -->
+	<bean id="createPaymentFileJob" class="com.rkylin.wheatfield.task.SettlementTask"/>
+	<bean id="createPaymentFileJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="readTLDebtAccountFileJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>createPaymentFile</value>
+		</property>
+	</bean>
+	 
+	<!-- 调度触发器 -->
+	<bean id="createPaymentFileTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="createPaymentFileJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 30 13 * * ?</value>
+		</property>
+	</bean>
+	<!--还款文件Task结束 -->
+
+	<!--丰年代收结果读入Task开始 -->
+	<bean id="readPaymentFile00Job" class="com.rkylin.wheatfield.task.SettlementTask">
+		<property name="filetype" value="8"></property>
+		<property name="rootinstcd" value="M000001"></property>
+		<property name="invoicedate" value=""></property>
+	</bean>
+	<bean id="readPaymentFile00jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+<!-- 		false表示等上一个任务执行完后再开启新的任务 -->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="readPaymentFile00Job"/>
+		</property>
+		<property name="targetMethod">
+			<value>readPaymentFileForTask</value>
+		</property>
+	</bean>	
+	<bean id="readPaymentFile00Trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="readPaymentFile00jobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 20 11 * * ?</value>
+		</property>
+	</bean>
+	<!--丰年代收结果读入Task结束 -->
+	
+	<!--丰年代付结果读入Task开始 -->
+	<bean id="readPaymentFile01Job" class="com.rkylin.wheatfield.task.SettlementTask">
+		<property name="filetype" value="9"></property>
+		<property name="rootinstcd" value="M000001"></property>
+		<property name="invoicedate" value=""></property>
+	</bean>
+	<bean id="readPaymentFile01jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+<!-- 		false表示等上一个任务执行完后再开启新的任务 -->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="readPaymentFile01Job"/>
+		</property>
+		<property name="targetMethod">
+			<value>readPaymentFileForTask</value>
+		</property>
+	</bean>	
+	<bean id="readPaymentFile01Trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="readPaymentFile01jobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 20 11 * * ?</value>
+		</property>
+	</bean>
+	<!--丰年代付结果读入Task结束 -->
+	
+	
+	<!--融数代付结果读入Task开始 -->
+	<bean id="readPaymentFile04Job" class="com.rkylin.wheatfield.task.SettlementTask">
+		<property name="filetype" value="9"></property>
+		<property name="rootinstcd" value="M00000X"></property>
+		<property name="invoicedate" value=""></property>
+	</bean>
+	<bean id="readPaymentFile04jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+<!-- 		false表示等上一个任务执行完后再开启新的任务 -->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="readPaymentFile04Job"/>
+		</property>
+		<property name="targetMethod">
+			<value>readPaymentFileForTask</value>
+		</property>
+	</bean>	
+	<bean id="readPaymentFile04Trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="readPaymentFile04jobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 20 11 * * ?</value>
+		</property>
+	</bean>
+	<!--融数代付结果读入Task结束 -->	
+	
+	<!--君融贷代付结果读入Task开始 -->
+	<bean id="readPaymentFile05Job" class="com.rkylin.wheatfield.task.SettlementTask">
+		<property name="filetype" value="9"></property>
+		<property name="rootinstcd" value="M000005"></property>
+		<property name="invoicedate" value=""></property>
+	</bean>
+	<bean id="readPaymentFile05jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+<!-- 		false表示等上一个任务执行完后再开启新的任务 -->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="readPaymentFile05Job"/>
+		</property>
+		<property name="targetMethod">
+			<value>readPaymentFileForTask</value>
+		</property>
+	</bean>	
+	<bean id="readPaymentFile05Trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="readPaymentFile05jobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 20 11 * * ?</value>
+		</property>
+	</bean>
+	<!--君融贷代付结果读入Task结束 -->	
+	
+	<!--会堂代收结果读入Task开始 -->
+	<bean id="readPaymentFile02Job" class="com.rkylin.wheatfield.task.SettlementTask">
+		<property name="filetype" value="8"></property>
+		<property name="rootinstcd" value="M000003"></property>
+		<property name="invoicedate" value=""></property>
+	</bean>
+	<bean id="readPaymentFile02jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+<!-- 		false表示等上一个任务执行完后再开启新的任务 -->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="readPaymentFile02Job"/>
+		</property>
+		<property name="targetMethod">
+			<value>readPaymentFileForTask</value>
+		</property>
+	</bean>	
+	<bean id="readPaymentFile02Trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="readPaymentFile02jobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 20 11 * * ?</value>
+		</property>
+	</bean>
+	<!--会堂代收结果读入Task结束 -->
+	
+	<!--会堂代付结果读入Task开始 -->
+	<bean id="readPaymentFile03Job" class="com.rkylin.wheatfield.task.SettlementTask">
+		<property name="filetype" value="9"></property>
+		<property name="rootinstcd" value="M000003"></property>
+		<property name="invoicedate" value=""></property>
+	</bean>
+	<bean id="readPaymentFile03jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+<!-- 		false表示等上一个任务执行完后再开启新的任务 -->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="readPaymentFile03Job"/>
+		</property>
+		<property name="targetMethod">
+			<value>readPaymentFileForTask</value>
+		</property>
+	</bean>	
+	<bean id="readPaymentFile03Trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="readPaymentFile03jobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 20 11 * * ?</value>
+		</property>
+	</bean>
+	<!--会堂代付结果读入Task结束 -->
+	
+	<!--日批上传代扣明细文件Task开始  20150602-->
+	<bean id="uploadCollectionJob" class="com.rkylin.wheatfield.task.SettlementTask"/>
+	<bean id="uploadCollectionJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="uploadCollectionJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>uploadWithholdFile</value>
+		</property>
+	</bean>
+	<!-- 调度触发器 -->
+	<bean id="uploadCollectionTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="uploadCollectionJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 7 * * ?</value>
+		</property>
+	</bean>
+	<!-- 棉庄日批上额度消费明细文件 -->
+	<bean id="uploadCollectionDeductJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="uploadCollectionJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>uploadDeductFile</value>
+		</property>
+	</bean>
+	<!-- 调度触发器 棉庄 -->
+	<bean id="uploadCollectionDeductTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="uploadCollectionDeductJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 2 * * ?</value>
+		</property>
+	</bean>
+	
+	 
+	<!--上传  扣款信息文件  20150602-->
+	<bean id="uploadInterRepayment" class="com.rkylin.wheatfield.task.SettlementTask"/>
+	<bean id="uploadInterRepaymentDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="uploadInterRepayment"/>
+		</property>
+		<property name="targetMethod">
+			<value>uploadInterRepaymentFile</value>
+		</property>
+	</bean>
+	<!-- 调度触发器 -->
+	<bean id="uploadInterRepaymentTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="uploadInterRepaymentDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 30 13 * * ?</value>
+		</property>
+	</bean>
+	
+	<!-- 对公账户接口,使用一分钱测试  PPP -->
+	<bean id="accountTask" class="com.rkylin.wheatfield.task.AccountTask"/>
+	<bean id="payJudgePubAccountDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="accountTask"/>
+		</property>
+		<property name="targetMethod">
+			<value>payJudgePublicAccount</value>
+		</property>
+	</bean>
+	<!-- 调度触发器 -->
+	<bean id="payJudgePubAccountTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="payJudgePubAccountDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 15 15 * * ?</value>
+		</property>
+	</bean>
+	
+	<bean id="updatePubAccByPayResultDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="accountTask"/>
+		</property>
+		<property name="targetMethod">
+			<value>updatePubAccByPayResult</value>
+		</property>
+	</bean>
+	<!-- 调度触发器 -->
+	<bean id="updatePubAccByPayResultTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="updatePubAccByPayResultDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 30 18 * * ?</value>
+		</property>
+	</bean>
+	
+	<!-- 调度触发器 -->
+	<bean id="updatePubAccByPayResultTrigger2" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="updatePubAccByPayResultDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 30 13 * * ?</value>
+		</property>
+	</bean>
+	
+	<!-- 对公账户接口,使用一分钱测试  杨京京start -->
+	<bean id="onecentServiceinterface" class="com.rkylin.wheatfield.service.impl.AccountManageServiceImpl"/>
+	<bean id="onecentServiceDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="onecentServiceinterface"/>
+		</property>
+		<property name="targetMethod">
+			<value>onecentService</value>
+		</property>
+	</bean>
+	<!-- 调度触发器 -->
+	<bean id="onecentServiceTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="onecentServiceDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 15 * * ?</value>
+		</property>
+	</bean>
+
+	<!-- 对公账户接口,使用一分钱测试  杨京京 end-->
+	
+	<!-- 更新对公账户状态 杨京京start -->
+		<bean id="updateAccountoneCentService" class="com.rkylin.wheatfield.service.impl.AccountManageServiceImpl"/>
+	<bean id="updateAccountoneCentDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="updateAccountoneCentService"/>
+		</property>
+		<property name="targetMethod">
+			<value>updateAccountoneCent</value>
+		</property>
+	</bean>
+	<!-- 调度触发器 -->
+	<bean id="updateAccountoneCentTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="updateAccountoneCentDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 18 * * ?</value>
+		</property>
+	</bean>
+	<bean id="updateAccountoneCentTrigger2" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="updateAccountoneCentDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 13 * * ?</value>
+		</property>
+	</bean>	
+	<!-- 更新对公账户状态 杨京京end -->
+	
+	<!--丰年T+0提现Task开始 -->
+	<bean id="withdrawFNT0Job" class="com.rkylin.wheatfield.task.WithdrawTask"/>
+	<bean id="withdrawFNT0JobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="withdrawFNT0Job"/>
+		</property>
+		<property name="targetMethod">
+			<value>withdrawFNT0</value>
+		</property>
+	</bean>
+	<!-- 调度触发器 -->
+	<bean id="withdrawFNT0Trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="withdrawFNT0JobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 16 * * ?</value>
+		</property>
+	</bean>
+	<!-- 2015年9月6日 执行-->
+	<bean id="withdrawFNT00906Trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="withdrawFNT0JobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 16 6 9 ? 2015</value>
+		</property>
+	</bean>
+	<!--丰年T+0提现Task结束 -->
+	
+	<!--会堂T+0代付Task开始 -->
+	<bean id="withholdHTT0Job" class="com.rkylin.wheatfield.task.WithholdTask"/>
+	<bean id="withholdHTT0JobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="withholdHTT0Job"/>
+		</property>
+		<property name="targetMethod">
+			<value>withholdHTT0</value>
+		</property>
+	</bean>
+	 
+	<!-- 调度触发器 -->
+	<bean id="withholdHTT0Trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="withholdHTT0JobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 16 * * ?</value>
+		</property>
+	</bean>
+	
+	<!-- 汇总清结算发送的40142汇总的代付并上传  starts -->
+	<bean id="withholdHT40142T0JobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="withholdHTT0Job"/>
+		</property>
+		<property name="targetMethod">
+			<value>summarizing40142</value>
+		</property>
+	</bean>	
+	<bean id="withholdHT40142T0Trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="withholdHT40142T0JobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 30 11 * * ?</value>
+		</property>
+	</bean>	
+	<!-- 汇总清结算发送的40142汇总的代付并上传  ends -->
+	
+	<!-- 2015年9月6日 执行-->
+	<bean id="withholdHTT00906Trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="withholdHTT0JobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 16 6 9 ? 2015</value>
+		</property>
+	</bean>
+	<!--会堂T+0代付Task结束 -->
+	
+	<!--会堂T+0代付结果读入Task开始 -->
+	<bean id="readPaymentFileHTT0Job" class="com.rkylin.wheatfield.task.SettlementTask">
+		<property name="filetype" value="9"></property>
+		<property name="rootinstcd" value="M000003"></property>
+		<property name="invoicedate" value=""></property>
+		<property name="datetype" value="0"></property>
+	</bean>
+	<bean id="readPaymentFileHTT0jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	<!-- false表示等上一个任务执行完后再开启新的任务 -->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="readPaymentFileHTT0Job"/>
+		</property>
+		<property name="targetMethod">
+			<value>readPaymentFileForTask</value>
+		</property>
+	</bean>	
+	<bean id="readPaymentFileHTT0Trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="readPaymentFileHTT0jobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 17 ? * MON-FRI</value>
+		</property>
+	</bean>
+	
+	<!-- 2015年9月6日 执行-->
+	<bean id="readPaymentFileHTT00906Trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="readPaymentFileHTT0jobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 17 6 9 ? 2015</value>
+		</property>
+	</bean>
+	<!--会堂T+0代付结果读入Task结束 -->
+	
+	<!--丰年T+0代付结果读入Task开始 -->
+	<bean id="readPaymentFileFNT0Job" class="com.rkylin.wheatfield.task.SettlementTask">
+		<property name="filetype" value="9"></property>
+		<property name="rootinstcd" value="M000001"></property>
+		<property name="invoicedate" value=""></property>
+		<property name="datetype" value="0"></property>
+	</bean>
+	<bean id="readPaymentFileFNT0jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	<!--false表示等上一个任务执行完后再开启新的任务 -->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="readPaymentFileFNT0Job"/>
+		</property>
+		<property name="targetMethod">
+			<value>readPaymentFileForTask</value>
+		</property>
+	</bean>	
+	<bean id="readPaymentFileFNT0Trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="readPaymentFileFNT0jobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 17 ? * MON-FRI</value>
+		</property>
+	</bean>
+	<!-- 2015年9月6日 执行-->
+	<bean id="readPaymentFileFNT00906Trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="readPaymentFileFNT0jobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 17 6 9 ? 2015</value>
+		</property>
+	</bean>
+	<!--丰年T+0代付结果读入Task结束 -->
+	
+	<!-- 定时处理缓存中代收付推入的数据 -->
+	<bean id="payCacheJob" class="com.rkylin.wheatfield.task.PayCacheTask"/>
+	<bean id="payCacheJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="payCacheJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>payCache</value>
+		</property>
+	</bean>
+	<bean id="payCacheTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="payCacheJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0/5 * * * ?</value>
+		</property>
+	</bean>
+	<!-- 定时汇总备付金账户金额 -->
+	<bean id="bfjSummaryJob" class="com.rkylin.wheatfield.task.AccountSummaryTask"/>
+	<bean id="bfjSummaryJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="bfjSummaryJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>bfjSummary</value>
+		</property>
+	</bean>
+	<bean id="bfjSummaryTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="bfjSummaryJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 40 23 * * ?</value>
+		</property>
+	</bean>
+	
+	<!-- 定时汇总平安应收账款金额 -->
+	<bean id="paysSummaryJob" class="com.rkylin.wheatfield.task.AccountSummaryTask"/>
+	<bean id="paysSummaryJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="paysSummaryJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>paysSummary</value>
+		</property>
+	</bean>
+	<bean id="paysSummaryTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="paysSummaryJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 35 23 * * ?</value>
+		</property>
+	</bean>
+	<!--LLwap对账Task开始 -->
+	<bean id="readLLWAPDebtAccountFileJob" class="com.rkylin.wheatfield.task.SettlementTask"/>
+	<bean id="readLLWAPDebtAccountFileJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="readLLWAPDebtAccountFileJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>collate_LL_C</value>
+		</property>
+	</bean>
+	<!-- 调度触发器 -->
+	<bean id="readLLWAPDebtAccountFileTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="readLLWAPDebtAccountFileJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 9 * * ?</value>
+		</property>
+	</bean>
+	<!--LLwap对账Task结束 -->
+	
+	<!--LLJRD对账Task开始 -->
+	<bean id="readLLJRDDebtAccountFileJob" class="com.rkylin.wheatfield.task.SettlementTask"/>
+	<bean id="readLLJRDDebtAccountFileJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="readLLJRDDebtAccountFileJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>collate_M5LL_C</value>
+		</property>
+	</bean>
+	<!-- 调度触发器 -->
+	<bean id="readLLJRDDebtAccountFileTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="readLLJRDDebtAccountFileJobDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 9 * * ?</value>
+		</property>
+	</bean>
+	<!--LLJRD对账Task结束 -->
+	
+	<!-- 计息定时还款任务 开始 -->
+	<bean id="interestJob" class="com.rkylin.wheatfield.task.InteresTask"></bean> 
+	<bean id="interestJobRepaymentDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> 
+		<property name="targetObject" ref="interestJob"></property> 
+		<property name="targetMethod" value="repaymentTask"></property> 
+	</bean> 
+	
+	<bean id="interestJobRepaymentTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="interestJobRepaymentDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 14 * * ?</value>
+		</property>
+	</bean>
+	<!-- 计息定时还款任务 结束 -->
+	<!-- 会唐还款明细文件上传 start -->
+	<bean id="interestJobUploadRepaymentFileDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> 
+		<property name="targetObject" ref="interestJob"></property> 
+		<property name="targetMethod" value="uploadHTRepaymentFileTask"></property> 
+	</bean> 
+	
+	<bean id="interestJobUploadRepaymentFileTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="interestJobUploadRepaymentFileDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 13 * * ?</value>
+		</property>
+	</bean>
+	<!-- 会唐还款明细文件上传 end -->
+	
+	<!-- 清结算汇总的代付结果返回后,调账   starts -->
+	<bean id="adjustment40142Detail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="accountTask"/>
+		</property>
+		<property name="targetMethod">
+			<value>adjustWithhold40142</value>
+		</property>
+	</bean>
+	<bean id="adjustment40142Trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="adjustment40142Detail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 30 16 * * ?</value>
+		</property>
+	</bean>	
+	<!-- 清结算汇总的代付结果返回后,调账   ends -->
+
+	<!-- 汇总40143   starts -->
+	<bean id="summarizing40143Detail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--false表示等上一个任务执行完后再开启新的任务-->
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="accountTask"/>
+		</property>
+		<property name="targetMethod">
+			<value>summarizing40143</value>
+		</property>
+	</bean>
+	<bean id="summarizing40143Trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="summarizing40143Detail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 16 * * ?</value>
+		</property>
+	</bean>	
+	<!-- 汇总40143   ends -->
+	<!-- 发送40143   starts -->
+	<bean id="send40143Detail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="accountTask"/>
+		</property>
+		<property name="targetMethod">
+			<value>send40143ToGateRouter</value>
+		</property>
+	</bean>
+	<bean id="submit40143Trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="send40143Detail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 20 16 * * ?</value>
+		</property>
+	</bean>	
+	<!-- 发送40143   ends -->	
+	
+	<!-- 白条提现汇总修改保理账户   starts -->
+	<bean id="sumCreditWithdrawToUpdateFactoringDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="accountTask"/>
+		</property>
+		<property name="targetMethod">
+			<value>sumCreditWithdrawToUpdateFactoring</value>
+		</property>
+	</bean>
+	<bean id="sumCreditWithdrawToUpdateFactoringTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="sumCreditWithdrawToUpdateFactoringDetail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 50 22 * * ?</value>
+		</property>
+	</bean>	
+	<!-- 白条提现汇总修改保理账户   ends -->
+	<!-- 白条提现汇总并上传T0   starts -->
+	<bean id="withdrawFactoringSummaryAndUploadT0Detail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="withdrawJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>withdrawFactoringSummaryAndUploadT0</value>
+		</property>
+	</bean>
+	<bean id="withdrawFactoringSummaryAndUploadT0Trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="withdrawFactoringSummaryAndUploadT0Detail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 16 * * ?</value>
+		</property>
+	</bean>	
+	<!-- 白条提现汇总并上传T0   ends -->
+	<!-- 白条提现汇总T1   starts -->
+	<bean id="withdrawFactoringSummaryT1Detail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="withdrawJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>withdrawFactoringSummaryT1</value>
+		</property>
+	</bean>
+	<bean id="withdrawFactoringSummaryT1Trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="withdrawFactoringSummaryT1Detail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 15 7 * * ?</value>
+		</property>
+	</bean>	
+	<!-- 白条提现汇总T1   ends -->
+	
+	<!-- 白条代付汇总T1   starts -->
+	<bean id="withholdFactoringSummaryT1Detail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="concurrent" value="false"/>
+		<property name="targetObject">
+			<ref bean="withholdJob"/>
+		</property>
+		<property name="targetMethod">
+			<value>withholdFactoring</value>
+		</property>
+	</bean>
+	<bean id="withholdFactoringSummaryT1Trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="withholdFactoringSummaryT1Detail" />
+		</property>
+		<property name="cronExpression">
+			<value>0 13 7 * * ?</value>
+		</property>
+	</bean>	
+	<!-- 白条代付汇总T1   ends -->	
+	
+	<!-- 调度工厂 -->
+	<bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+			<!-- 公共定时任务start -->
+				<!-- 定时汇总平安银行应收账款金额  -->
+				<ref bean="paysSummaryTrigger"/>
+				<!-- 定时汇总备付金账户金额  -->
+				<ref bean="bfjSummaryTrigger"/>
+				<!-- 定时处理缓存中代收付推入的数据  -->
+				<ref bean="payCacheTrigger"/>
+				<!-- 代付一分钱 代付时修改备注字段（新）-->
+				<ref bean="payJudgePubAccountTrigger"/>
+				<!-- 代收付结果文件返回更新对公卡状态 （新）-->
+				<ref bean="updatePubAccByPayResultTrigger"/>
+				<ref bean="updatePubAccByPayResultTrigger2"/>
+				
+				<!-- 代付一分钱 代付时修改备注字段（原）-->
+				<ref bean="onecentServiceTrigger"/> 
+				<!-- 代收付结果文件返回更新对公卡状态 （原）-->
+				<ref bean="updateAccountoneCentTrigger"/>
+				<ref bean="updateAccountoneCentTrigger2"/> 
+			<!-- 公共定时任务end -->
+				<!-- 连连wap支付对账 -->
+				<!-- <ref bean="readLLWAPDebtAccountFileTrigger"/> -->
+			<!-- 会堂定时任务start -->
+				<!-- 会堂代收汇总&文件上传 -->
+				<ref bean="collectionTrigger"/>
+				<!-- 会堂代付 -->
+				<ref bean="withholdTrigger"/>
+				<!-- 会堂对账文件 -->
+				<!-- <ref bean="readTLHTDebtAccountFileTrigger"/> -->
+				<!-- 会堂代付文件 -->
+				<ref bean="uploadPaymentFileTrigger2"/>
+				<!-- 会堂代收结果读入 -->
+<!-- 				<ref bean="readPaymentFile02Trigger"/> -->
+				<!-- 会堂代付结果读入-->
+<!-- 				<ref bean="readPaymentFile03Trigger"/> -->
+			<!-- 会堂定时任务 end-->
+			<!-- 清结算汇总的40142交易的代付返回结果后补涨 -->
+				<ref bean="adjustment40142Trigger"/>
+		
+			<!-- 丰年，客栈公用定时任务start -->
+				<!-- 丰年代收结果读入，客栈 -->
+				<!--<ref bean="readPaymentFile00Trigger"/>-->
+				<!-- 丰年代付结果读入 客栈-->
+				<!--<ref bean="readPaymentFile01Trigger"/> -->
+				<!-- 丰年代付文件 客栈-->
+				<ref bean="uploadPaymentFileTrigger"/>
+				<ref bean="uploadPaymentFileTriggerT0"/>
+				<!-- 丰年代收文件 客栈-->
+				<ref bean="uploadPaymentFileTrigger1"/>
+			<!-- 丰年，客栈公用定时任务end-->
+		
+			<!-- 丰年定时任务start -->
+				<!-- 丰年提现 -->
+				<ref bean="withdrawTrigger"/>
+				<!-- 丰年代收 -->
+				<ref bean="collectionFNTrigger"/>
+				<!-- 丰年对账文件 -->
+				<!-- <ref bean="createDebtAccountFileTrigger"/> -->
+				<!-- 丰年，通联对账 -->
+				<!-- <ref bean="readTLDebtAccountFileTrigger"/> -->
+				<!-- 丰年生成债权包文件-->
+				<ref bean="createDebtFileTrigger"/>
+				<!-- 丰年还款文件 -->
+				<ref bean="createPaymentFileTrigger"/>
+			<!-- 丰年定时任务end -->	
+		
+			<!-- 客栈定时任务start -->	
+				<!-- 客栈代收 -->
+				<!--<ref bean="collectionKZTrigger"/> -->
+				<ref bean="collectionSumSubmitKZT0Trigger"/>
+				<!-- 客栈代付 -->
+				<ref bean="withholdKZTrigger"/>	
+				<!-- 客栈代收汇总&文件上传 -->
+<!-- 				<ref bean="collectionKZT0Trigger"/> -->
+				<!--  上传客栈还款明细文件-->
+				<!--<ref bean="uploadInterRepaymentTrigger"/>-->
+				<!--  上传客栈代扣明细文件-->
+			  	<ref bean="uploadCollectionTrigger"/>
+			  	<!--  客栈提现T0-->
+			  	<ref bean="withdrawKZTrigger"/>
+			  	<!--  客栈提现T1-->
+			  	<ref bean="withdrawKZT1Trigger"/>
+			<!-- 客栈定时任务end -->	
+			<!-- T+0业务定时任务start -->
+			    <!--  丰年T+0提现汇总+代收付文件上传-->
+			  	<ref bean="withdrawFNT0Trigger"/>
+			    <!--  会唐T+0代付汇总+代收付文件上传-->
+			  	<ref bean="withholdHTT0Trigger"/>
+			  	<!-- 汇总清结算发送的40142汇总的代付并上传 -->
+			  	<ref bean="withholdHT40142T0Trigger"/>
+			    <!--  丰年T+0提现汇总+代收付文件上传 9月6日周日执行-->
+			  	<!--<ref bean="withdrawFNT00906Trigger"/>-->
+			    <!--  会唐T+0代付汇总+代收付文件上传 9月6日周日执行-->
+			  	<!--<ref bean="withholdHTT00906Trigger"/>-->
+			  	<!--  丰年T+0代收付结果读入-->
+<!-- 			  	<ref bean="readPaymentFileFNT0Trigger"/> -->
+			    <!--  会唐T+0代收付结果读入-->
+<!-- 			  	<ref bean="readPaymentFileHTT0Trigger"/> -->
+			  	<!--  丰年T+0代收付结果读入 9月6日周日执行-->
+			  	<!--<ref bean="readPaymentFileFNT00906Trigger"/>-->
+			    <!--  会唐T+0代收付结果读入 9月6日周日执行-->
+			  	<!--<ref bean="readPaymentFileHTT00906Trigger"/>-->
+			  	<!-- 会堂提现汇总 -->
+			  	<ref bean="withdrawHTTrigger"/>
+			<!-- T+0业务定时任务end -->			
+
+			<!-- 君融贷定时任务start -->
+				<!-- 君融贷提现 -->
+				<ref bean="withdrawJRDTrigger"/>
+				<!-- 君融贷非网关支付对账文件 -->
+<!-- 				<ref bean="createJRDDebtAccountFileTrigger"/> -->
+				<!-- 君融贷网关支付对账文件 -->
+<!-- 				<ref bean="readTLJRDDebtAccountFileTrigger"/> -->
+				<!-- 君融贷代付 -->
+				<ref bean="withholdJRDTrigger"/>
+				<!-- 君融贷代付文件上传 -->
+				<ref bean="uploadPaymentFileTrigger3"/>
+				<!-- 君融贷代付结果读入 -->
+				<!--<ref bean="readPaymentFile05Trigger"/>-->
+				<!-- 连连君融贷支付对账 -->
+				<!-- <ref bean="readLLJRDDebtAccountFileTrigger"/> -->
+			<!-- 君融贷定时任务end -->	
+		
+			<!-- 棉庄定时任务 start -->
+				<!-- 棉庄提现 -->
+				<ref bean="withdrawMZTrigger"/>
+				<!--  上传棉庄额度消费明细明细文件-->
+				<!--<ref bean="uploadCollectionDeductTrigger"/>-->
+				<!-- 棉庄和食全食美代付文件 -->
+				<ref bean="uploadPaymentFileTrigger4"/>
+				 <!-- 棉庄代付结果读入 -->
+				<!--<ref bean="readPaymentFile04Trigger"/> 	-->
+				<!-- 棉庄代付 -->
+				<ref bean="withholdMZTrigger"/>
+				<!-- 棉庄分润 -->
+				<!-- <ref bean="profitLogicMZTrigger"/> -->
+				<!-- 棉庄定时任务 end -->
+				<!-- 食全食美定时任务 start -->
+				<!-- 食全食美提现 -->
+				<!--<ref bean="withdrawSQSMTrigger"/>-->
+				<!-- 食全食美代付 -->
+				<!--<ref bean="withholdSQSMTrigger"/>-->
+				<!-- 食全食美定时任务 end -->
+				<!-- 展酷task  开始-->
+				<!-- 提现汇总 -->
+				<ref bean="withdrawZkTrigger"/>
+				<!-- 代付汇总 -->
+				<ref bean="withholdZkTrigger"/>
+				<!-- 展酷代付上传 -->
+				<ref bean="uploadPaymentZkTrigger"/>
+				<!-- 展酷task  结束-->
+				<!-- 会唐还款明细文件上传 start -->
+			    <!--<ref bean="interestJobUploadRepaymentFileTrigger"/>-->
+			    <!-- 会唐还款明细文件上传 end -->
+			    <!-- 计息定时还款任务 start -->
+			    <!--<ref bean="interestJobRepaymentTrigger"/>-->
+			    <!-- 计息定时还款任务 end -->
+			    <!-- 指尖代言提现 汇总 -->
+				<ref bean="withdrawZJDYTrigger"/>
+				<!-- 指尖代言代付 汇总 -->
+				<ref bean="withholdZJDYTrigger"/>
+				<!-- 指尖代言代付上传 -->
+				<ref bean="uploadPaymentZJDY7Trigger"/>
+				<!-- 通信运维start-->
+				<!-- 提现汇总 -->
+				<ref bean="withdrawTXYWTrigger"/>
+				<!-- 代付汇总 -->
+				<ref bean="withholdTXYWTrigger"/>
+				<!-- 通信运维end-->
+				
+				<!-- 帮帮助学开始 -->
+				<ref bean="withholdBBZXTrigger"/><!-- 帮帮助学代付汇总 -->
+				<ref bean="withdrawBBZXT0Trigger"/><!-- 帮帮助学提现汇总T0 -->
+				<ref bean="withdrawBBZXTrigger"/><!-- 帮帮助学提现汇总T1 -->
+				<ref bean="collectionSumSubmitBBZXT0Trigger"/><!-- 帮帮助学代收汇总上传 -->
+				<!-- 帮帮助学结束 -->
+				
+				<!-- 白条相关开始 -->
+				<ref bean="sumCreditWithdrawToUpdateFactoringTrigger"/><!-- 白条提现汇总修改保理账户 -->
+				<ref bean="withdrawFactoringSummaryAndUploadT0Trigger"/><!-- 白条提现汇总并上传T0 -->
+				<ref bean="withdrawFactoringSummaryT1Trigger"/><!-- 白条提现汇总T1 -->
+				<ref bean="withholdFactoringSummaryT1Trigger"/><!-- 白条代付汇总T1 -->
+				<!-- 白条相关结束 -->
+				
+				<!-- 银企直连开始 -->
+				<ref bean="summarizing40143Trigger"/><!-- 40143汇总 -->
+				<ref bean="submit40143Trigger"/><!-- 40143发送多渠道-->
+				<!-- 银企直连结束 -->
+				
+				<!-- 房仓开始 -->
+				<ref bean="withdrawFCT1Trigger"/><!-- 房仓提现T1汇总 -->
+				<ref bean="withholdFCTrigger"/><!-- 房仓代付汇总-->
+				<!-- 房仓结束 -->				
+			</list>
+		</property>
+	</bean>
+</beans>

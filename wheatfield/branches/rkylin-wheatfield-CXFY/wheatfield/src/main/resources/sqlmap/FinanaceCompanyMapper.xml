@@ -1,0 +1,617 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FinanaceCompanyMapper">
+	<resultMap id="BaseResultMap" type="FinanaceCompany">
+	  <result column="COMPANY_ID" jdbcType="INTEGER" property="companyId" />
+	  <result column="COMPANY_CODE" jdbcType="VARCHAR" property="companyCode" />
+	  <result column="FIN_ACCOUNT_ID" jdbcType="VARCHAR" property="finAccountId" />
+	  <result column="COMPANY_NAME" jdbcType="VARCHAR" property="companyName" />
+	  <result column="COMPANY_SHORT_NAME" jdbcType="VARCHAR" property="companyShortName" />
+	  <result column="COMPANY_TYPE" jdbcType="TINYINT" property="companyType" />
+	  <result column="MCC" jdbcType="VARCHAR" property="mcc" />
+	  <result column="POST" jdbcType="VARCHAR" property="post" />
+	  <result column="CONNECT" jdbcType="VARCHAR" property="connect" />
+	  <result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+	  <result column="BUSLINCE" jdbcType="VARCHAR" property="buslince" />
+	  <result column="ACUNT_OPN_LINCE" jdbcType="VARCHAR" property="acuntOpnLince" />
+	  <result column="TAXREG_CARD1" jdbcType="VARCHAR" property="taxregCard1" />
+	  <result column="TAXREG_CARD2" jdbcType="VARCHAR" property="taxregCard2" />
+	  <result column="ORGAN_CERTIFICATE" jdbcType="VARCHAR" property="organCertificate" />
+	  <result column="CORPORATE_NAME" jdbcType="VARCHAR" property="corporateName" />
+	  <result column="CORPORATE_IDENTITY" jdbcType="VARCHAR" property="corporateIdentity" />
+	  <result column="BUS_PLACE_CTF" jdbcType="VARCHAR" property="busPlaceCtf" />
+	  <result column="LOAN_CARD" jdbcType="VARCHAR" property="loanCard" />
+	  <result column="STATUS_ID" jdbcType="VARCHAR" property="statusId" />
+	  <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+	  <result column="CREATED_TIME" jdbcType="TIMESTAMP" property="createdTime" />
+	  <result column="UPDATED_TIME" jdbcType="TIMESTAMP" property="updatedTime" />
+  </resultMap>
+	<resultMap id="BaseResultMap1" type="FinanaceCompany">	 
+	  <result column="FIN_ACCOUNT_ID" jdbcType="VARCHAR" property="finAccountId" />
+	   <result column="BUSLINCE" jdbcType="VARCHAR" property="buslince" />
+	  <result column="STATUS_ID" jdbcType="VARCHAR" property="statusId" />
+  </resultMap>
+    <sql id="Example_Where_Clause">
+    <where>
+      <trim prefix="(" prefixOverrides="and" suffix=")">
+      <if test="companyId != null" >
+	      and COMPANY_ID = #{companyId,jdbcType=INTEGER}
+	    </if>
+      <if test="companyCode != null" >
+	      and COMPANY_CODE = #{companyCode,jdbcType=VARCHAR}
+	    </if>
+      <if test="finAccountId != null" >
+	      and FIN_ACCOUNT_ID = #{finAccountId,jdbcType=VARCHAR}
+	    </if>
+      <if test="companyName != null" >
+	      and COMPANY_NAME = #{companyName,jdbcType=VARCHAR}
+	    </if>
+      <if test="companyShortName != null" >
+	      and COMPANY_SHORT_NAME = #{companyShortName,jdbcType=VARCHAR}
+	    </if>
+      <if test="companyType != null" >
+	      and COMPANY_TYPE = #{companyType,jdbcType=TINYINT}
+	    </if>
+      <if test="mcc != null" >
+	      and MCC = #{mcc,jdbcType=VARCHAR}
+	    </if>
+      <if test="post != null" >
+	      and POST = #{post,jdbcType=VARCHAR}
+	    </if>
+      <if test="connect != null" >
+	      and CONNECT = #{connect,jdbcType=VARCHAR}
+	    </if>
+      <if test="address != null" >
+	      and ADDRESS = #{address,jdbcType=VARCHAR}
+	    </if>
+      <if test="buslince != null" >
+	      and BUSLINCE = #{buslince,jdbcType=VARCHAR}
+	    </if>
+      <if test="acuntOpnLince != null" >
+	      and ACUNT_OPN_LINCE = #{acuntOpnLince,jdbcType=VARCHAR}
+	    </if>
+      <if test="taxregCard1 != null" >
+	      and TAXREG_CARD1 = #{taxregCard1,jdbcType=VARCHAR}
+	    </if>
+      <if test="taxregCard2 != null" >
+	      and TAXREG_CARD2 = #{taxregCard2,jdbcType=VARCHAR}
+	    </if>
+      <if test="organCertificate != null" >
+	      and ORGAN_CERTIFICATE = #{organCertificate,jdbcType=VARCHAR}
+	    </if>
+      <if test="corporateName != null" >
+	      and CORPORATE_NAME = #{corporateName,jdbcType=VARCHAR}
+	    </if>
+      <if test="corporateIdentity != null" >
+	      and CORPORATE_IDENTITY = #{corporateIdentity,jdbcType=VARCHAR}
+	    </if>
+      <if test="busPlaceCtf != null" >
+	      and BUS_PLACE_CTF = #{busPlaceCtf,jdbcType=VARCHAR}
+	    </if>
+      <if test="loanCard != null" >
+	      and LOAN_CARD = #{loanCard,jdbcType=VARCHAR}
+	    </if>
+      <if test="statusId != null" >
+	      and STATUS_ID = #{statusId,jdbcType=VARCHAR}
+	    </if>
+      <if test="remark != null" >
+	      and REMARK = #{remark,jdbcType=VARCHAR}
+	    </if>
+      <if test="createdTime != null" >
+	      and CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="updatedTime != null" >
+	      and UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP}
+	    </if>
+	  </trim>
+    </where>
+  </sql>
+  <sql id="Example_Where_Clause1">
+    <where>
+      <trim prefix="(" prefixOverrides="and" suffix=")">
+      <if test="createdStartTime != null" >
+	      <![CDATA[ and FINANACE_COMPANY.CREATED_TIME >= #{createdStartTime,jdbcType=TIMESTAMP} ]]>
+	    </if>
+	  <if test="createdEndTime != null" >
+	      <![CDATA[ and FINANACE_COMPANY.CREATED_TIME <= #{createdEndTime,jdbcType=TIMESTAMP} ]]>
+	    </if>
+      <if test="companyId != null" >
+	      and COMPANY_ID = #{companyId,jdbcType=INTEGER}
+	    </if>
+      <if test="companyCode != null" >
+	      and COMPANY_CODE = #{companyCode,jdbcType=VARCHAR}
+	    </if>
+      <if test="finAccountId != null" >
+	      and FIN_ACCOUNT_ID = #{finAccountId,jdbcType=VARCHAR}
+	    </if>
+      <if test="companyName != null" >
+	      <!--and COMPANY_NAME = #{companyName,jdbcType=VARCHAR}-->
+	      and COMPANY_NAME like CONCAT(CONCAT('%', #{companyName,jdbcType=VARCHAR}), '%')
+	    </if>
+      <if test="companyShortName != null" >
+	      <!--and COMPANY_SHORT_NAME = #{companyShortName,jdbcType=VARCHAR}-->
+	      and COMPANY_SHORT_NAME like CONCAT(CONCAT('%', #{companyShortName,jdbcType=VARCHAR}), '%')
+	    </if>
+      <if test="companyType != null" >
+	      and COMPANY_TYPE = #{companyType,jdbcType=TINYINT}
+	    </if>
+      <if test="mcc != null" >
+	      and MCC = #{mcc,jdbcType=VARCHAR}
+	    </if>
+      <if test="post != null" >
+	      and POST = #{post,jdbcType=VARCHAR}
+	    </if>
+      <if test="connect != null" >
+	      and CONNECT = #{connect,jdbcType=VARCHAR}
+	    </if>
+      <if test="address != null" >
+	      and ADDRESS = #{address,jdbcType=VARCHAR}
+	    </if>
+      <if test="buslince != null" >
+	      <!--and BUSLINCE = #{buslince,jdbcType=VARCHAR}-->
+	      and BUSLINCE like CONCAT(CONCAT('%', #{buslince,jdbcType=VARCHAR}), '%')
+	    </if>
+      <if test="acuntOpnLince != null" >
+	       <!--and ACUNT_OPN_LINCE = #{acuntOpnLince,jdbcType=VARCHAR}-->
+	      and ACUNT_OPN_LINCE like CONCAT(CONCAT('%', #{acuntOpnLince,jdbcType=VARCHAR}), '%')
+	    </if>
+      <if test="taxregCard1 != null" >
+	      and TAXREG_CARD1 = #{taxregCard1,jdbcType=VARCHAR}
+	    </if>
+      <if test="taxregCard2 != null" >
+	      and TAXREG_CARD2 = #{taxregCard2,jdbcType=VARCHAR}
+	    </if>
+      <if test="organCertificate != null" >
+	      <!--and ORGAN_CERTIFICATE = #{organCertificate,jdbcType=VARCHAR}-->
+	      and ORGAN_CERTIFICATE like CONCAT(CONCAT('%', #{organCertificate,jdbcType=VARCHAR}), '%')
+	    </if>
+      <if test="corporateName != null" >
+	      <!--and CORPORATE_NAME = #{corporateName,jdbcType=VARCHAR}-->
+	      and CORPORATE_NAME like CONCAT(CONCAT('%', #{corporateName,jdbcType=VARCHAR}), '%')
+	    </if>
+      <if test="corporateIdentity != null" >
+	      and CORPORATE_IDENTITY = #{corporateIdentity,jdbcType=VARCHAR}
+	    </if>
+      <if test="busPlaceCtf != null" >
+	      and BUS_PLACE_CTF = #{busPlaceCtf,jdbcType=VARCHAR}
+	    </if>
+      <if test="loanCard != null" >
+	      and LOAN_CARD = #{loanCard,jdbcType=VARCHAR}
+	    </if>
+      <if test="statusId != null" >
+	      and FINANACE_COMPANY.STATUS_ID = #{statusId,jdbcType=VARCHAR}
+	    </if>
+      <if test="remark != null" >
+	      and REMARK = #{remark,jdbcType=VARCHAR}
+	    </if>
+      <if test="createdTime != null" >
+	      and CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="updatedTime != null" >
+	      and UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP}
+	    </if>
+	  <if test="rootInstCd != null" >
+	      and ROOT_INST_CD = #{rootInstCd,jdbcType=VARCHAR}
+	    </if> 
+	  <if test="accountRelateId != null" >
+	      and ACCOUNT_RELATE_ID = #{accountRelateId,jdbcType=VARCHAR}
+	    </if> 
+	    
+	    	  </trim>
+    </where>
+  </sql>
+  <sql id="Example_Set_Clause">
+    <set>
+      <trim suffixOverrides=",">
+      <if test="companyId != null">
+        COMPANY_ID = #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="companyCode != null">
+        COMPANY_CODE = #{companyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="finAccountId != null">
+        FIN_ACCOUNT_ID = #{finAccountId,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null">
+        COMPANY_NAME = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyShortName != null">
+        COMPANY_SHORT_NAME = #{companyShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyType != null">
+        COMPANY_TYPE = #{companyType,jdbcType=TINYINT},
+      </if>
+      <if test="mcc != null">
+        MCC = #{mcc,jdbcType=VARCHAR},
+      </if>
+      <if test="post != null">
+        POST = #{post,jdbcType=VARCHAR},
+      </if>
+      <if test="connect != null">
+        CONNECT = #{connect,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="buslince != null">
+        BUSLINCE = #{buslince,jdbcType=VARCHAR},
+      </if>
+      <if test="acuntOpnLince != null">
+        ACUNT_OPN_LINCE = #{acuntOpnLince,jdbcType=VARCHAR},
+      </if>
+      <if test="taxregCard1 != null">
+        TAXREG_CARD1 = #{taxregCard1,jdbcType=VARCHAR},
+      </if>
+      <if test="taxregCard2 != null">
+        TAXREG_CARD2 = #{taxregCard2,jdbcType=VARCHAR},
+      </if>
+      <if test="organCertificate != null">
+        ORGAN_CERTIFICATE = #{organCertificate,jdbcType=VARCHAR},
+      </if>
+      <if test="corporateName != null">
+        CORPORATE_NAME = #{corporateName,jdbcType=VARCHAR},
+      </if>
+      <if test="corporateIdentity != null">
+        CORPORATE_IDENTITY = #{corporateIdentity,jdbcType=VARCHAR},
+      </if>
+      <if test="busPlaceCtf != null">
+        BUS_PLACE_CTF = #{busPlaceCtf,jdbcType=VARCHAR},
+      </if>
+      <if test="loanCard != null">
+        LOAN_CARD = #{loanCard,jdbcType=VARCHAR},
+      </if>
+      <if test="statusId != null">
+        STATUS_ID = #{statusId,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      </trim>
+    </set>
+  </sql>
+  <sql id="Base_Column_List">
+    COMPANY_ID,
+    COMPANY_CODE,
+    FIN_ACCOUNT_ID,
+    COMPANY_NAME,
+    COMPANY_SHORT_NAME,
+    COMPANY_TYPE,
+    MCC,
+    POST,
+    CONNECT,
+    ADDRESS,
+    BUSLINCE,
+    ACUNT_OPN_LINCE,
+    TAXREG_CARD1,
+    TAXREG_CARD2,
+    ORGAN_CERTIFICATE,
+    CORPORATE_NAME,
+    CORPORATE_IDENTITY,
+    BUS_PLACE_CTF,
+    LOAN_CARD,
+    STATUS_ID,
+    REMARK,
+    CREATED_TIME,
+    UPDATED_TIME,
+  </sql>
+  <sql id="Base_Set_Clause">
+    <set>
+      <trim suffixOverrides=",">
+        COMPANY_ID = #{companyId,jdbcType=INTEGER},
+        COMPANY_CODE = #{companyCode,jdbcType=VARCHAR},
+        FIN_ACCOUNT_ID = #{finAccountId,jdbcType=VARCHAR},
+        COMPANY_NAME = #{companyName,jdbcType=VARCHAR},
+        COMPANY_SHORT_NAME = #{companyShortName,jdbcType=VARCHAR},
+        COMPANY_TYPE = #{companyType,jdbcType=TINYINT},
+        MCC = #{mcc,jdbcType=VARCHAR},
+        POST = #{post,jdbcType=VARCHAR},
+        CONNECT = #{connect,jdbcType=VARCHAR},
+        ADDRESS = #{address,jdbcType=VARCHAR},
+        BUSLINCE = #{buslince,jdbcType=VARCHAR},
+        ACUNT_OPN_LINCE = #{acuntOpnLince,jdbcType=VARCHAR},
+        TAXREG_CARD1 = #{taxregCard1,jdbcType=VARCHAR},
+        TAXREG_CARD2 = #{taxregCard2,jdbcType=VARCHAR},
+        ORGAN_CERTIFICATE = #{organCertificate,jdbcType=VARCHAR},
+        CORPORATE_NAME = #{corporateName,jdbcType=VARCHAR},
+        CORPORATE_IDENTITY = #{corporateIdentity,jdbcType=VARCHAR},
+        BUS_PLACE_CTF = #{busPlaceCtf,jdbcType=VARCHAR},
+        LOAN_CARD = #{loanCard,jdbcType=VARCHAR},
+        STATUS_ID = #{statusId,jdbcType=VARCHAR},
+        REMARK = #{remark,jdbcType=VARCHAR},
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </trim>
+    </set>
+  </sql>
+  <sql id="Selective_Column_List">
+    <if test="companyId != null">
+      COMPANY_ID,
+    </if>
+    <if test="companyCode != null">
+      COMPANY_CODE,
+    </if>
+    <if test="finAccountId != null">
+      FIN_ACCOUNT_ID,
+    </if>
+    <if test="companyName != null">
+      COMPANY_NAME,
+    </if>
+    <if test="companyShortName != null">
+      COMPANY_SHORT_NAME,
+    </if>
+    <if test="companyType != null">
+      COMPANY_TYPE,
+    </if>
+    <if test="mcc != null">
+      MCC,
+    </if>
+    <if test="post != null">
+      POST,
+    </if>
+    <if test="connect != null">
+      CONNECT,
+    </if>
+    <if test="address != null">
+      ADDRESS,
+    </if>
+    <if test="buslince != null">
+      BUSLINCE,
+    </if>
+    <if test="acuntOpnLince != null">
+      ACUNT_OPN_LINCE,
+    </if>
+    <if test="taxregCard1 != null">
+      TAXREG_CARD1,
+    </if>
+    <if test="taxregCard2 != null">
+      TAXREG_CARD2,
+    </if>
+    <if test="organCertificate != null">
+      ORGAN_CERTIFICATE,
+    </if>
+    <if test="corporateName != null">
+      CORPORATE_NAME,
+    </if>
+    <if test="corporateIdentity != null">
+      CORPORATE_IDENTITY,
+    </if>
+    <if test="busPlaceCtf != null">
+      BUS_PLACE_CTF,
+    </if>
+    <if test="loanCard != null">
+      LOAN_CARD,
+    </if>
+    <if test="statusId != null">
+      STATUS_ID,
+    </if>
+    <if test="remark != null">
+      REMARK,
+    </if>
+    <if test="createdTime != null">
+      CREATED_TIME,
+    </if>
+    <if test="updatedTime != null">
+      UPDATED_TIME,
+    </if>
+  </sql>
+	<sql id="Base_Value_List">
+    #{companyId,jdbcType=INTEGER},
+    #{companyCode,jdbcType=VARCHAR},
+    #{finAccountId,jdbcType=VARCHAR},
+    #{companyName,jdbcType=VARCHAR},
+    #{companyShortName,jdbcType=VARCHAR},
+    #{companyType,jdbcType=TINYINT},
+    #{mcc,jdbcType=VARCHAR},
+    #{post,jdbcType=VARCHAR},
+    #{connect,jdbcType=VARCHAR},
+    #{address,jdbcType=VARCHAR},
+    #{buslince,jdbcType=VARCHAR},
+    #{acuntOpnLince,jdbcType=VARCHAR},
+    #{taxregCard1,jdbcType=VARCHAR},
+    #{taxregCard2,jdbcType=VARCHAR},
+    #{organCertificate,jdbcType=VARCHAR},
+    #{corporateName,jdbcType=VARCHAR},
+    #{corporateIdentity,jdbcType=VARCHAR},
+    #{busPlaceCtf,jdbcType=VARCHAR},
+    #{loanCard,jdbcType=VARCHAR},
+    #{statusId,jdbcType=VARCHAR},
+    #{remark,jdbcType=VARCHAR},
+    #{createdTime,jdbcType=TIMESTAMP},
+    #{updatedTime,jdbcType=TIMESTAMP},
+	</sql>
+  <sql id="Selective_Value_List">
+    <if test="companyId != null">
+      #{companyId,jdbcType=INTEGER},
+    </if>
+    <if test="companyCode != null">
+      #{companyCode,jdbcType=VARCHAR},
+    </if>
+    <if test="finAccountId != null">
+      #{finAccountId,jdbcType=VARCHAR},
+    </if>
+    <if test="companyName != null">
+      #{companyName,jdbcType=VARCHAR},
+    </if>
+    <if test="companyShortName != null">
+      #{companyShortName,jdbcType=VARCHAR},
+    </if>
+    <if test="companyType != null">
+      #{companyType,jdbcType=TINYINT},
+    </if>
+    <if test="mcc != null">
+      #{mcc,jdbcType=VARCHAR},
+    </if>
+    <if test="post != null">
+      #{post,jdbcType=VARCHAR},
+    </if>
+    <if test="connect != null">
+      #{connect,jdbcType=VARCHAR},
+    </if>
+    <if test="address != null">
+      #{address,jdbcType=VARCHAR},
+    </if>
+    <if test="buslince != null">
+      #{buslince,jdbcType=VARCHAR},
+    </if>
+    <if test="acuntOpnLince != null">
+      #{acuntOpnLince,jdbcType=VARCHAR},
+    </if>
+    <if test="taxregCard1 != null">
+      #{taxregCard1,jdbcType=VARCHAR},
+    </if>
+    <if test="taxregCard2 != null">
+      #{taxregCard2,jdbcType=VARCHAR},
+    </if>
+    <if test="organCertificate != null">
+      #{organCertificate,jdbcType=VARCHAR},
+    </if>
+    <if test="corporateName != null">
+      #{corporateName,jdbcType=VARCHAR},
+    </if>
+    <if test="corporateIdentity != null">
+      #{corporateIdentity,jdbcType=VARCHAR},
+    </if>
+    <if test="busPlaceCtf != null">
+      #{busPlaceCtf,jdbcType=VARCHAR},
+    </if>
+    <if test="loanCard != null">
+      #{loanCard,jdbcType=VARCHAR},
+    </if>
+    <if test="statusId != null">
+      #{statusId,jdbcType=VARCHAR},
+    </if>
+    <if test="remark != null">
+      #{remark,jdbcType=VARCHAR},
+    </if>
+    <if test="createdTime != null">
+      #{createdTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="updatedTime != null">
+      #{updatedTime,jdbcType=TIMESTAMP},
+    </if>
+  </sql>
+  
+  <select id="selectByExample" parameterType="FinanaceCompanyQuery" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from FINANACE_COMPANY
+    <include refid="Example_Where_Clause" />
+    <!-- order by CREATE_DATE -->
+  </select>
+  
+  <!-- 获取企业开户详细信息列表 -->
+  <select id="selectCompanyList" parameterType="FinanaceCompanyQuery" resultMap="BaseResultMap">
+    SELECT
+<!--	FINANACE_ACCOUNT.ROOT_INST_CD,-->
+	FA.ACCOUNT_RELATE_ID as userId,
+	FINANACE_COMPANY.COMPANY_ID,
+	FINANACE_COMPANY.COMPANY_CODE,
+	FINANACE_COMPANY.FIN_ACCOUNT_ID,
+	FINANACE_COMPANY.COMPANY_NAME,
+	FINANACE_COMPANY.COMPANY_SHORT_NAME,
+	FINANACE_COMPANY.COMPANY_TYPE,
+	FINANACE_COMPANY.MCC,
+	FINANACE_COMPANY.POST,
+	FINANACE_COMPANY.CONNECT,
+	FINANACE_COMPANY.ADDRESS,
+	FINANACE_COMPANY.BUSLINCE,
+	FINANACE_COMPANY.ACUNT_OPN_LINCE,
+	FINANACE_COMPANY.TAXREG_CARD1,
+	FINANACE_COMPANY.TAXREG_CARD2,
+	FINANACE_COMPANY.ORGAN_CERTIFICATE,
+	FINANACE_COMPANY.CORPORATE_NAME,
+	FINANACE_COMPANY.CORPORATE_IDENTITY,
+	FINANACE_COMPANY.BUS_PLACE_CTF,
+	FINANACE_COMPANY.LOAN_CARD,
+	FINANACE_COMPANY.STATUS_ID,
+	FINANACE_COMPANY.REMARK,
+	FINANACE_COMPANY.CREATED_TIME,
+	FINANACE_COMPANY.UPDATED_TIME
+	FROM
+	FINANACE_COMPANY
+	INNER JOIN FINANACE_ACCOUNT FA 
+	ON 
+	FA.FIN_ACCOUNT_ID = FINANACE_COMPANY.FIN_ACCOUNT_ID 
+	AND FA.ROOT_INST_CD = #{rootInstCd}
+	AND FA.STATUS_ID=1
+    <include refid="Example_Where_Clause1" />
+     order by FINANACE_COMPANY.CREATED_TIME;
+  </select>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from FINANACE_COMPANY
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <!--校验企业营业执照号在同一个机构中是否唯一-->
+   <select id="selectByRootInstCdOrBUSLINCEOrStatusId" resultMap="BaseResultMap1">
+    select
+	FINANACE_COMPANY.FIN_ACCOUNT_ID,
+	FINANACE_COMPANY.BUSLINCE,
+	FINANACE_COMPANY.STATUS_ID
+    FROM
+	FINANACE_ACCOUNT
+	INNER JOIN FINANACE_COMPANY ON FINANACE_COMPANY.FIN_ACCOUNT_ID = FINANACE_ACCOUNT.FIN_ACCOUNT_ID 
+    where FINANACE_ACCOUNT.ROOT_INST_CD=#{rootInstCd,jdbcType=VARCHAR} and FINANACE_COMPANY.BUSLINCE=#{buslince,jdbcType=VARCHAR} and FINANACE_COMPANY.STATUS_ID=#{statusId,jdbcType=VARCHAR}
+  </select>
+  
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from FINANACE_COMPANY
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="FinanaceCompanyQuery">
+    delete from FINANACE_COMPANY
+    <include refid="Example_Where_Clause" />
+  </delete>
+  <insert id="insert" parameterType="FinanaceCompany">
+    insert into FINANACE_COMPANY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Base_Column_List"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Base_Value_List"/>
+    </trim>
+  </insert>
+  <insert id="insertSelective" parameterType="FinanaceCompany">
+    insert into FINANACE_COMPANY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Column_List"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Value_List"/>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="FinanaceCompanyQuery" resultType="java.lang.Integer">
+    select count(*) from FINANACE_COMPANY
+    <include refid="Example_Where_Clause" />
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="FinanaceCompany">
+    update FINANACE_COMPANY
+    <include refid="Example_Set_Clause"/>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="FinanaceCompany">
+    update FINANACE_COMPANY
+    <include refid="Base_Set_Clause"/>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByFinanaceAccountId" parameterType="FinanaceCompany">
+    update FINANACE_COMPANY
+    <include refid="Example_Set_Clause"/>
+    where FIN_ACCOUNT_ID = #{finAccountId,jdbcType=VARCHAR}
+  </update>
+</mapper>

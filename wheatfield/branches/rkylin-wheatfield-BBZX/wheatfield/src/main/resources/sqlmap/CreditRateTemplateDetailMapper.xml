@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CreditRateTemplateDetailMapper">
+	<resultMap id="BaseResultMap" type="CreditRateTemplateDetail">
+	  <result column="RATE_DETAIL_ID" jdbcType="INTEGER" property="rateDetailId" />
+	  <result column="RATE_ID" jdbcType="VARCHAR" property="rateId" />
+	  <result column="RATE_LEVEL" jdbcType="VARCHAR" property="rateLevel" />
+	  <result column="RATE_TIME" jdbcType="VARCHAR" property="rateTime" />
+	  <result column="RATE_TIME_UNIT" jdbcType="CHAR" property="rateTimeUnit" />
+	  <result column="RATE" jdbcType="VARCHAR" property="rate" />
+	  <result column="RATE_UNIT" jdbcType="CHAR" property="rateUnit" />
+	  <result column="STATUS_ID" jdbcType="TINYINT" property="statusId" />
+	  <result column="CREATED_TIME" jdbcType="TIMESTAMP" property="createdTime" />
+	  <result column="UPDATED_TIME" jdbcType="TIMESTAMP" property="updatedTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <trim prefix="(" prefixOverrides="and" suffix=")">
+      <if test="rateDetailId != null" >
+	      and RATE_DETAIL_ID = #{rateDetailId,jdbcType=INTEGER}
+	    </if>
+      <if test="rateId != null" >
+	      and RATE_ID = #{rateId,jdbcType=VARCHAR}
+	    </if>
+      <if test="rateLevel != null" >
+	      and RATE_LEVEL = #{rateLevel,jdbcType=VARCHAR}
+	    </if>
+      <if test="rateTime != null" >
+	      and RATE_TIME = #{rateTime,jdbcType=VARCHAR}
+	    </if>
+      <if test="rateTimeUnit != null" >
+	      and RATE_TIME_UNIT = #{rateTimeUnit,jdbcType=CHAR}
+	    </if>
+      <if test="rate != null" >
+	      and RATE = #{rate,jdbcType=VARCHAR}
+	    </if>
+      <if test="rateUnit != null" >
+	      and RATE_UNIT = #{rateUnit,jdbcType=CHAR}
+	    </if>
+      <if test="statusId != null" >
+	      and STATUS_ID = #{statusId,jdbcType=TINYINT}
+	    </if>
+      <if test="createdTime != null" >
+	      and CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="updatedTime != null" >
+	      and UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP}
+	    </if>
+	  </trim>
+    </where>
+  </sql>
+  <sql id="Example_Set_Clause">
+    <set>
+      <trim suffixOverrides=",">
+      <if test="rateDetailId != null">
+        RATE_DETAIL_ID = #{rateDetailId,jdbcType=INTEGER},
+      </if>
+      <if test="rateId != null">
+        RATE_ID = #{rateId,jdbcType=VARCHAR},
+      </if>
+      <if test="rateLevel != null">
+        RATE_LEVEL = #{rateLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="rateTime != null">
+        RATE_TIME = #{rateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="rateTimeUnit != null">
+        RATE_TIME_UNIT = #{rateTimeUnit,jdbcType=CHAR},
+      </if>
+      <if test="rate != null">
+        RATE = #{rate,jdbcType=VARCHAR},
+      </if>
+      <if test="rateUnit != null">
+        RATE_UNIT = #{rateUnit,jdbcType=CHAR},
+      </if>
+      <if test="statusId != null">
+        STATUS_ID = #{statusId,jdbcType=TINYINT},
+      </if>
+      <if test="createdTime != null">
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      </trim>
+    </set>
+  </sql>
+  <sql id="Base_Column_List">
+    RATE_DETAIL_ID,
+    RATE_ID,
+    RATE_LEVEL,
+    RATE_TIME,
+    RATE_TIME_UNIT,
+    RATE,
+    RATE_UNIT,
+    STATUS_ID,
+    CREATED_TIME,
+    UPDATED_TIME,
+  </sql>
+  <sql id="Base_Set_Clause">
+    <set>
+      <trim suffixOverrides=",">
+        RATE_DETAIL_ID = #{rateDetailId,jdbcType=INTEGER},
+        RATE_ID = #{rateId,jdbcType=VARCHAR},
+        RATE_LEVEL = #{rateLevel,jdbcType=VARCHAR},
+        RATE_TIME = #{rateTime,jdbcType=VARCHAR},
+        RATE_TIME_UNIT = #{rateTimeUnit,jdbcType=CHAR},
+        RATE = #{rate,jdbcType=VARCHAR},
+        RATE_UNIT = #{rateUnit,jdbcType=CHAR},
+        STATUS_ID = #{statusId,jdbcType=TINYINT},
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </trim>
+    </set>
+  </sql>
+  <sql id="Selective_Column_List">
+    <if test="rateDetailId != null">
+      RATE_DETAIL_ID,
+    </if>
+    <if test="rateId != null">
+      RATE_ID,
+    </if>
+    <if test="rateLevel != null">
+      RATE_LEVEL,
+    </if>
+    <if test="rateTime != null">
+      RATE_TIME,
+    </if>
+    <if test="rateTimeUnit != null">
+      RATE_TIME_UNIT,
+    </if>
+    <if test="rate != null">
+      RATE,
+    </if>
+    <if test="rateUnit != null">
+      RATE_UNIT,
+    </if>
+    <if test="statusId != null">
+      STATUS_ID,
+    </if>
+    <if test="createdTime != null">
+      CREATED_TIME,
+    </if>
+    <if test="updatedTime != null">
+      UPDATED_TIME,
+    </if>
+  </sql>
+	<sql id="Base_Value_List">
+    #{rateDetailId,jdbcType=INTEGER},
+    #{rateId,jdbcType=VARCHAR},
+    #{rateLevel,jdbcType=VARCHAR},
+    #{rateTime,jdbcType=VARCHAR},
+    #{rateTimeUnit,jdbcType=CHAR},
+    #{rate,jdbcType=VARCHAR},
+    #{rateUnit,jdbcType=CHAR},
+    #{statusId,jdbcType=TINYINT},
+    #{createdTime,jdbcType=TIMESTAMP},
+    #{updatedTime,jdbcType=TIMESTAMP},
+	</sql>
+  <sql id="Selective_Value_List">
+    <if test="rateDetailId != null">
+      #{rateDetailId,jdbcType=INTEGER},
+    </if>
+    <if test="rateId != null">
+      #{rateId,jdbcType=VARCHAR},
+    </if>
+    <if test="rateLevel != null">
+      #{rateLevel,jdbcType=VARCHAR},
+    </if>
+    <if test="rateTime != null">
+      #{rateTime,jdbcType=VARCHAR},
+    </if>
+    <if test="rateTimeUnit != null">
+      #{rateTimeUnit,jdbcType=CHAR},
+    </if>
+    <if test="rate != null">
+      #{rate,jdbcType=VARCHAR},
+    </if>
+    <if test="rateUnit != null">
+      #{rateUnit,jdbcType=CHAR},
+    </if>
+    <if test="statusId != null">
+      #{statusId,jdbcType=TINYINT},
+    </if>
+    <if test="createdTime != null">
+      #{createdTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="updatedTime != null">
+      #{updatedTime,jdbcType=TIMESTAMP},
+    </if>
+  </sql>
+  
+  <select id="selectByExample" parameterType="CreditRateTemplateDetailQuery" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from CREDIT_RATE_TEMPLATE_DETAIL
+    <include refid="Example_Where_Clause" />
+    <!-- order by CREATE_DATE -->
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from CREDIT_RATE_TEMPLATE_DETAIL
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from CREDIT_RATE_TEMPLATE_DETAIL
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="CreditRateTemplateDetailQuery">
+    delete from CREDIT_RATE_TEMPLATE_DETAIL
+    <include refid="Example_Where_Clause" />
+  </delete>
+  <insert id="insert" parameterType="CreditRateTemplateDetail">
+    insert into CREDIT_RATE_TEMPLATE_DETAIL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Base_Column_List"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Base_Value_List"/>
+    </trim>
+  </insert>
+  <insert id="insertSelective" parameterType="CreditRateTemplateDetail">
+    insert into CREDIT_RATE_TEMPLATE_DETAIL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Column_List"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Value_List"/>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="CreditRateTemplateDetailQuery" resultType="java.lang.Integer">
+    select count(*) from CREDIT_RATE_TEMPLATE_DETAIL
+    <include refid="Example_Where_Clause" />
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="CreditRateTemplateDetail">
+    update CREDIT_RATE_TEMPLATE_DETAIL
+    <include refid="Example_Set_Clause"/>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+   <update id="updateByRateId" parameterType="CreditRateTemplateDetail">
+    update CREDIT_RATE_TEMPLATE_DETAIL
+    <include refid="Example_Set_Clause"/>
+    where RATE_ID = #{rateId,jdbcType=VARCHAR}
+    AND RATE_LEVEL = #{rateLevel,jdbcType=VARCHAR}
+    AND STATUS_ID = 1
+  </update>
+  <update id="updateStatusByRateId" parameterType="CreditRateTemplateDetail">
+    update CREDIT_RATE_TEMPLATE_DETAIL
+    set STATUS_ID = 0
+    where RATE_ID = #{rateId,jdbcType=VARCHAR}
+    AND STATUS_ID = 1
+  </update>
+  <select id="countByRateId" parameterType="CreditRateTemplateDetail" resultType="java.lang.Integer">
+    select count(*) from CREDIT_RATE_TEMPLATE_DETAIL
+    where RATE_ID = #{rateId,jdbcType=VARCHAR}
+    AND RATE_LEVEL = #{rateLevel,jdbcType=VARCHAR}
+    AND STATUS_ID = 1
+  </select>
+  <update id="updateByPrimaryKey" parameterType="CreditRateTemplateDetail">
+    update CREDIT_RATE_TEMPLATE_DETAIL
+    <include refid="Base_Set_Clause"/>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

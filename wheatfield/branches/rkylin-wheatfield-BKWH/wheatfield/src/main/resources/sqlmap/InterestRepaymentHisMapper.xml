@@ -1,0 +1,671 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="InterestRepaymentHisMapper">
+	<resultMap id="BaseResultMap" type="InterestRepaymentHis">
+	  <result column="INTER_ID" jdbcType="INTEGER" property="interId" />
+	  <result column="ROOT_INST_CD" jdbcType="VARCHAR" property="rootInstCd" />
+	  <result column="PRODUCT_ID" jdbcType="VARCHAR" property="productId" />
+	  <result column="PROVIDER_ID" jdbcType="VARCHAR" property="providerId" />
+	  <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+	  <result column="CREDIT_RESULT_ID" jdbcType="VARCHAR" property="creditResultId" />
+	  <result column="USER_ORDER_ID" jdbcType="VARCHAR" property="userOrderId" />
+	  <result column="ORDER_ID" jdbcType="VARCHAR" property="orderId" />
+	  <result column="OVERDUE_ORDER_ID" jdbcType="VARCHAR" property="overdueOrderId" />
+	  <result column="ORDER_TYPE" jdbcType="TINYINT" property="orderType" />
+	  <result column="CREDIT_AGREEMENT_ID" jdbcType="VARCHAR" property="creditAgreementId" />
+	  <result column="PERIOD_SUMMARY" jdbcType="VARCHAR" property="periodSummary" />
+	  <result column="PERIOD_CURRENT" jdbcType="VARCHAR" property="periodCurrent" />
+	  <result column="SHOULD_REPAYMENT_DATE" jdbcType="TIMESTAMP" property="shouldRepaymentDate" />
+	  <result column="SHOULD_CAPITAL" jdbcType="DECIMAL" property="shouldCapital" />
+	  <result column="SHOULD_INTEREST" jdbcType="DECIMAL" property="shouldInterest" />
+	  <result column="SHOULD_AMOUNT" jdbcType="DECIMAL" property="shouldAmount" />
+	  <result column="REPAID_REPAYMENT_DATE" jdbcType="TIMESTAMP" property="repaidRepaymentDate" />
+	  <result column="REPAID_INTEREST" jdbcType="DECIMAL" property="repaidInterest" />
+	  <result column="REPAID_AMOUNT" jdbcType="DECIMAL" property="repaidAmount" />
+	  <result column="INTEREST_FREE" jdbcType="DECIMAL" property="interestFree" />
+	  <result column="OVERDUE_FLAG1" jdbcType="TINYINT" property="overdueFlag1" />
+	  <result column="OVERDUE_FLAG2" jdbcType="TINYINT" property="overdueFlag2" />
+	  <result column="OVERDUE_DAYS" jdbcType="INTEGER" property="overdueDays" />
+	  <result column="OVERDUE_FINE" jdbcType="DECIMAL" property="overdueFine" />
+	  <result column="OVERDUE_INTEREST" jdbcType="DECIMAL" property="overdueInterest" />
+	  <result column="ADVANCE_AMOUNT" jdbcType="DECIMAL" property="advanceAmount" />
+	  <result column="ADVANCE_INTEREST" jdbcType="DECIMAL" property="advanceInterest" />
+	  <result column="OVERPLUS_AMOUNT" jdbcType="DECIMAL" property="overplusAmount" />
+	  <result column="INTEREST_PARTY" jdbcType="TINYINT" property="interestParty" />
+	  <result column="IS_SUC_INTEREST" jdbcType="TINYINT" property="isSucInterest" />
+	  <result column="IS_SUC_CAPITAL" jdbcType="TINYINT" property="isSucCapital" />
+	  <result column="STATUS_ID" jdbcType="TINYINT" property="statusId" />
+	  <result column="IS_EFFECTIVE" jdbcType="TINYINT" property="isEffective" />
+	  <result column="CREATED_TIME" jdbcType="TIMESTAMP" property="createdTime" />
+	  <result column="UPDATED_TIME" jdbcType="TIMESTAMP" property="updatedTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <trim prefix="(" prefixOverrides="and" suffix=")">
+      <if test="interId != null" >
+	      and INTER_ID = #{interId,jdbcType=INTEGER}
+	    </if>
+      <if test="rootInstCd != null" >
+	      and ROOT_INST_CD = #{rootInstCd,jdbcType=VARCHAR}
+	    </if>
+      <if test="productId != null" >
+	      and PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+	    </if>
+      <if test="providerId != null" >
+	      and PROVIDER_ID = #{providerId,jdbcType=VARCHAR}
+	    </if>
+      <if test="userId != null" >
+	      and USER_ID = #{userId,jdbcType=VARCHAR}
+	    </if>
+      <if test="creditResultId != null" >
+	      and CREDIT_RESULT_ID = #{creditResultId,jdbcType=VARCHAR}
+	    </if>
+      <if test="userOrderId != null" >
+	      and USER_ORDER_ID = #{userOrderId,jdbcType=VARCHAR}
+	    </if>
+      <if test="orderId != null" >
+	      and ORDER_ID = #{orderId,jdbcType=VARCHAR}
+	    </if>
+      <if test="overdueOrderId != null" >
+	      and OVERDUE_ORDER_ID = #{overdueOrderId,jdbcType=VARCHAR}
+	    </if>
+      <if test="orderType != null" >
+	      and ORDER_TYPE = #{orderType,jdbcType=TINYINT}
+	    </if>
+      <if test="creditAgreementId != null" >
+	      and CREDIT_AGREEMENT_ID = #{creditAgreementId,jdbcType=VARCHAR}
+	    </if>
+      <if test="periodSummary != null" >
+	      and PERIOD_SUMMARY = #{periodSummary,jdbcType=VARCHAR}
+	    </if>
+      <if test="periodCurrent != null" >
+	      and PERIOD_CURRENT = #{periodCurrent,jdbcType=VARCHAR}
+	    </if>
+      <if test="shouldRepaymentDate != null" >
+	      and SHOULD_REPAYMENT_DATE = #{shouldRepaymentDate,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="shouldCapital != null" >
+	      and SHOULD_CAPITAL = #{shouldCapital,jdbcType=DECIMAL}
+	    </if>
+      <if test="shouldInterest != null" >
+	      and SHOULD_INTEREST = #{shouldInterest,jdbcType=DECIMAL}
+	    </if>
+      <if test="shouldAmount != null" >
+	      and SHOULD_AMOUNT = #{shouldAmount,jdbcType=DECIMAL}
+	    </if>
+      <if test="repaidRepaymentDate != null" >
+	      and REPAID_REPAYMENT_DATE = #{repaidRepaymentDate,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="repaidInterest != null" >
+	      and REPAID_INTEREST = #{repaidInterest,jdbcType=DECIMAL}
+	    </if>
+      <if test="repaidAmount != null" >
+	      and REPAID_AMOUNT = #{repaidAmount,jdbcType=DECIMAL}
+	    </if>
+      <if test="interestFree != null" >
+	      and INTEREST_FREE = #{interestFree,jdbcType=DECIMAL}
+	    </if>
+      <if test="overdueFlag1 != null" >
+	      and OVERDUE_FLAG1 = #{overdueFlag1,jdbcType=TINYINT}
+	    </if>
+      <if test="overdueFlag2 != null" >
+	      and OVERDUE_FLAG2 = #{overdueFlag2,jdbcType=TINYINT}
+	    </if>
+      <if test="overdueDays != null" >
+	      and OVERDUE_DAYS = #{overdueDays,jdbcType=INTEGER}
+	    </if>
+      <if test="overdueFine != null" >
+	      and OVERDUE_FINE = #{overdueFine,jdbcType=DECIMAL}
+	    </if>
+      <if test="overdueInterest != null" >
+	      and OVERDUE_INTEREST = #{overdueInterest,jdbcType=DECIMAL}
+	    </if>
+      <if test="advanceAmount != null" >
+	      and ADVANCE_AMOUNT = #{advanceAmount,jdbcType=DECIMAL}
+	    </if>
+      <if test="advanceInterest != null" >
+	      and ADVANCE_INTEREST = #{advanceInterest,jdbcType=DECIMAL}
+	    </if>
+      <if test="overplusAmount != null" >
+	      and OVERPLUS_AMOUNT = #{overplusAmount,jdbcType=DECIMAL}
+	    </if>
+      <if test="interestParty != null" >
+	      and INTEREST_PARTY = #{interestParty,jdbcType=TINYINT}
+	    </if>
+      <if test="isSucInterest != null" >
+	      and IS_SUC_INTEREST = #{isSucInterest,jdbcType=TINYINT}
+	    </if>
+      <if test="isSucCapital != null" >
+	      and IS_SUC_CAPITAL = #{isSucCapital,jdbcType=TINYINT}
+	    </if>
+      <if test="statusId != null" >
+	      and STATUS_ID = #{statusId,jdbcType=TINYINT}
+	    </if>
+      <if test="isEffective != null" >
+	      and IS_EFFECTIVE = #{isEffective,jdbcType=TINYINT}
+	    </if>
+      <if test="createdTime != null" >
+	      and CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="updatedTime != null" >
+	      and UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP}
+	    </if>
+	  </trim>
+    </where>
+  </sql>
+  <sql id="Example_Set_Clause">
+    <set>
+      <trim suffixOverrides=",">
+      <if test="interId != null">
+        INTER_ID = #{interId,jdbcType=INTEGER},
+      </if>
+      <if test="rootInstCd != null">
+        ROOT_INST_CD = #{rootInstCd,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null">
+        PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="providerId != null">
+        PROVIDER_ID = #{providerId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="creditResultId != null">
+        CREDIT_RESULT_ID = #{creditResultId,jdbcType=VARCHAR},
+      </if>
+      <if test="userOrderId != null">
+        USER_ORDER_ID = #{userOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="overdueOrderId != null">
+        OVERDUE_ORDER_ID = #{overdueOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null">
+        ORDER_TYPE = #{orderType,jdbcType=TINYINT},
+      </if>
+      <if test="creditAgreementId != null">
+        CREDIT_AGREEMENT_ID = #{creditAgreementId,jdbcType=VARCHAR},
+      </if>
+      <if test="periodSummary != null">
+        PERIOD_SUMMARY = #{periodSummary,jdbcType=VARCHAR},
+      </if>
+      <if test="periodCurrent != null">
+        PERIOD_CURRENT = #{periodCurrent,jdbcType=VARCHAR},
+      </if>
+      <if test="shouldRepaymentDate != null">
+        SHOULD_REPAYMENT_DATE = #{shouldRepaymentDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shouldCapital != null">
+        SHOULD_CAPITAL = #{shouldCapital,jdbcType=DECIMAL},
+      </if>
+      <if test="shouldInterest != null">
+        SHOULD_INTEREST = #{shouldInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="shouldAmount != null">
+        SHOULD_AMOUNT = #{shouldAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="repaidRepaymentDate != null">
+        REPAID_REPAYMENT_DATE = #{repaidRepaymentDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="repaidInterest != null">
+        REPAID_INTEREST = #{repaidInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="repaidAmount != null">
+        REPAID_AMOUNT = #{repaidAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="interestFree != null">
+        INTEREST_FREE = #{interestFree,jdbcType=DECIMAL},
+      </if>
+      <if test="overdueFlag1 != null">
+        OVERDUE_FLAG1 = #{overdueFlag1,jdbcType=TINYINT},
+      </if>
+      <if test="overdueFlag2 != null">
+        OVERDUE_FLAG2 = #{overdueFlag2,jdbcType=TINYINT},
+      </if>
+      <if test="overdueDays != null">
+        OVERDUE_DAYS = #{overdueDays,jdbcType=INTEGER},
+      </if>
+      <if test="overdueFine != null">
+        OVERDUE_FINE = #{overdueFine,jdbcType=DECIMAL},
+      </if>
+      <if test="overdueInterest != null">
+        OVERDUE_INTEREST = #{overdueInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="advanceAmount != null">
+        ADVANCE_AMOUNT = #{advanceAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="advanceInterest != null">
+        ADVANCE_INTEREST = #{advanceInterest,jdbcType=DECIMAL},
+      </if>
+      <if test="overplusAmount != null">
+        OVERPLUS_AMOUNT = #{overplusAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="interestParty != null">
+        INTEREST_PARTY = #{interestParty,jdbcType=TINYINT},
+      </if>
+      <if test="isSucInterest != null">
+        IS_SUC_INTEREST = #{isSucInterest,jdbcType=TINYINT},
+      </if>
+      <if test="isSucCapital != null">
+        IS_SUC_CAPITAL = #{isSucCapital,jdbcType=TINYINT},
+      </if>
+      <if test="statusId != null">
+        STATUS_ID = #{statusId,jdbcType=TINYINT},
+      </if>
+      <if test="isEffective != null">
+        IS_EFFECTIVE = #{isEffective,jdbcType=TINYINT},
+      </if>
+      <if test="createdTime != null">
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      </trim>
+    </set>
+  </sql>
+  <sql id="Base_Column_List">
+    INTER_ID,
+    ROOT_INST_CD,
+    PRODUCT_ID,
+    PROVIDER_ID,
+    USER_ID,
+    CREDIT_RESULT_ID,
+    USER_ORDER_ID,
+    ORDER_ID,
+    OVERDUE_ORDER_ID,
+    ORDER_TYPE,
+    CREDIT_AGREEMENT_ID,
+    PERIOD_SUMMARY,
+    PERIOD_CURRENT,
+    SHOULD_REPAYMENT_DATE,
+    SHOULD_CAPITAL,
+    SHOULD_INTEREST,
+    SHOULD_AMOUNT,
+    REPAID_REPAYMENT_DATE,
+    REPAID_INTEREST,
+    REPAID_AMOUNT,
+    INTEREST_FREE,
+    OVERDUE_FLAG1,
+    OVERDUE_FLAG2,
+    OVERDUE_DAYS,
+    OVERDUE_FINE,
+    OVERDUE_INTEREST,
+    ADVANCE_AMOUNT,
+    ADVANCE_INTEREST,
+    OVERPLUS_AMOUNT,
+    INTEREST_PARTY,
+    IS_SUC_INTEREST,
+    IS_SUC_CAPITAL,
+    STATUS_ID,
+    IS_EFFECTIVE,
+    CREATED_TIME,
+    UPDATED_TIME,
+  </sql>
+  <sql id="Base_Set_Clause">
+    <set>
+      <trim suffixOverrides=",">
+        INTER_ID = #{interId,jdbcType=INTEGER},
+        ROOT_INST_CD = #{rootInstCd,jdbcType=VARCHAR},
+        PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+        PROVIDER_ID = #{providerId,jdbcType=VARCHAR},
+        USER_ID = #{userId,jdbcType=VARCHAR},
+        CREDIT_RESULT_ID = #{creditResultId,jdbcType=VARCHAR},
+        USER_ORDER_ID = #{userOrderId,jdbcType=VARCHAR},
+        ORDER_ID = #{orderId,jdbcType=VARCHAR},
+        OVERDUE_ORDER_ID = #{overdueOrderId,jdbcType=VARCHAR},
+        ORDER_TYPE = #{orderType,jdbcType=TINYINT},
+        CREDIT_AGREEMENT_ID = #{creditAgreementId,jdbcType=VARCHAR},
+        PERIOD_SUMMARY = #{periodSummary,jdbcType=VARCHAR},
+        PERIOD_CURRENT = #{periodCurrent,jdbcType=VARCHAR},
+        SHOULD_REPAYMENT_DATE = #{shouldRepaymentDate,jdbcType=TIMESTAMP},
+        SHOULD_CAPITAL = #{shouldCapital,jdbcType=DECIMAL},
+        SHOULD_INTEREST = #{shouldInterest,jdbcType=DECIMAL},
+        SHOULD_AMOUNT = #{shouldAmount,jdbcType=DECIMAL},
+        REPAID_REPAYMENT_DATE = #{repaidRepaymentDate,jdbcType=TIMESTAMP},
+        REPAID_INTEREST = #{repaidInterest,jdbcType=DECIMAL},
+        REPAID_AMOUNT = #{repaidAmount,jdbcType=DECIMAL},
+        INTEREST_FREE = #{interestFree,jdbcType=DECIMAL},
+        OVERDUE_FLAG1 = #{overdueFlag1,jdbcType=TINYINT},
+        OVERDUE_FLAG2 = #{overdueFlag2,jdbcType=TINYINT},
+        OVERDUE_DAYS = #{overdueDays,jdbcType=INTEGER},
+        OVERDUE_FINE = #{overdueFine,jdbcType=DECIMAL},
+        OVERDUE_INTEREST = #{overdueInterest,jdbcType=DECIMAL},
+        ADVANCE_AMOUNT = #{advanceAmount,jdbcType=DECIMAL},
+        ADVANCE_INTEREST = #{advanceInterest,jdbcType=DECIMAL},
+        OVERPLUS_AMOUNT = #{overplusAmount,jdbcType=DECIMAL},
+        INTEREST_PARTY = #{interestParty,jdbcType=TINYINT},
+        IS_SUC_INTEREST = #{isSucInterest,jdbcType=TINYINT},
+        IS_SUC_CAPITAL = #{isSucCapital,jdbcType=TINYINT},
+        STATUS_ID = #{statusId,jdbcType=TINYINT},
+        IS_EFFECTIVE = #{isEffective,jdbcType=TINYINT},
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </trim>
+    </set>
+  </sql>
+  <sql id="Selective_Column_List">
+    <if test="interId != null">
+      INTER_ID,
+    </if>
+    <if test="rootInstCd != null">
+      ROOT_INST_CD,
+    </if>
+    <if test="productId != null">
+      PRODUCT_ID,
+    </if>
+    <if test="providerId != null">
+      PROVIDER_ID,
+    </if>
+    <if test="userId != null">
+      USER_ID,
+    </if>
+    <if test="creditResultId != null">
+      CREDIT_RESULT_ID,
+    </if>
+    <if test="userOrderId != null">
+      USER_ORDER_ID,
+    </if>
+    <if test="orderId != null">
+      ORDER_ID,
+    </if>
+    <if test="overdueOrderId != null">
+      OVERDUE_ORDER_ID,
+    </if>
+    <if test="orderType != null">
+      ORDER_TYPE,
+    </if>
+    <if test="creditAgreementId != null">
+      CREDIT_AGREEMENT_ID,
+    </if>
+    <if test="periodSummary != null">
+      PERIOD_SUMMARY,
+    </if>
+    <if test="periodCurrent != null">
+      PERIOD_CURRENT,
+    </if>
+    <if test="shouldRepaymentDate != null">
+      SHOULD_REPAYMENT_DATE,
+    </if>
+    <if test="shouldCapital != null">
+      SHOULD_CAPITAL,
+    </if>
+    <if test="shouldInterest != null">
+      SHOULD_INTEREST,
+    </if>
+    <if test="shouldAmount != null">
+      SHOULD_AMOUNT,
+    </if>
+    <if test="repaidRepaymentDate != null">
+      REPAID_REPAYMENT_DATE,
+    </if>
+    <if test="repaidInterest != null">
+      REPAID_INTEREST,
+    </if>
+    <if test="repaidAmount != null">
+      REPAID_AMOUNT,
+    </if>
+    <if test="interestFree != null">
+      INTEREST_FREE,
+    </if>
+    <if test="overdueFlag1 != null">
+      OVERDUE_FLAG1,
+    </if>
+    <if test="overdueFlag2 != null">
+      OVERDUE_FLAG2,
+    </if>
+    <if test="overdueDays != null">
+      OVERDUE_DAYS,
+    </if>
+    <if test="overdueFine != null">
+      OVERDUE_FINE,
+    </if>
+    <if test="overdueInterest != null">
+      OVERDUE_INTEREST,
+    </if>
+    <if test="advanceAmount != null">
+      ADVANCE_AMOUNT,
+    </if>
+    <if test="advanceInterest != null">
+      ADVANCE_INTEREST,
+    </if>
+    <if test="overplusAmount != null">
+      OVERPLUS_AMOUNT,
+    </if>
+    <if test="interestParty != null">
+      INTEREST_PARTY,
+    </if>
+    <if test="isSucInterest != null">
+      IS_SUC_INTEREST,
+    </if>
+    <if test="isSucCapital != null">
+      IS_SUC_CAPITAL,
+    </if>
+    <if test="statusId != null">
+      STATUS_ID,
+    </if>
+    <if test="isEffective != null">
+      IS_EFFECTIVE,
+    </if>
+    <if test="createdTime != null">
+      CREATED_TIME,
+    </if>
+    <if test="updatedTime != null">
+      UPDATED_TIME,
+    </if>
+  </sql>
+	<sql id="Base_Value_List">
+    #{interId,jdbcType=INTEGER},
+    #{rootInstCd,jdbcType=VARCHAR},
+    #{productId,jdbcType=VARCHAR},
+    #{providerId,jdbcType=VARCHAR},
+    #{userId,jdbcType=VARCHAR},
+    #{creditResultId,jdbcType=VARCHAR},
+    #{userOrderId,jdbcType=VARCHAR},
+    #{orderId,jdbcType=VARCHAR},
+    #{overdueOrderId,jdbcType=VARCHAR},
+    #{orderType,jdbcType=TINYINT},
+    #{creditAgreementId,jdbcType=VARCHAR},
+    #{periodSummary,jdbcType=VARCHAR},
+    #{periodCurrent,jdbcType=VARCHAR},
+    #{shouldRepaymentDate,jdbcType=TIMESTAMP},
+    #{shouldCapital,jdbcType=DECIMAL},
+    #{shouldInterest,jdbcType=DECIMAL},
+    #{shouldAmount,jdbcType=DECIMAL},
+    #{repaidRepaymentDate,jdbcType=TIMESTAMP},
+    #{repaidInterest,jdbcType=DECIMAL},
+    #{repaidAmount,jdbcType=DECIMAL},
+    #{interestFree,jdbcType=DECIMAL},
+    #{overdueFlag1,jdbcType=TINYINT},
+    #{overdueFlag2,jdbcType=TINYINT},
+    #{overdueDays,jdbcType=INTEGER},
+    #{overdueFine,jdbcType=DECIMAL},
+    #{overdueInterest,jdbcType=DECIMAL},
+    #{advanceAmount,jdbcType=DECIMAL},
+    #{advanceInterest,jdbcType=DECIMAL},
+    #{overplusAmount,jdbcType=DECIMAL},
+    #{interestParty,jdbcType=TINYINT},
+    #{isSucInterest,jdbcType=TINYINT},
+    #{isSucCapital,jdbcType=TINYINT},
+    #{statusId,jdbcType=TINYINT},
+    #{isEffective,jdbcType=TINYINT},
+    #{createdTime,jdbcType=TIMESTAMP},
+    #{updatedTime,jdbcType=TIMESTAMP},
+	</sql>
+  <sql id="Selective_Value_List">
+    <if test="interId != null">
+      #{interId,jdbcType=INTEGER},
+    </if>
+    <if test="rootInstCd != null">
+      #{rootInstCd,jdbcType=VARCHAR},
+    </if>
+    <if test="productId != null">
+      #{productId,jdbcType=VARCHAR},
+    </if>
+    <if test="providerId != null">
+      #{providerId,jdbcType=VARCHAR},
+    </if>
+    <if test="userId != null">
+      #{userId,jdbcType=VARCHAR},
+    </if>
+    <if test="creditResultId != null">
+      #{creditResultId,jdbcType=VARCHAR},
+    </if>
+    <if test="userOrderId != null">
+      #{userOrderId,jdbcType=VARCHAR},
+    </if>
+    <if test="orderId != null">
+      #{orderId,jdbcType=VARCHAR},
+    </if>
+    <if test="overdueOrderId != null">
+      #{overdueOrderId,jdbcType=VARCHAR},
+    </if>
+    <if test="orderType != null">
+      #{orderType,jdbcType=TINYINT},
+    </if>
+    <if test="creditAgreementId != null">
+      #{creditAgreementId,jdbcType=VARCHAR},
+    </if>
+    <if test="periodSummary != null">
+      #{periodSummary,jdbcType=VARCHAR},
+    </if>
+    <if test="periodCurrent != null">
+      #{periodCurrent,jdbcType=VARCHAR},
+    </if>
+    <if test="shouldRepaymentDate != null">
+      #{shouldRepaymentDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="shouldCapital != null">
+      #{shouldCapital,jdbcType=DECIMAL},
+    </if>
+    <if test="shouldInterest != null">
+      #{shouldInterest,jdbcType=DECIMAL},
+    </if>
+    <if test="shouldAmount != null">
+      #{shouldAmount,jdbcType=DECIMAL},
+    </if>
+    <if test="repaidRepaymentDate != null">
+      #{repaidRepaymentDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="repaidInterest != null">
+      #{repaidInterest,jdbcType=DECIMAL},
+    </if>
+    <if test="repaidAmount != null">
+      #{repaidAmount,jdbcType=DECIMAL},
+    </if>
+    <if test="interestFree != null">
+      #{interestFree,jdbcType=DECIMAL},
+    </if>
+    <if test="overdueFlag1 != null">
+      #{overdueFlag1,jdbcType=TINYINT},
+    </if>
+    <if test="overdueFlag2 != null">
+      #{overdueFlag2,jdbcType=TINYINT},
+    </if>
+    <if test="overdueDays != null">
+      #{overdueDays,jdbcType=INTEGER},
+    </if>
+    <if test="overdueFine != null">
+      #{overdueFine,jdbcType=DECIMAL},
+    </if>
+    <if test="overdueInterest != null">
+      #{overdueInterest,jdbcType=DECIMAL},
+    </if>
+    <if test="advanceAmount != null">
+      #{advanceAmount,jdbcType=DECIMAL},
+    </if>
+    <if test="advanceInterest != null">
+      #{advanceInterest,jdbcType=DECIMAL},
+    </if>
+    <if test="overplusAmount != null">
+      #{overplusAmount,jdbcType=DECIMAL},
+    </if>
+    <if test="interestParty != null">
+      #{interestParty,jdbcType=TINYINT},
+    </if>
+    <if test="isSucInterest != null">
+      #{isSucInterest,jdbcType=TINYINT},
+    </if>
+    <if test="isSucCapital != null">
+      #{isSucCapital,jdbcType=TINYINT},
+    </if>
+    <if test="statusId != null">
+      #{statusId,jdbcType=TINYINT},
+    </if>
+    <if test="isEffective != null">
+      #{isEffective,jdbcType=TINYINT},
+    </if>
+    <if test="createdTime != null">
+      #{createdTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="updatedTime != null">
+      #{updatedTime,jdbcType=TIMESTAMP},
+    </if>
+  </sql>
+  
+  <select id="selectByExample" parameterType="InterestRepaymentHisQuery" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from INTEREST_REPAYMENT_HIS
+    <include refid="Example_Where_Clause" />
+    <!-- order by CREATE_DATE -->
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from INTEREST_REPAYMENT_HIS
+    where
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from INTEREST_REPAYMENT_HIS
+    where
+  </delete>
+  <delete id="deleteByExample" parameterType="InterestRepaymentHisQuery">
+    delete from INTEREST_REPAYMENT_HIS
+    <include refid="Example_Where_Clause" />
+  </delete>
+  <insert id="insert" parameterType="InterestRepaymentHis">
+    insert into INTEREST_REPAYMENT_HIS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Base_Column_List"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Base_Value_List"/>
+    </trim>
+  </insert>
+  <insert id="insertSelective" parameterType="InterestRepaymentHis">
+    insert into INTEREST_REPAYMENT_HIS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Column_List"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Value_List"/>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="InterestRepaymentHisQuery" resultType="java.lang.Integer">
+    select count(*) from INTEREST_REPAYMENT_HIS
+    <include refid="Example_Where_Clause" />
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="InterestRepaymentHis">
+    update INTEREST_REPAYMENT_HIS
+    <include refid="Example_Set_Clause"/>
+    where
+  </update>
+  <update id="updateByPrimaryKey" parameterType="InterestRepaymentHis">
+    update INTEREST_REPAYMENT_HIS
+    <include refid="Base_Set_Clause"/>
+    where
+
+  </update>
+   <select id="sumRepaidAmountByExample" parameterType="InterestRepaymentHisQuery" resultType="java.lang.Long">
+      SELECT SUM(SHOULD_CAPITAL) FROM INTEREST_REPAYMENT_HIS
+    <include refid="Example_Where_Clause" />
+  </select>
+</mapper>

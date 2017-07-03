@@ -1,0 +1,618 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CreditApprovalInfoMapper">
+	<resultMap id="BaseResultMap" type="CreditApprovalInfo">
+	  <result column="CREDIT_ID" jdbcType="INTEGER" property="creditId" />
+	  <result column="ROOT_INST_CD" jdbcType="VARCHAR" property="rootInstCd" />
+	  <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+	  <result column="MERCHANT_ID" jdbcType="VARCHAR" property="merchantId" />
+	  <result column="PROVIDER_ID" jdbcType="VARCHAR" property="providerId" />
+	  <result column="PRODUCT_ID" jdbcType="VARCHAR" property="productId" />
+	  <result column="CREDIT_OBJECT_TYPE" jdbcType="VARCHAR" property="creditObjectType" />
+	  <result column="CREDIT_AGREEMENT_ID" jdbcType="VARCHAR" property="creditAgreementId" />
+	  <result column="CREDIT_RESULT_ID" jdbcType="VARCHAR" property="creditResultId" />
+	  <result column="CREDIT_TYPE_ID" jdbcType="TINYINT" property="creditTypeId" />
+	  <result column="AMOUNT" jdbcType="DECIMAL" property="amount" />
+	  <result column="AMOUNT_SINGLE" jdbcType="DECIMAL" property="amountSingle" />
+	  <result column="RATE_ID" jdbcType="VARCHAR" property="rateId" />
+	  <result column="CURRENCY" jdbcType="VARCHAR" property="currency" />
+	  <result column="DEAD_LINE" jdbcType="VARCHAR" property="deadLine" />
+	  <result column="START_TIME" jdbcType="TIMESTAMP" property="startTime" />
+	  <result column="END_TIME" jdbcType="TIMESTAMP" property="endTime" />
+	  <result column="APPLY_DATE" jdbcType="TIMESTAMP" property="applyDate" />
+	  <result column="APPLY_ACCOUNT_DATE" jdbcType="TIMESTAMP" property="applyAccountDate" />
+	  <result column="AUDIT_COMPLETE_DATE" jdbcType="TIMESTAMP" property="auditCompleteDate" />
+	  <result column="INTEREST_DATE" jdbcType="TIMESTAMP" property="interestDate" />
+	  <result column="VERSION" jdbcType="VARCHAR" property="version" />
+	  <result column="VERSION_DATE" jdbcType="TIMESTAMP" property="versionDate" />
+	  <result column="EXPANSION1" jdbcType="VARCHAR" property="expansion1" />
+	  <result column="EXPANSION2" jdbcType="VARCHAR" property="expansion2" />
+	  <result column="EXPANSION3" jdbcType="VARCHAR" property="expansion3" />
+	  <result column="EXPANSION4" jdbcType="VARCHAR" property="expansion4" />
+	  <result column="EXPANSION5" jdbcType="VARCHAR" property="expansion5" />
+	  <result column="EXPANSION6" jdbcType="VARCHAR" property="expansion6" />
+	  <result column="STATUS_ID" jdbcType="VARCHAR" property="statusId" />
+	  <result column="CREATED_TIME" jdbcType="TIMESTAMP" property="createdTime" />
+	  <result column="UPDATED_TIME" jdbcType="TIMESTAMP" property="updatedTime" />
+  </resultMap>
+  
+  <sql id="Example_Where_Clause">
+    <where>
+      <trim prefix="(" prefixOverrides="and" suffix=")">
+      <if test="creditId != null" >
+	      and CREDIT_ID = #{creditId,jdbcType=INTEGER}
+	    </if>
+      <if test="rootInstCd != null" >
+	      and ROOT_INST_CD = #{rootInstCd,jdbcType=VARCHAR}
+	    </if>
+      <if test="userId != null" >
+	      and USER_ID = #{userId,jdbcType=VARCHAR}
+	    </if>
+      <if test="merchantId != null" >
+	      and MERCHANT_ID = #{merchantId,jdbcType=VARCHAR}
+	    </if>
+      <if test="providerId != null" >
+	      and PROVIDER_ID = #{providerId,jdbcType=VARCHAR}
+	    </if>
+      <if test="productId != null" >
+	      and PRODUCT_ID = #{productId,jdbcType=VARCHAR}
+	    </if>
+      <if test="creditObjectType != null" >
+	      and CREDIT_OBJECT_TYPE = #{creditObjectType,jdbcType=VARCHAR}
+	    </if>
+      <if test="creditAgreementId != null" >
+	      and CREDIT_AGREEMENT_ID = #{creditAgreementId,jdbcType=VARCHAR}
+	    </if>
+      <if test="creditResultId != null" >
+	      and CREDIT_RESULT_ID = #{creditResultId,jdbcType=VARCHAR}
+	  	</if>
+      <if test="creditTypeId != null" >
+	      and CREDIT_TYPE_ID = #{creditTypeId,jdbcType=TINYINT}
+	    </if>
+      <if test="amount != null" >
+	      and AMOUNT = #{amount,jdbcType=DECIMAL}
+	    </if>
+      <if test="amountSingle != null" >
+	      and AMOUNT_SINGLE = #{amountSingle,jdbcType=DECIMAL}
+	    </if>
+      <if test="rateId != null" >
+	      and RATE_ID = #{rateId,jdbcType=VARCHAR}
+	    </if>
+      <if test="currency != null" >
+	      and CURRENCY = #{currency,jdbcType=VARCHAR}
+	    </if>
+      <if test="deadLine != null" >
+	      and DEAD_LINE = #{deadLine,jdbcType=VARCHAR}
+	    </if>
+      <if test="startTime != null" >
+	      and START_TIME = #{startTime,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="endTime != null" >
+	      and END_TIME = #{endTime,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="applyDate != null" >
+	      and APPLY_DATE = #{applyDate,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="applyAccountDate != null" >
+	      and APPLY_ACCOUNT_DATE = #{applyAccountDate,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="auditCompleteDate != null" >
+	      and AUDIT_COMPLETE_DATE = #{auditCompleteDate,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="interestDate != null" >
+	      and INTEREST_DATE = #{interestDate,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="version != null" >
+	      and VERSION = #{version,jdbcType=VARCHAR}
+	    </if>
+      <if test="versionDate != null" >
+	      and VERSION_DATE = #{versionDate,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="expansion1 != null" >
+	      and EXPANSION1 = #{expansion1,jdbcType=VARCHAR}
+	    </if>
+      <if test="expansion2 != null" >
+	      and EXPANSION2 = #{expansion2,jdbcType=VARCHAR}
+	    </if>
+      <if test="expansion3 != null" >
+	      and EXPANSION3 = #{expansion3,jdbcType=VARCHAR}
+	    </if>
+      <if test="expansion4 != null" >
+	      and EXPANSION4 = #{expansion4,jdbcType=VARCHAR}
+	    </if>
+      <if test="expansion5 != null" >
+	      and EXPANSION5 = #{expansion5,jdbcType=VARCHAR}
+	    </if>
+      <if test="expansion6 != null" >
+	      and EXPANSION6 = #{expansion6,jdbcType=VARCHAR}
+	    </if>
+      <if test="statusId != null" >
+	      and STATUS_ID = #{statusId,jdbcType=VARCHAR}
+	    </if>
+      <if test="createdTime != null" >
+	      and CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="updatedTime != null" >
+	      and UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP}
+	    </if>
+	  </trim>
+    </where>
+  </sql>
+  <sql id="Example_Set_Clause">
+    <set>
+      <trim suffixOverrides=",">
+      <if test="creditId != null">
+        CREDIT_ID = #{creditId,jdbcType=INTEGER},
+      </if>
+      <if test="rootInstCd != null">
+        ROOT_INST_CD = #{rootInstCd,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantId != null">
+        MERCHANT_ID = #{merchantId,jdbcType=VARCHAR},
+      </if>
+      <if test="providerId != null">
+        PROVIDER_ID = #{providerId,jdbcType=VARCHAR},
+      </if>
+      <if test="productId != null">
+        PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="creditObjectType != null">
+        CREDIT_OBJECT_TYPE = #{creditObjectType,jdbcType=VARCHAR},
+      </if>
+      <if test="creditAgreementId != null">
+        CREDIT_AGREEMENT_ID = #{creditAgreementId,jdbcType=VARCHAR},
+      </if>
+      <if test="creditResultId != null" >
+	    CREDIT_RESULT_ID = #{creditResultId,jdbcType=VARCHAR},
+	  	</if>
+      <if test="creditTypeId != null">
+        CREDIT_TYPE_ID = #{creditTypeId,jdbcType=TINYINT},
+      </if>
+      <if test="amount != null">
+        AMOUNT = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="amountSingle != null">
+        AMOUNT_SINGLE = #{amountSingle,jdbcType=DECIMAL},
+      </if>
+      <if test="rateId != null">
+        RATE_ID = #{rateId,jdbcType=VARCHAR},
+      </if>
+      <if test="currency != null">
+        CURRENCY = #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="deadLine != null">
+        DEAD_LINE = #{deadLine,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        START_TIME = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        END_TIME = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applyDate != null">
+        APPLY_DATE = #{applyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applyAccountDate != null">
+        APPLY_ACCOUNT_DATE = #{applyAccountDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditCompleteDate != null">
+        AUDIT_COMPLETE_DATE = #{auditCompleteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="interestDate != null">
+        INTEREST_DATE = #{interestDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        VERSION = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="versionDate != null">
+        VERSION_DATE = #{versionDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expansion1 != null">
+        EXPANSION1 = #{expansion1,jdbcType=VARCHAR},
+      </if>
+      <if test="expansion2 != null">
+        EXPANSION2 = #{expansion2,jdbcType=VARCHAR},
+      </if>
+      <if test="expansion3 != null">
+        EXPANSION3 = #{expansion3,jdbcType=VARCHAR},
+      </if>
+      <if test="expansion4 != null">
+        EXPANSION4 = #{expansion4,jdbcType=VARCHAR},
+      </if>
+      <if test="expansion5 != null">
+        EXPANSION5 = #{expansion5,jdbcType=VARCHAR},
+      </if>
+      <if test="expansion6 != null">
+        EXPANSION6 = #{expansion6,jdbcType=VARCHAR},
+      </if>
+      <if test="statusId != null">
+        STATUS_ID = #{statusId,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      </trim>
+    </set>
+  </sql>
+  <sql id="Base_Column_List">
+    CREDIT_ID,
+    ROOT_INST_CD,
+    USER_ID,
+    MERCHANT_ID,
+    PROVIDER_ID,
+    PRODUCT_ID,
+    CREDIT_OBJECT_TYPE,
+    CREDIT_AGREEMENT_ID,
+    CREDIT_RESULT_ID,
+    CREDIT_TYPE_ID,
+    AMOUNT,
+    AMOUNT_SINGLE,
+    RATE_ID,
+    CURRENCY,
+    DEAD_LINE,
+    START_TIME,
+    END_TIME,
+    APPLY_DATE,
+    APPLY_ACCOUNT_DATE,
+    AUDIT_COMPLETE_DATE,
+    INTEREST_DATE,
+    VERSION,
+    VERSION_DATE,
+    EXPANSION1,
+    EXPANSION2,
+    EXPANSION3,
+    EXPANSION4,
+    EXPANSION5,
+    EXPANSION6,
+    STATUS_ID,
+    CREATED_TIME,
+    UPDATED_TIME,
+  </sql>
+  <sql id="Base_Set_Clause">
+    <set>
+      <trim suffixOverrides=",">
+        CREDIT_ID = #{creditId,jdbcType=INTEGER},
+        ROOT_INST_CD = #{rootInstCd,jdbcType=VARCHAR},
+        USER_ID = #{userId,jdbcType=VARCHAR},
+        MERCHANT_ID = #{merchantId,jdbcType=VARCHAR},
+        PROVIDER_ID = #{providerId,jdbcType=VARCHAR},
+        PRODUCT_ID = #{productId,jdbcType=VARCHAR},
+        CREDIT_OBJECT_TYPE = #{creditObjectType,jdbcType=VARCHAR},
+        CREDIT_AGREEMENT_ID = #{creditAgreementId,jdbcType=VARCHAR},
+	    CREDIT_RESULT_ID = #{creditResultId,jdbcType=VARCHAR},
+        CREDIT_TYPE_ID = #{creditTypeId,jdbcType=TINYINT},
+        AMOUNT = #{amount,jdbcType=DECIMAL},
+        AMOUNT_SINGLE = #{amountSingle,jdbcType=DECIMAL},
+        RATE_ID = #{rateId,jdbcType=VARCHAR},
+        CURRENCY = #{currency,jdbcType=VARCHAR},
+        DEAD_LINE = #{deadLine,jdbcType=VARCHAR},
+        START_TIME = #{startTime,jdbcType=TIMESTAMP},
+        END_TIME = #{endTime,jdbcType=TIMESTAMP},
+        APPLY_DATE = #{applyDate,jdbcType=TIMESTAMP},
+        APPLY_ACCOUNT_DATE = #{applyAccountDate,jdbcType=TIMESTAMP},
+        AUDIT_COMPLETE_DATE = #{auditCompleteDate,jdbcType=TIMESTAMP},
+        INTEREST_DATE = #{interestDate,jdbcType=TIMESTAMP},
+        VERSION = #{version,jdbcType=VARCHAR},
+        VERSION_DATE = #{versionDate,jdbcType=TIMESTAMP},
+        EXPANSION1 = #{expansion1,jdbcType=VARCHAR},
+        EXPANSION2 = #{expansion2,jdbcType=VARCHAR},
+        EXPANSION3 = #{expansion3,jdbcType=VARCHAR},
+        EXPANSION4 = #{expansion4,jdbcType=VARCHAR},
+        EXPANSION5 = #{expansion5,jdbcType=VARCHAR},
+        EXPANSION6 = #{expansion6,jdbcType=VARCHAR},
+        STATUS_ID = #{statusId,jdbcType=VARCHAR},
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </trim>
+    </set>
+  </sql>
+  <sql id="Selective_Column_List">
+    <if test="creditId != null">
+      CREDIT_ID,
+    </if>
+    <if test="rootInstCd != null">
+      ROOT_INST_CD,
+    </if>
+    <if test="userId != null">
+      USER_ID,
+    </if>
+    <if test="merchantId != null">
+      MERCHANT_ID,
+    </if>
+    <if test="providerId != null">
+      PROVIDER_ID,
+    </if>
+    <if test="productId != null">
+      PRODUCT_ID,
+    </if>
+    <if test="creditObjectType != null">
+      CREDIT_OBJECT_TYPE,
+    </if>
+    <if test="creditAgreementId != null">
+      CREDIT_AGREEMENT_ID,
+    </if>
+    <if test="creditResultId != null" >
+      CREDIT_RESULT_ID,
+ 	</if>
+    <if test="creditTypeId != null">
+      CREDIT_TYPE_ID,
+    </if>
+    <if test="amount != null">
+      AMOUNT,
+    </if>
+    <if test="amountSingle != null">
+      AMOUNT_SINGLE,
+    </if>
+    <if test="rateId != null">
+      RATE_ID,
+    </if>
+    <if test="currency != null">
+      CURRENCY,
+    </if>
+    <if test="deadLine != null">
+      DEAD_LINE,
+    </if>
+    <if test="startTime != null">
+      START_TIME,
+    </if>
+    <if test="endTime != null">
+      END_TIME,
+    </if>
+    <if test="applyDate != null">
+      APPLY_DATE,
+    </if>
+    <if test="applyAccountDate != null">
+      APPLY_ACCOUNT_DATE,
+    </if>
+    <if test="auditCompleteDate != null">
+      AUDIT_COMPLETE_DATE,
+    </if>
+    <if test="interestDate != null">
+      INTEREST_DATE,
+    </if>
+    <if test="version != null">
+      VERSION,
+    </if>
+    <if test="versionDate != null">
+      VERSION_DATE,
+    </if>
+    <if test="expansion1 != null">
+      EXPANSION1,
+    </if>
+    <if test="expansion2 != null">
+      EXPANSION2,
+    </if>
+    <if test="expansion3 != null">
+      EXPANSION3,
+    </if>
+    <if test="expansion4 != null">
+      EXPANSION4,
+    </if>
+    <if test="expansion5 != null">
+      EXPANSION5,
+    </if>
+    <if test="expansion6 != null">
+      EXPANSION6,
+    </if>
+    <if test="statusId != null">
+      STATUS_ID,
+    </if>
+    <if test="createdTime != null">
+      CREATED_TIME,
+    </if>
+    <if test="updatedTime != null">
+      UPDATED_TIME,
+    </if>
+  </sql>
+	<sql id="Base_Value_List">
+    #{creditId,jdbcType=INTEGER},
+    #{rootInstCd,jdbcType=VARCHAR},
+    #{userId,jdbcType=VARCHAR},
+    #{merchantId,jdbcType=VARCHAR},
+    #{providerId,jdbcType=VARCHAR},
+    #{productId,jdbcType=VARCHAR},
+    #{creditObjectType,jdbcType=VARCHAR},
+    #{creditAgreementId,jdbcType=VARCHAR},
+    #{creditTypeId,jdbcType=TINYINT},
+    #{amount,jdbcType=DECIMAL},
+    #{amountSingle,jdbcType=DECIMAL},
+    #{rateId,jdbcType=VARCHAR},
+    #{currency,jdbcType=VARCHAR},
+    #{deadLine,jdbcType=VARCHAR},
+    #{startTime,jdbcType=TIMESTAMP},
+    #{endTime,jdbcType=TIMESTAMP},
+    #{applyDate,jdbcType=TIMESTAMP},
+    #{applyAccountDate,jdbcType=TIMESTAMP},
+    #{auditCompleteDate,jdbcType=TIMESTAMP},
+    #{interestDate,jdbcType=TIMESTAMP},
+    #{version,jdbcType=VARCHAR},
+    #{versionDate,jdbcType=TIMESTAMP},
+    #{expansion1,jdbcType=VARCHAR},
+    #{expansion2,jdbcType=VARCHAR},
+    #{expansion3,jdbcType=VARCHAR},
+    #{expansion4,jdbcType=VARCHAR},
+    #{expansion5,jdbcType=VARCHAR},
+    #{expansion6,jdbcType=VARCHAR},
+    #{statusId,jdbcType=VARCHAR},
+    #{createdTime,jdbcType=TIMESTAMP},
+    #{updatedTime,jdbcType=TIMESTAMP},
+	</sql>
+  <sql id="Selective_Value_List">
+    <if test="creditId != null">
+      #{creditId,jdbcType=INTEGER},
+    </if>
+    <if test="rootInstCd != null">
+      #{rootInstCd,jdbcType=VARCHAR},
+    </if>
+    <if test="userId != null">
+      #{userId,jdbcType=VARCHAR},
+    </if>
+    <if test="merchantId != null">
+      #{merchantId,jdbcType=VARCHAR},
+    </if>
+    <if test="providerId != null">
+      #{providerId,jdbcType=VARCHAR},
+    </if>
+    <if test="productId != null">
+      #{productId,jdbcType=VARCHAR},
+    </if>
+    <if test="creditObjectType != null">
+      #{creditObjectType,jdbcType=VARCHAR},
+    </if>
+    <if test="creditAgreementId != null">
+      #{creditAgreementId,jdbcType=VARCHAR},
+    </if>
+    <if test="creditResultId != null">
+      #{creditResultId,jdbcType=VARCHAR},
+    </if>
+    <if test="creditTypeId != null">
+      #{creditTypeId,jdbcType=TINYINT},
+    </if>
+    <if test="amount != null">
+      #{amount,jdbcType=DECIMAL},
+    </if>
+    <if test="amountSingle != null">
+      #{amountSingle,jdbcType=DECIMAL},
+    </if>
+    <if test="rateId != null">
+      #{rateId,jdbcType=VARCHAR},
+    </if>
+    <if test="currency != null">
+      #{currency,jdbcType=VARCHAR},
+    </if>
+    <if test="deadLine != null">
+      #{deadLine,jdbcType=VARCHAR},
+    </if>
+    <if test="startTime != null">
+      #{startTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="endTime != null">
+      #{endTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="applyDate != null">
+      #{applyDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="applyAccountDate != null">
+      #{applyAccountDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="auditCompleteDate != null">
+      #{auditCompleteDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="interestDate != null">
+      #{interestDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="version != null">
+      #{version,jdbcType=VARCHAR},
+    </if>
+    <if test="versionDate != null">
+      #{versionDate,jdbcType=TIMESTAMP},
+    </if>
+    <if test="expansion1 != null">
+      #{expansion1,jdbcType=VARCHAR},
+    </if>
+    <if test="expansion2 != null">
+      #{expansion2,jdbcType=VARCHAR},
+    </if>
+    <if test="expansion3 != null">
+      #{expansion3,jdbcType=VARCHAR},
+    </if>
+    <if test="expansion4 != null">
+      #{expansion4,jdbcType=VARCHAR},
+    </if>
+    <if test="expansion5 != null">
+      #{expansion5,jdbcType=VARCHAR},
+    </if>
+    <if test="expansion6 != null">
+      #{expansion6,jdbcType=VARCHAR},
+    </if>
+    <if test="statusId != null">
+      #{statusId,jdbcType=VARCHAR},
+    </if>
+    <if test="createdTime != null">
+      #{createdTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="updatedTime != null">
+      #{updatedTime,jdbcType=TIMESTAMP},
+    </if>
+  </sql>
+  
+  <select id="selectByExample" parameterType="CreditApprovalInfoQuery" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from CREDIT_APPROVAL_INFO
+    <include refid="Example_Where_Clause" />
+    <!-- order by CREATE_DATE -->
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from CREDIT_APPROVAL_INFO
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from CREDIT_APPROVAL_INFO
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="CreditApprovalInfoQuery">
+    delete from CREDIT_APPROVAL_INFO
+    <include refid="Example_Where_Clause" />
+  </delete>
+  <insert id="insert" parameterType="CreditApprovalInfo">
+    insert into CREDIT_APPROVAL_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Base_Column_List"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Base_Value_List"/>
+    </trim>
+  </insert>
+  <insert id="insertSelective" parameterType="CreditApprovalInfo">
+    insert into CREDIT_APPROVAL_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Column_List"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Value_List"/>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="CreditApprovalInfoQuery" resultType="java.lang.Integer">
+    select count(*) from CREDIT_APPROVAL_INFO
+    <include refid="Example_Where_Clause" />
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="CreditApprovalInfo">
+    update CREDIT_APPROVAL_INFO
+    <include refid="Example_Set_Clause"/>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="CreditApprovalInfo">
+    update CREDIT_APPROVAL_INFO
+    <include refid="Base_Set_Clause"/>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="validateOrderList" parameterType="java.util.Map" resultType="java.lang.String">
+  		SELECT DISTINCT b.order_id
+		FROM account.CREDIT_APPROVAL_INFO a
+		INNER JOIN  `order`.ORDER_ITEM b ON a.CREDIT_RESULT_ID = b.BUSINESS_ID
+		WHERE b.order_id IN ( ${orderOnList} );
+  </select>
+  
+  <update id="updateInterestDate" parameterType="java.util.Map">
+	update account.CREDIT_APPROVAL_INFO
+	set INTEREST_DATE = #{interestDate}
+	where CREDIT_RESULT_ID in
+	 ( select BUSINESS_ID from `order`.ORDER_ITEM
+	   where order_id in ( ${orderOnList} )
+	 )
+  </update>
+</mapper>

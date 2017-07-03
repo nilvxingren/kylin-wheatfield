@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 引入配置文件 -->
+	<!-- <properties resource="db.properties" /> -->
+
+	<settings>
+		<!-- 全局的映射器启用或禁用缓存。 -->
+		<setting name="cacheEnabled" value="true" />
+		<!-- 全局启用或禁用延迟加载 -->
+		<setting name="lazyLoadingEnabled" value="true" />
+		<!-- 允许或不允许多种结果集从一个单独的语句中返回 -->
+		<setting name="multipleResultSetsEnabled" value="true" />
+		<!-- 使用列标签代替列名 -->
+		<setting name="useColumnLabel" value="true" />
+		<!-- 允许JDBC支持生成的键 -->
+		<setting name="useGeneratedKeys" value="false" />
+		<!-- 配置默认的执行器 -->
+		<setting name="defaultExecutorType" value="SIMPLE" />
+		<!-- 设置超时时间 -->
+		<setting name="defaultStatementTimeout" value="25000" />
+	</settings>
+ 	
+	<!-- 实体类别名 -->    
+	<typeAliases>
+		<package name="com.rkylin.wheatfield.pojo"/>
+	</typeAliases>
+    
+	<!-- 类型转换处理器 -->
+    
+	<!-- 映射文件 -->
+	<mappers>
+		<mapper resource="sqlmap/AccountAgreementMapper.xml" />
+		<mapper resource="sqlmap/AccountInfoMapper.xml" />
+		<mapper resource="sqlmap/CreditInfoMapper.xml" />
+		<mapper resource="sqlmap/CurrencyInfoMapper.xml" />
+		<mapper resource="sqlmap/FinanaceAccountMapper.xml" />
+		<mapper resource="sqlmap/FinanaceEntryMapper.xml" />
+		<mapper resource="sqlmap/FuncCodeMapper.xml" />
+		<mapper resource="sqlmap/OrgInfoMapper.xml" />
+		<mapper resource="sqlmap/ParameterInfoMapper.xml" />
+		<mapper resource="sqlmap/TransCodeMapper.xml" />
+		<mapper resource="sqlmap/TransOrderInfoMapper.xml" />
+		<mapper resource="sqlmap/ManageHistoryMapper.xml" />
+		<mapper resource="sqlmap/MyBatisMap.xml" />
+		<mapper resource="sqlmap/SettlementMapper.xml" />
+		<mapper resource="sqlmap/GenerationPaymentHistoryMapper.xml" />
+		<mapper resource="sqlmap/GenerationPaymentMapper.xml" />
+		<mapper resource="sqlmap/CreditRepaymentHistoryMapper.xml" />
+		<mapper resource="sqlmap/TransDaysSummaryMapper.xml" />
+		<mapper resource="sqlmap/OpenBankCodeMapper.xml" />
+		<mapper resource="sqlmap/AccountPasswordMapper.xml" />
+		<mapper resource="sqlmap/CreditRepaymentMonthMapper.xml" />
+		<mapper resource="sqlmap/FinanaceEntryLastMapper.xml"/>
+		<mapper resource="sqlmap/SettleBalanceEntryMapper.xml" />
+		<mapper resource="sqlmap/SettleSplittingEntryMapper.xml" />
+		<mapper resource="sqlmap/FinanaceAccountAuthMapper.xml" />
+		<mapper resource="sqlmap/TlBankCodeMapper.xml" />
+		<mapper resource="sqlmap/CityCodeMapper.xml" />
+		<mapper resource="sqlmap/FinanaceCompanyMapper.xml" />
+		<mapper resource="sqlmap/FinanacePersonMapper.xml" />
+		<mapper resource="sqlmap/FinanaceEntryHistoryMapper.xml" />
+		<mapper resource="sqlmap/SettleTransTabMapper.xml" />
+		<mapper resource="sqlmap/CreditRepaymentMapper.xml" />
+		<mapper resource="sqlmap/CreditRateTemplateMapper.xml" />
+		<mapper resource="sqlmap/CreditApprovalInfoMapper.xml" />
+		<mapper resource="sqlmap/CreditRateTemplateDetailMapper.xml" />
+		<mapper resource="sqlmap/InterestRepaymentMapper.xml" />
+		<mapper resource="sqlmap/SettleBatchManageMapper.xml" />
+		<mapper resource="sqlmap/SettleBatchResultMapper.xml" />
+		<mapper resource="sqlmap/CorporatAccountInfoMapper.xml" />
+		<mapper resource="sqlmap/DictionaryMapper.xml" />
+	</mappers>
+
+</configuration>

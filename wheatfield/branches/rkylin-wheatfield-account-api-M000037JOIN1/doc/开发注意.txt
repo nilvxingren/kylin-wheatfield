@@ -1,0 +1,12 @@
+	1:新的dubbo接口的实现类都要新建,不要用项目(wheatfield)原有的实现类直接实现,如果这个实现类是是专门写dubbo实现类的除外,
+实现类在实现dubbo service时,在项目(wheatfield)内再建一个service便于内部测试;
+	2:相近的业务写在一个实现接口及类;
+	3:接口起名:业务相关的单词+DubboService,以便于区分内部接口和对外接口;
+	4:入参的实体类放在com.rkylin.wheatfield.bean包下面(由于入参的实体类随着接口增加,为了拓展可能需要增加属性,所以入参实体不要和账户项目包名一样;)
+	5:以下的接口的实现类为新建,及相关业务范围;
+      com.rkylin.wheatfield.api.BaseInforDubboService       基础信息相关(与业务无关,比如在字典表查数据)
+      com.rkylin.wheatfield.api.AccountInfoDubboService		账户信息相关 
+      com.rkylin.wheatfield.api.RecAndPayDubboService       代收付相关
+      com.rkylin.wheatfield.api.TransOrderDubboService		订单相关查询
+
+	

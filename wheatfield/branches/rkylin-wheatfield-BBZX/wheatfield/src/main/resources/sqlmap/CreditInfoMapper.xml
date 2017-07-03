@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CreditInfoMapper">
+	<resultMap id="BaseResultMap" type="CreditInfo">
+	  <result column="ID" jdbcType="INTEGER" property="id" />
+	  <result column="ROOT_INST_CD" jdbcType="VARCHAR" property="rootInstCd" />
+	  <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+	  <result column="PROVIDER_ID" jdbcType="VARCHAR" property="providerId" />
+	  <result column="CREDIT_AGREEMENT_ID" jdbcType="VARCHAR" property="creditAgreementId" />
+	  <result column="CREDIT_TYPE_ID" jdbcType="TINYINT" property="creditTypeId" />
+	  <result column="AMOUNT" jdbcType="DECIMAL" property="amount" />
+	  <result column="RATE" jdbcType="VARCHAR" property="rate" />
+	  <result column="CURRENCY" jdbcType="VARCHAR" property="currency" />
+	  <result column="START_TIME" jdbcType="TIMESTAMP" property="startTime" />
+	  <result column="END_TIME" jdbcType="TIMESTAMP" property="endTime" />
+	  <result column="CREATED_TIME" jdbcType="TIMESTAMP" property="createdTime" />
+	  <result column="UPDATED_TIME" jdbcType="TIMESTAMP" property="updatedTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <trim prefix="(" prefixOverrides="and" suffix=")">
+      <if test="rootInstCd != null" >
+	      and ROOT_INST_CD = #{rootInstCd,jdbcType=VARCHAR}
+	    </if>
+      <if test="userId != null" >
+	      and USER_ID = #{userId,jdbcType=VARCHAR}
+	    </if>
+      <if test="providerId != null" >
+	      and PROVIDER_ID = #{providerId,jdbcType=VARCHAR}
+	    </if>
+      <if test="creditAgreementId != null" >
+	      and CREDIT_AGREEMENT_ID = #{creditAgreementId,jdbcType=VARCHAR}
+	    </if>
+      <if test="creditTypeId != null" >
+	      and CREDIT_TYPE_ID = #{creditTypeId,jdbcType=TINYINT}
+	    </if>
+      <if test="amount != null" >
+	      and AMOUNT = #{amount,jdbcType=DECIMAL}
+	    </if>
+      <if test="rate != null" >
+	      and RATE = #{rate,jdbcType=VARCHAR}
+	    </if>
+      <if test="currency != null" >
+	      and CURRENCY = #{currency,jdbcType=VARCHAR}
+	    </if>
+      <if test="startTime != null" >
+	      and START_TIME = #{startTime,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="endTime != null" >
+	      and END_TIME = #{endTime,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="createdTime != null" >
+	      and CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP}
+	    </if>
+      <if test="updatedTime != null" >
+	      and UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP}
+	    </if>
+	  </trim>
+    </where>
+  </sql>
+  <sql id="Example_Set_Clause">
+    <set>
+      <trim suffixOverrides=",">
+      <if test="rootInstCd != null">
+        ROOT_INST_CD = #{rootInstCd,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="providerId != null">
+        PROVIDER_ID = #{providerId,jdbcType=VARCHAR},
+      </if>
+      <if test="creditAgreementId != null">
+        CREDIT_AGREEMENT_ID = #{creditAgreementId,jdbcType=VARCHAR},
+      </if>
+      <if test="creditTypeId != null">
+        CREDIT_TYPE_ID = #{creditTypeId,jdbcType=TINYINT},
+      </if>
+      <if test="amount != null">
+        AMOUNT = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="rate != null">
+        RATE = #{rate,jdbcType=VARCHAR},
+      </if>
+      <if test="currency != null">
+        CURRENCY = #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        START_TIME = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        END_TIME = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdTime != null">
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedTime != null">
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+      </trim>
+    </set>
+  </sql>
+  <sql id="Base_Column_List">
+    ID,
+    ROOT_INST_CD,
+    USER_ID,
+    PROVIDER_ID,
+    CREDIT_AGREEMENT_ID,
+    CREDIT_TYPE_ID,
+    AMOUNT,
+    RATE,
+    CURRENCY,
+    START_TIME,
+    END_TIME,
+    CREATED_TIME,
+    UPDATED_TIME,
+  </sql>
+  <sql id="Base_Set_Clause">
+    <set>
+      <trim suffixOverrides=",">
+        ROOT_INST_CD = #{rootInstCd,jdbcType=VARCHAR},
+        USER_ID = #{userId,jdbcType=VARCHAR},
+        PROVIDER_ID = #{providerId,jdbcType=VARCHAR},
+        CREDIT_AGREEMENT_ID = #{creditAgreementId,jdbcType=VARCHAR},
+        CREDIT_TYPE_ID = #{creditTypeId,jdbcType=TINYINT},
+        AMOUNT = #{amount,jdbcType=DECIMAL},
+        RATE = #{rate,jdbcType=VARCHAR},
+        CURRENCY = #{currency,jdbcType=VARCHAR},
+        START_TIME = #{startTime,jdbcType=TIMESTAMP},
+        END_TIME = #{endTime,jdbcType=TIMESTAMP},
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+      </trim>
+    </set>
+  </sql>
+  <sql id="Selective_Column_List">
+    <if test="rootInstCd != null">
+      ROOT_INST_CD,
+    </if>
+    <if test="userId != null">
+      USER_ID,
+    </if>
+    <if test="providerId != null">
+      PROVIDER_ID,
+    </if>
+    <if test="creditAgreementId != null">
+      CREDIT_AGREEMENT_ID,
+    </if>
+    <if test="creditTypeId != null">
+      CREDIT_TYPE_ID,
+    </if>
+    <if test="amount != null">
+      AMOUNT,
+    </if>
+    <if test="rate != null">
+      RATE,
+    </if>
+    <if test="currency != null">
+      CURRENCY,
+    </if>
+    <if test="startTime != null">
+      START_TIME,
+    </if>
+    <if test="endTime != null">
+      END_TIME,
+    </if>
+    <if test="createdTime != null">
+      CREATED_TIME,
+    </if>
+    <if test="updatedTime != null">
+      UPDATED_TIME,
+    </if>
+  </sql>
+	<sql id="Base_Value_List">
+    #{id,jdbcType=INTEGER},
+    #{rootInstCd,jdbcType=VARCHAR},
+    #{userId,jdbcType=VARCHAR},
+    #{providerId,jdbcType=VARCHAR},
+    #{creditAgreementId,jdbcType=VARCHAR},
+    #{creditTypeId,jdbcType=TINYINT},
+    #{amount,jdbcType=DECIMAL},
+    #{rate,jdbcType=VARCHAR},
+    #{currency,jdbcType=VARCHAR},
+    #{startTime,jdbcType=TIMESTAMP},
+    #{endTime,jdbcType=TIMESTAMP},
+    #{createdTime,jdbcType=TIMESTAMP},
+    #{updatedTime,jdbcType=TIMESTAMP},
+	</sql>
+  <sql id="Selective_Value_List">
+    <if test="rootInstCd != null">
+      #{rootInstCd,jdbcType=VARCHAR},
+    </if>
+    <if test="userId != null">
+      #{userId,jdbcType=VARCHAR},
+    </if>
+    <if test="providerId != null">
+      #{providerId,jdbcType=VARCHAR},
+    </if>
+    <if test="creditAgreementId != null">
+      #{creditAgreementId,jdbcType=VARCHAR},
+    </if>
+    <if test="creditTypeId != null">
+      #{creditTypeId,jdbcType=TINYINT},
+    </if>
+    <if test="amount != null">
+      #{amount,jdbcType=DECIMAL},
+    </if>
+    <if test="rate != null">
+      #{rate,jdbcType=VARCHAR},
+    </if>
+    <if test="currency != null">
+      #{currency,jdbcType=VARCHAR},
+    </if>
+    <if test="startTime != null">
+      #{startTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="endTime != null">
+      #{endTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="createdTime != null">
+      #{createdTime,jdbcType=TIMESTAMP},
+    </if>
+    <if test="updatedTime != null">
+      #{updatedTime,jdbcType=TIMESTAMP},
+    </if>
+  </sql>
+  
+  <select id="selectByExample" parameterType="CreditInfoQuery" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from CREDIT_INFO
+    <include refid="Example_Where_Clause" />
+    <!-- order by CREATE_DATE -->
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <trim suffixOverrides=",">
+      <include refid="Base_Column_List" />
+    </trim>
+    from CREDIT_INFO
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from CREDIT_INFO
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="CreditInfoQuery">
+    delete from CREDIT_INFO
+    <include refid="Example_Where_Clause" />
+  </delete>
+  <insert id="insert" parameterType="CreditInfo" useGeneratedKeys="true" keyProperty="id">
+    insert into CREDIT_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Base_Column_List"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Base_Value_List"/>
+    </trim>
+  </insert>
+  <insert id="insertSelective" parameterType="CreditInfo" useGeneratedKeys="true" keyProperty="id">
+    insert into CREDIT_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Column_List"/>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <include refid="Selective_Value_List"/>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="CreditInfoQuery" resultType="java.lang.Integer">
+    select count(*) from CREDIT_INFO
+    <include refid="Example_Where_Clause" />
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="CreditInfo">
+    update CREDIT_INFO
+    <include refid="Example_Set_Clause"/>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="CreditInfo">
+    update CREDIT_INFO
+    <include refid="Base_Set_Clause"/>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
